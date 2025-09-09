@@ -39,7 +39,8 @@ const HeaderNav = () => {
                     {menuItems.map((item) => {
                         return (<li>
                             {/* <Link to={item.route}> */}
-                            {item.label}
+                            {/* TODO убрать тег а */}
+                            <a>{item.label}</a>
                             {/* </Link> */}
                         </li>)
                     })}

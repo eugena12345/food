@@ -1,16 +1,12 @@
-import { useState } from 'react';
 import './App.css';
 import Header from './components/Header';
+import CatalogPage from './pages/CatalogPage';
 
 function App() {
-  const [count, setCount] = useState(0);
   return (
     <>
       <Header/>
-      <div>
-       Основная страница
-      </div>
-      
+      <CatalogPage/>      
     </>
   );
 }

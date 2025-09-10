@@ -1,0 +1,21 @@
+.spin {
+    color: var(--color-brand);
+}
+
+.white {
+    color: white;
+}
+
+@keyframes logo-spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.spin {
+    animation: logo-spin infinite 5s linear;
+}

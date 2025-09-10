@@ -1,0 +1,29 @@
+$spaceXS: 8px;
+$spaceM: 16px;
+$color-brand: var(--color-brand);
+
+.container {
+    background-color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    padding-right: $spaceXS;
+    border: 1px solid transparent;
+    width: 100%;
+    margin-right: 5px;
+
+    &:focus-within {
+        background-color: #FFFFFF;
+        border: 1px solid $color-brand;
+    }
+
+    input {
+        box-sizing: border-box;
+        outline: none;
+        width: 100%;
+        font-size: 13px;
+        padding: $spaceM $spaceXS;
+        border: 1px solid transparent;
+        flex-grow: 1;
+        font-size: $spaceM;
+    }
+}

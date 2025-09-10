@@ -6,15 +6,12 @@ import CatalogPage from './pages/CatalogPage';
 function App() {
   return (
     <div className="app">
+      <Header />
       <Outlet />
-      <>
-      <Header/>
-      <CatalogPage/>      
-    </>
     </div>
 
 
-    
+
   );
 }
 

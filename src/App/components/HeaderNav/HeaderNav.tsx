@@ -1,14 +1,14 @@
-//import { Link } from 'react-router';
+import { Link } from 'react-router';
 import styles from './HeaderNav.module.scss';
-//import { routes } from 'config/routes.config';
+import { routes } from 'config/routes.config';
 import { useState } from 'react';
 
 const menuItems = [
-    { label: 'Recipes', },//route: routes.recipes.create()
-    { label: 'Meals Categories', },
-    { label: 'Products', },
-    { label: 'Menu Items', },
-    { label: 'Meal Planning', },
+    { label: 'Recipes', route: routes.recipes.create() },
+    { label: 'Meals Categories', route: routes.categories.create() },
+    { label: 'Products', route: routes.main.create() }, //TODO сделать роуты
+    { label: 'Menu Items', route: routes.main.create() }, //TODO сделать роуты
+    { label: 'Meal Planning', route: routes.main.create() }, //TODO сделать роуты
 ];
 
 const HeaderNav = () => {
@@ -22,11 +22,15 @@ const HeaderNav = () => {
                 <button onClick={showMenu}>☰</button>
                 {isMenuOpen &&
                     <div className={styles.mobileMenu} onClick={closeMenu}>
-                        {/* <ul>
-                            <li><Link to={routes.main.create()} onClick={closeMenu} >Products</Link></li>
-                            <li><Link to={routes.categories.create()} onClick={closeMenu}>Categories</Link></li>
-                            <li><Link to={routes.about.create()} onClick={closeMenu}>About us</Link></li>
-                        </ul> */}
+                        <ul>
+                            {menuItems.map((item) => {
+                                return (<li>
+                                    <Link to={item.route} onClick={closeMenu}>
+                                        {item.label}
+                                    </Link>
+                                </li>)
+                            })}
+                        </ul>
                         <button onClick={closeMenu} className={styles.close}>
                             ×
                         </button>
@@ -38,15 +42,11 @@ const HeaderNav = () => {
                 <ul>
                     {menuItems.map((item) => {
                         return (<li>
-                            {/* <Link to={item.route}> */}
-                            {/* TODO убрать тег а */}
-                            <a>{item.label}</a>
-                            {/* </Link> */}
+                            <Link to={item.route}>
+                                {item.label}
+                            </Link>
                         </li>)
                     })}
-                    {/* <li><Link to={routes.main.create()}>Products</Link></li>
-                    <li><Link to={routes.categories.create()}>Categories</Link></li>
-                    <li><Link to={routes.about.create()}>About us</Link></li> */}
                 </ul>
             </nav>
         </>

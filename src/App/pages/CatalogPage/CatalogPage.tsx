@@ -1,9 +1,15 @@
+import InfoCard from "App/components/InfoCard";
 import axios from "axios";
+import Button from "components/Button";
+import { routes } from "config/routes.config";
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
 
 const STRAPI_BASE_URL = 'https://front-school-strapi.ktsdev.ru';
 const STRAPI_URL = `${STRAPI_BASE_URL}/api`;
+const getIngradientsString = (ingArr) => {
+    return ingArr.map((ing) => ing.name).join(' + ')
+}
 
 
 
@@ -14,17 +20,16 @@ const CatalogPage = () => {
     useEffect(() => {
         const fetch = async () => {
             const response = await axios.get(
-                `${STRAPI_URL}/recipes`,
+                //использовать библиотеку qs
+                `${STRAPI_URL}/recipes?populate[0]=images&populate[1]=ingradients`,
                 {
                     headers: {
-                        // API_TOKEN нужно получить в боте при выборе проекта
                         Authorization: `Bearer ${import.meta.env.VITE_API_TOKEN}`,
                     },
                 },
             );
-
-            console.log('response', response);
             setRecipes(response.data.data);
+            console.log(response.data.data)
         };
 
         fetch();
@@ -36,8 +41,22 @@ const CatalogPage = () => {
             <ul>
                 {recipes.map(rec => (
                     <li key={rec.id}>
-                        <Link to={`/users/${rec.id}`}>
-                            {rec.name}
+                        <Link to={routes.recipe.create(rec.documentId)}>
+                            <InfoCard
+                                image={rec.images[0].url}
+                                captionSlot={`${rec.cookingTime} minutes`}
+                                title={rec.name}
+                                subtitle={getIngradientsString(rec.ingradients)}
+                                itemDocumentId={rec.documentId}
+                                contentSlot={`${Math.round(rec.calories)} kcal`}
+                                actionSlot={
+                                    <Button>Save</Button>
+                                }
+
+                            //onClick?: React.MouseEventHandler;
+                            />
+
+
                         </Link>
                     </li>
                 ))}

@@ -11,7 +11,8 @@
       "config": ["config/*"],
       "styles": ["styles/*"],
       "utils": ["utils/*"],
-      "assets": ["assets/*"]
+      "assets": ["assets/*"],
+      "App": ["App/*"]
 
     }
   }

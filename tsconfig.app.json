@@ -38,7 +38,10 @@
       ],
       "assets": [
         "assets/*"
-      ]
+      ],
+      "App": [
+        "App/*"
+      ],
     }
   },
   "include": [

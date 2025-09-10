@@ -20,10 +20,10 @@ export const routes = {
     mask: "/categories",
     create: () => `/categories`,
   },
-  // about: {
-  //   mask: "/about",
-  //   create: () => `/about`,
-  // },
+  products: {
+    mask: "/products",
+    create: () => `/products`,
+  },
   favorite: {
     mask: "/favorite",
     create: () => `/favorite`,

@@ -1,41 +1,46 @@
-import type { RouteObject } from "react-router";
+import { Navigate, type RouteObject } from "react-router";
 import App from "../App";
 import CatalogPage from 'App/pages/CatalogPage';
 import ReceptPage from "App/pages/ReceptPage";
 import ComingSoonPage from "App/pages/ComingSoonPage";
+import { routes } from "config/routes.config";
 
 export const routesConfig: RouteObject[] = [
   {
-    path: '/',
+    path: routes.main.mask,
     element: <App />,
-     children: [
+    children: [
       {
         element: <CatalogPage />,
         index: true
       },
       {
-        path: '/recipes',
+        path: routes.recipes.mask,
         element: <CatalogPage />
       },
       {
-        path: '/recipes/:id',
+        path: routes.recipe.mask,
         element: <ReceptPage />
       },
       {
-        path: '/categories',
+        path: routes.categories.mask,
         element: <ComingSoonPage />
       },
       {
-        path: '/favorite',
+        path: routes.favorite.mask,
         element: <ComingSoonPage />
       },
       {
-        path: '/login',
+        path: routes.login.mask,
         element: <ComingSoonPage />
       },
       {
-        path: '/products',
+        path: routes.products.mask,
         element: <ComingSoonPage />
+      },
+      {
+        path: "*",
+        element: <Navigate to={routes.main.mask} replace />,
       },
     ]
   }

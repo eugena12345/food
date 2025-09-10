@@ -24,7 +24,7 @@ const HeaderNav = () => {
                     <div className={styles.mobileMenu} onClick={closeMenu}>
                         <ul>
                             {menuItems.map((item) => {
-                                return (<li>
+                                return (<li key={item.label}>
                                     <Link to={item.route} onClick={closeMenu}>
                                         {item.label}
                                     </Link>

@@ -1,0 +1,23 @@
+.container {
+    &__search {
+        display: flex;
+        flex-direction: row;
+        margin-bottom: var(--spaceXL);
+
+        &--grow {
+            flex-grow: 1;
+            flex-shrink: 1;
+            margin-right: var(--spaceXL);
+        }
+    }
+}
+
+@media (max-width: 310px) {
+    .container {
+        &__search {
+            &--grow {
+                margin-right: 2px;
+            }
+        }
+    }
+}

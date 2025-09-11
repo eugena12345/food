@@ -7,6 +7,10 @@ import Loader from "components/Loader";
 import titleImage from 'assets/images/titleImage.png';
 import overlayImage from 'assets/images/Recipes (1) 1.svg'
 import Pagination from "App/components/Pagination";
+//import Text from "components/Text";
+//import ProductsInfo from "App";
+import SearchInfo from "App/components/SearchInfo";
+import SearchRecipes from "App/components/SearchRecipes";
 
 const STRAPI_BASE_URL = 'https://front-school-strapi.ktsdev.ru';
 const STRAPI_URL = `${STRAPI_BASE_URL}/api`;
@@ -39,8 +43,8 @@ const CatalogPage = () => {
             setPageCount(response.data.meta.pagination.pageCount);
             setActualPage(response.data.meta.pagination.page)
             //console.log(response.data)
-            console.log(response.data.meta.pagination.pageCount)
-            console.log(response.data.meta.pagination.page)
+            //console.log(response.data.meta.pagination.pageCount)
+            // console.log(response.data.meta.pagination.page)
 
             setIsLoading(false)
         };
@@ -58,7 +62,11 @@ const CatalogPage = () => {
             <div className={styles.container}>
 
                 <div className={styles[`container--maxWidth`]}>
+                    <SearchInfo />
+                    <SearchRecipes />
+
                     {isLoading && <Loader />}
+
                     <div className={styles[`container__products`]}>
                         {recipes.map(rec => (
 

@@ -1,9 +1,10 @@
 import InfoCard from "App/components/InfoCard";
 import axios from "axios";
 import Button from "components/Button";
-import { routes } from "config/routes.config";
 import { useEffect, useState } from "react";
-import { Link } from "react-router";
+import styles from './CatalogPage.module.scss'
+import Loader from "components/Loader";
+import titleImage from 'assets/images/titleImage.png';
 
 const STRAPI_BASE_URL = 'https://front-school-strapi.ktsdev.ru';
 const STRAPI_URL = `${STRAPI_BASE_URL}/api`;
@@ -16,6 +17,7 @@ const getIngradientsString = (ingArr) => {
 
 const CatalogPage = () => {
     const [recipes, setRecipes] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
         const fetch = async () => {
@@ -30,19 +32,25 @@ const CatalogPage = () => {
             );
             setRecipes(response.data.data);
             console.log(response.data.data)
+            setIsLoading(false)
         };
-
+        setIsLoading(true)
         fetch();
     }, []);
 
     return (
-        <div>Основная страница
+        <div>
+            <img src={titleImage} alt='food' className={styles.titleImage} />
+            {/* добвить стили картинке ^^ */}
+            <div className={styles.container}>
 
-            <ul>
-                {recipes.map(rec => (
-                    <li key={rec.id}>
-                        <Link to={routes.recipe.create(rec.documentId)}>
+                <div className={styles[`container--maxWidth`]}>
+                    {isLoading && <Loader />}
+                    <div className={styles[`container__products`]}>
+                        {recipes.map(rec => (
+
                             <InfoCard
+                                key={rec.id}
                                 image={rec.images[0].url}
                                 captionSlot={`${rec.cookingTime} minutes`}
                                 title={rec.name}
@@ -52,16 +60,15 @@ const CatalogPage = () => {
                                 actionSlot={
                                     <Button>Save</Button>
                                 }
-
-                            //onClick?: React.MouseEventHandler;
                             />
+                        ))}
+                    </div>
+                </div>
+            </div>
 
-
-                        </Link>
-                    </li>
-                ))}
-            </ul>
         </div>
+
+
     )
 };
 

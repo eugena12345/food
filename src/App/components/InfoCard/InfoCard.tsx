@@ -21,8 +21,10 @@ const InfoCard: React.FC<CardProps> = ({ className, image, captionSlot, title, s
     const navigate = useNavigate();
 
     return (
-        <div className={actualClassName} onClick={onClick? onClick : () => navigate(routes.product.create(itemDocumentId))}> 
+        <div className={actualClassName} onClick={onClick? onClick : () => navigate(routes.recipe.create(itemDocumentId))}> 
+            <div className={styles['card__image-container']}>
             <img src={image} alt='картинка' className={styles['card__image']} />
+            </div>
             <div className={styles['card__info']}>
                 <div className={styles['card__description']}>
                     {captionSlot && <p className={styles['card__caption']}>{captionSlot}</p>}

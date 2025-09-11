@@ -6,11 +6,11 @@
 
     padding-top: 100px;
     margin-top: 90px;
-    background-color: #FAFAFA;
+    background-color: #FFC0763B;
     padding-left: 100px;
     padding-right: 100px;
     box-sizing: border-box;
-
+    
     &--maxWidth {
         display: flex;
         flex-direction: column;
@@ -32,6 +32,10 @@
     }
 }
 
+.titleImage {
+    width: 100%;
+}
+
 @media (max-width: 730px) {
 .container {
     padding-left: 20px;
@@ -39,3 +43,6 @@
 
 }
 }
+
+
+    // background-color: #FAFAFA;

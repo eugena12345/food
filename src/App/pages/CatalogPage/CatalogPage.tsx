@@ -6,6 +6,7 @@ import styles from './CatalogPage.module.scss'
 import Loader from "components/Loader";
 import titleImage from 'assets/images/titleImage.png';
 import overlayImage from 'assets/images/Recipes (1) 1.svg'
+import Pagination from "App/components/Pagination";
 
 const STRAPI_BASE_URL = 'https://front-school-strapi.ktsdev.ru';
 const STRAPI_URL = `${STRAPI_BASE_URL}/api`;
@@ -19,6 +20,9 @@ const getIngradientsString = (ingArr) => {
 const CatalogPage = () => {
     const [recipes, setRecipes] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
+    const [pageCount, setPageCount] = useState(1);
+    const [actualPage, setActualPage] = useState(1)
+
 
     useEffect(() => {
         const fetch = async () => {
@@ -32,7 +36,12 @@ const CatalogPage = () => {
                 },
             );
             setRecipes(response.data.data);
-            console.log(response.data.data)
+            setPageCount(response.data.meta.pagination.pageCount);
+            setActualPage(response.data.meta.pagination.page)
+            //console.log(response.data)
+            console.log(response.data.meta.pagination.pageCount)
+            console.log(response.data.meta.pagination.page)
+
             setIsLoading(false)
         };
         setIsLoading(true)
@@ -67,6 +76,8 @@ const CatalogPage = () => {
                             />
                         ))}
                     </div>
+                    {pageCount > 1
+                        && <Pagination pageCount={pageCount} actualPage={actualPage} />}
                 </div>
             </div>
 

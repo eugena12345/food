@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import styles from './CatalogPage.module.scss'
 import Loader from "components/Loader";
 import titleImage from 'assets/images/titleImage.png';
+import overlayImage from 'assets/images/Recipes (1) 1.svg'
 
 const STRAPI_BASE_URL = 'https://front-school-strapi.ktsdev.ru';
 const STRAPI_URL = `${STRAPI_BASE_URL}/api`;
@@ -40,7 +41,10 @@ const CatalogPage = () => {
 
     return (
         <div>
-            <img src={titleImage} alt='food' className={styles.titleImage} />
+            <div className={styles['titleImage-container']}>
+                <img src={titleImage} alt='food' className={styles.titleImage} />
+                <img src={overlayImage} alt="Overlay" className={styles.overlay} />
+            </div>
             {/* добвить стили картинке ^^ */}
             <div className={styles.container}>
 

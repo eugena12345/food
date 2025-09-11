@@ -5,7 +5,7 @@
     align-items: center;
 
     padding-top: 100px;
-    margin-top: 90px;
+    // margin-top: 90px;
     background-color: #FFC0763B;
     padding-left: 100px;
     padding-right: 100px;
@@ -32,9 +32,33 @@
     }
 }
 
-.titleImage {
+.titleImage-container {
+  position: relative;
+  width: 100%; // Ширина контейнера 100%
+  padding-bottom: calc((572 / 1440) * 100%); // Сохраняем пропорции 1440:572
+  overflow: hidden; // Обрезаем всё, что выходит за границы
+
+  .titleImage {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
+    height: 100%;
+    object-fit: cover; // Масштабируем изображение, чтобы оно заполнило контейнер
+    object-position: top; // Выравниваем изображение по верхней части контейнера
+  }
+
+  .overlay {
+    position: absolute;
+    top: 70%; // Позиционируем по вертикали по центру
+    left: 50%; // Позиционируем по горизонтали по центру
+    transform: translate(-50%, -50%); // Центрируем точно
+    max-width: 80%; // Ограничиваем ширину наложенной картинки (по желанию)
+    max-height: 80%; // Ограничиваем высоту наложенной картинки (по желанию)
+    z-index: 1; // Убедитесь, что наложенная картинка выше основной
+  }
 }
+
 
 @media (max-width: 730px) {
 .container {

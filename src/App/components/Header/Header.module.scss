@@ -1,6 +1,19 @@
+.generalHeaderContainer {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    background-color: #ffffff;
+    padding: 16px 0;
+    display: flex;
+    justify-content: center;
+}
+
 .headerContainer {
     display: flex;
     width: 100%;
+    max-width: 1280px;
     flex-direction: row;
     justify-content: space-between;
 }
@@ -10,4 +23,11 @@
     // width: 100%;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
+    gap: 17px;
+    cursor: pointer;
+}
+
+.logoTitle{
+    font-weight: bold;
 }

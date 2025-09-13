@@ -6,12 +6,12 @@ const SearchByFilter = () => {
 
 
     const getTitle = () => {
-        console.log('getTitle')
+        //console.log('getTitle')
         return 'title'
     }
 
     const onChange = (value: Option[]) => {
-        console.log(value)
+        //console.log(value)
     };
 
 

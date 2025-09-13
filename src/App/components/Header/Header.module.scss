@@ -1,7 +1,5 @@
 .generalHeaderContainer {
-    //  width: 100vw;
      width: 100%;
-    //width: calc(100vw - (100vw - 100%));
     position: relative;
     left: 50%;
     right: 50%;
@@ -23,7 +21,6 @@
 
 .logoContent {
     display: flex;
-    // width: 100%;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;

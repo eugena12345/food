@@ -6,18 +6,19 @@ import heartSvg from 'assets/images/HeartIcon.svg'
 import { useNavigate } from 'react-router';
 import { routes } from 'config/routes.config';
 
+type NavigateFunction = () => void;
 
 const Header = () => {
     const navigate = useNavigate()
-    const goToLogin = () => {
+    const goToLogin: NavigateFunction = () => {
         navigate(routes.login.create())
     }
 
-    const goToFavorite = () => {
+    const goToFavorite: NavigateFunction = () => {
         navigate(routes.favorite.create())
     }
 
-    const goToCatalog = () => {
+    const goToCatalog: NavigateFunction = () => {
         navigate(routes.main.create())
 
     }

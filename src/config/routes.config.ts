@@ -32,8 +32,4 @@ export const routes = {
     mask: "/login",
     create: () => `/login`,
   },
-  // payment: {
-  //   mask: "/payment",
-  //   create: () => `/payment`,
-  // },
 }

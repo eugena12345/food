@@ -3,20 +3,22 @@ import styles from './IngredientsEquipmentBlock.module.scss';
 import dinner from 'assets/images/dinner.svg';
 import ladle from 'assets/images/ladle.png';
 import Text from 'components/Text';
+import type { Ingredient, Equipment } from 'App/pages/CatalogPage/CatalogPage';
+
 
 type Props = {
-  ingredients: string[]; // TODO сделать правильную типизацию
-  equipment: string[]; // TODO сделать правильную типизацию
+  ingredients: Ingredient[];
+  equipment?: Equipment[];
 };
 
 const IngredientsEquipmentBlock: React.FC<Props> = ({ ingredients, equipment }) => {
-  const splitIntoColumns = (array: string[]) => {
+  const splitIntoColumns = <T extends Ingredient | Equipment>(array: T[]): [T[], T[]] => {
     const half = Math.ceil(array.length / 2);
     return [array.slice(0, half), array.slice(half)];
   };
 
   const [ingredientsLeft, ingredientsRight] = splitIntoColumns(ingredients);
-  const [equipmentLeft, equipmentRight] = splitIntoColumns(equipment);
+  const [equipmentLeft, equipmentRight] = splitIntoColumns(equipment || []);
 
   return (
     <div className={styles.container}>
@@ -49,7 +51,7 @@ const IngredientsEquipmentBlock: React.FC<Props> = ({ ingredients, equipment }) 
       </div>
 
       <div className={styles.rightBlock}>
-                <div className={styles.title}>
+        <div className={styles.title}>
           <Text tag='h3'>Equipment</Text>
         </div>
         <div className={styles.columns}>

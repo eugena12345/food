@@ -23,17 +23,16 @@ $color-brand: var(--color-brand);
 
     &__image-container {
         position: relative;
-        width: 324px; // Ширина контейнера для изображения
-        height: 324px; // Высота контейнера для изображения
-        overflow: hidden; // Обрезаем изображение по границам контейнера
+        width: 324px; 
+        height: 324px; 
+        overflow: hidden; 
     }
 
     &__image {
-        width: 100%; // Ширина изображения всегда 100%
-        height: 100%; // Высота изображения всегда 100%
-        object-fit: cover; // Масштабируем изображение, чтобы оно заполнило контейнер
-        object-position: center; // Центрируем изображение внутри контейнера
-        //width: 100%;
+        width: 100%; 
+        height: 100%; 
+        object-fit: cover; 
+        object-position: center; 
         background-color: #d9d9d9;
         flex-grow: 0;
     }

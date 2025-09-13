@@ -6,13 +6,14 @@ import axios from 'axios';
 import Text from 'components/Text';
 import IngredientsEquipmentBlock from 'App/pages/ReceptPage/IngredientsEquipmentBlock';
 import decorativeImage from './../../../assets/images/Pattern.png';
+import type { Recipe } from 'App/pages/CatalogPage/CatalogPage';
 
 const STRAPI_BASE_URL = 'https://front-school-strapi.ktsdev.ru';
 const STRAPI_URL = `${STRAPI_BASE_URL}/api`;
 
 const ReceptPage = () => {
     const { id } = useParams();
-    const [recipe, setRecipe] = useState({});
+    const [recipe, setRecipe] = useState<Recipe | null>(null);
     const [isLoading, setIsLoading] = useState(false);
 
 
@@ -42,7 +43,7 @@ const ReceptPage = () => {
             <div className={styles.decorativeImage} style={{ backgroundImage: `url(${decorativeImage})` }}></div>
             <div className={styles[`container--maxWidth`]}>
                 {isLoading && <div className={styles.center}><Loader /></div>}
-                {recipe.name
+                {recipe?.name
                     && <div className={styles.recipe}>
                         <div className={styles.title}>
                             {/*TODO картиника вернуться назад */}
@@ -93,7 +94,7 @@ const ReceptPage = () => {
 
                         <div className={styles.description}>
                             <Text tag='h2'>Directions</Text>
-                            {recipe.directions.map((step, idx) => {
+                            {recipe.directions?.map((step, idx) => {
                                 return (
                                     <div className={styles.steps}>
                                         <Text tag='h3'>Step {idx + 1}</Text>

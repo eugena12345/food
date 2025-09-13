@@ -5,6 +5,7 @@ import Loader from 'components/Loader';
 import axios from 'axios';
 import Text from 'components/Text';
 import IngredientsEquipmentBlock from 'App/pages/ReceptPage/IngredientsEquipmentBlock';
+import decorativeImage from './../../../assets/images/Pattern.png';
 
 const STRAPI_BASE_URL = 'https://front-school-strapi.ktsdev.ru';
 const STRAPI_URL = `${STRAPI_BASE_URL}/api`;
@@ -38,69 +39,72 @@ const ReceptPage = () => {
 
     return (
         <div className={styles.container}>
-            {isLoading && <div className={styles.center}><Loader /></div>}
-            {recipe.name
-                && <div className={styles.recipe}>
-                    <div className={styles.title}>
-                        {/*TODO картиника назад */}
-                        <Text view='title'>{recipe.name}</Text>
-                    </div>
+            <div className={styles.decorativeImage} style={{ backgroundImage: `url(${decorativeImage})` }}></div>
+            <div className={styles[`container--maxWidth`]}>
+                {isLoading && <div className={styles.center}><Loader /></div>}
+                {recipe.name
+                    && <div className={styles.recipe}>
+                        <div className={styles.title}>
+                            {/*TODO картиника вернуться назад */}
+                            <Text view='title'>{recipe.name}</Text>
+                        </div>
 
 
-                    <div className={styles.preInfo}>
-                        <img src={recipe.images[0].url} alt='картинка' className={styles['card__image']} />
-                        <div className={styles.info}>
-                            <div className={styles.descrElement}>
-                                <Text>Preparation</Text>
-                                <Text weight='bold' color='accent'>{recipe.preparationTime} minutes</Text>
-                            </div>
-                            <div className={styles.descrElement}>
-                                <Text>Cooking</Text>
-                                <Text weight='bold' color='accent'>{recipe.cookingTime} minutes</Text>
-                            </div>
-                            <div className={styles.descrElement}>
-                                <Text>Total</Text>
-                                <Text weight='bold' color='accent'>{recipe.preparationTime + recipe.cookingTime} minutes</Text>
-                            </div>
-                            <div className={styles.descrElement}>
-                                <Text>Likes</Text>
-                                <Text weight='bold' color='accent'>{recipe.likes}</Text>
-                            </div>
-                            <div className={styles.descrElement}>
-                                <Text>Servings</Text>
-                                <Text weight='bold' color='accent'>{recipe.servings} servings</Text>
-                            </div>
-                            <div className={styles.descrElement}>
-                                <Text>Ratings</Text>
-                                <Text weight='bold' color='accent'>{recipe.rating}/5</Text>
+                        <div className={styles.preInfo}>
+                            <img src={recipe.images[0].url} alt='картинка' className={styles['card__image']} />
+                            <div className={styles.info}>
+                                <div className={styles.descrElement}>
+                                    <Text>Preparation</Text>
+                                    <Text weight='bold' color='accent'>{recipe.preparationTime} minutes</Text>
+                                </div>
+                                <div className={styles.descrElement}>
+                                    <Text>Cooking</Text>
+                                    <Text weight='bold' color='accent'>{recipe.cookingTime} minutes</Text>
+                                </div>
+                                <div className={styles.descrElement}>
+                                    <Text>Total</Text>
+                                    <Text weight='bold' color='accent'>{recipe.preparationTime + recipe.cookingTime} minutes</Text>
+                                </div>
+                                <div className={styles.descrElement}>
+                                    <Text>Likes</Text>
+                                    <Text weight='bold' color='accent'>{recipe.likes}</Text>
+                                </div>
+                                <div className={styles.descrElement}>
+                                    <Text>Servings</Text>
+                                    <Text weight='bold' color='accent'>{recipe.servings} servings</Text>
+                                </div>
+                                <div className={styles.descrElement}>
+                                    <Text>Ratings</Text>
+                                    <Text weight='bold' color='accent'>{recipe.rating}/5</Text>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div className={styles.summary}>
-                        <div dangerouslySetInnerHTML={{ __html: recipe.summary }} ></div>
-                    </div>
+                        <div className={styles.summary}>
+                            <div dangerouslySetInnerHTML={{ __html: recipe.summary }} ></div>
+                        </div>
 
-                    <div className={styles.need}>
-                        <IngredientsEquipmentBlock
-                            ingredients={recipe.ingradients}
-                            equipment={recipe.equipments}
-                        />
-                    </div>
+                        <div className={styles.need}>
+                            <IngredientsEquipmentBlock
+                                ingredients={recipe.ingradients}
+                                equipment={recipe.equipments}
+                            />
+                        </div>
 
-                    <div className={styles.description}>
-                        <Text tag='h2'>Directions</Text>
-                        {recipe.directions.map((step, idx) => {
-                            return (
-                                <div className={styles.steps}>
-                                    <Text tag='h3'>Step {idx + 1}</Text>
-                                    <div>{step.description}</div>
-                                </div>
-                            )
-                        })}
+                        <div className={styles.description}>
+                            <Text tag='h2'>Directions</Text>
+                            {recipe.directions.map((step, idx) => {
+                                return (
+                                    <div className={styles.steps}>
+                                        <Text tag='h3'>Step {idx + 1}</Text>
+                                        <div>{step.description}</div>
+                                    </div>
+                                )
+                            })}
+                        </div>
                     </div>
-                </div>
-            }
+                }
+            </div>
         </div>
     )
 };

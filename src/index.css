@@ -21,6 +21,7 @@
   --spaceXS: 12px;
   --spaceXXS: 8px;
   --color-optionHover: #AFADB5
+  --maxWidth: 1440px;
 }
 
 a {
@@ -38,7 +39,6 @@ body {
   width: 100vw;
   min-width: 200px;
   min-height: 100vh;
-  background-color: #FFC0763B;
 
   /* background-color: #FAFAFA; */
 }

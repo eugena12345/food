@@ -84,3 +84,88 @@
   transform: translateX(-50%);
   height: 95%;
 }
+
+@media (max-width: 1440px) {
+  .container {
+    gap: 30px;
+    padding: $spaceM;
+  }
+
+  .title {
+    font-size: $spaceM;
+  }
+
+  .columns {
+    gap: $spaceM;
+  }
+
+  .dinnerLogo {
+    width: $spaceL;
+    height: $spaceL;
+  }
+}
+
+@media (max-width: 1024px) {
+  .container {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .leftBlock,
+  .rightBlock {
+    flex: none;
+  }
+
+  .columns {
+    flex-direction: column;
+    gap: $spaceS;
+  }
+
+  .line {
+    display: none;
+  }
+
+  .circle {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: $spaceS;
+  }
+
+  .title {
+    font-size: $spaceS;
+  }
+
+  .column li {
+    font-size: $spaceXS;
+    gap: 5px;
+  }
+
+  .dinnerLogo {
+    width: $spaceM;
+    height: $spaceM;
+  }
+}
+
+@media (max-width: 375px) {
+  .container {
+    gap: 10px;
+  }
+
+  .title {
+    font-size: $spaceS;
+  }
+
+  .column li {
+    font-size: $spaceXS;
+    gap: 3px;
+  }
+
+  .dinnerLogo {
+    width: $spaceS;
+    height: $spaceS;
+  }
+}

@@ -11,6 +11,8 @@ import Pagination from "App/components/Pagination";
 //import ProductsInfo from "App";
 import SearchInfo from "App/components/SearchInfo";
 import SearchRecipes from "App/components/SearchRecipes";
+import qs from 'qs';
+import { useSearchParams } from "react-router";
 
 const STRAPI_BASE_URL = 'https://front-school-strapi.ktsdev.ru';
 const STRAPI_URL = `${STRAPI_BASE_URL}/api`;
@@ -68,6 +70,18 @@ export interface Recipe {
     directions?: Direction[];
 }
 
+const getURL = (actualPage: number): string => {
+    const queryParams = {
+        populate: ['images', 'ingradients'],
+        pagination: {
+            page: actualPage,
+            pageSize: 6,
+        }
+    };
+    const queryString = qs.stringify(queryParams, { encodeValuesOnly: true });
+    const fullUrl = `${STRAPI_URL}/recipes?${queryString}`;
+    return fullUrl;
+}
 
 
 
@@ -75,14 +89,20 @@ const CatalogPage = () => {
     const [recipes, setRecipes] = useState<Recipe[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [pageCount, setPageCount] = useState<number>(1);
-    const [actualPage, setActualPage] = useState<number>(1)
+    const [actualPage, setActualPage] = useState<number>(1);
+    const [searchParams, setSearchParams] = useSearchParams();
+
+
 
 
     useEffect(() => {
+        const page = Number(searchParams.get('page')) || 1;
+        const url = getURL(page);
+        console.log(url)
+        console.log(`${STRAPI_URL}/recipes?populate[0]=images&populate[1]=ingradients`)
         const fetch = async () => {
             const response = await axios.get(
-                //использовать библиотеку qs
-                `${STRAPI_URL}/recipes?populate[0]=images&populate[1]=ingradients`,
+                url,
                 {
                     headers: {
                         Authorization: `Bearer ${import.meta.env.VITE_API_TOKEN}`,
@@ -100,7 +120,12 @@ const CatalogPage = () => {
         };
         setIsLoading(true)
         fetch();
-    }, []);
+    }, [searchParams]);
+
+    useEffect(() => {
+        console.log('ap', searchParams.get('page'))
+        setActualPage(Number(searchParams.get('page')) || 1);
+    }, [searchParams]);
 
     return (
         <div>

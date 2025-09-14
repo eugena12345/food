@@ -12,7 +12,7 @@ const STRAPI_BASE_URL = 'https://front-school-strapi.ktsdev.ru';
 const STRAPI_URL = `${STRAPI_BASE_URL}/api`;
 
 const ReceptPage = () => {
-    const { id } = useParams();
+    const params = useParams();
     const [recipe, setRecipe] = useState<Recipe | null>(null);
     const [isLoading, setIsLoading] = useState(false);
 
@@ -22,7 +22,7 @@ const ReceptPage = () => {
             const response = await axios.get(
                 //использовать библиотеку qs
 
-                `${STRAPI_URL}/recipes/${id}?populate[0]=ingradients&populate[1]=equipments&populate[2]=directions.image&populate[3]=images&populate[4]=category`,
+                `${STRAPI_URL}/recipes/${params.id}?populate[0]=ingradients&populate[1]=equipments&populate[2]=directions.image&populate[3]=images&populate[4]=category`,
                 {
                     headers: {
                         Authorization: `Bearer ${import.meta.env.VITE_API_TOKEN}`,

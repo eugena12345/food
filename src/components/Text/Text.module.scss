@@ -1,3 +1,5 @@
+@use './../../variables.scss' as vars;
+
 @font-face {
     font-weight: normal;
     font-family: Roboto;
@@ -15,8 +17,6 @@
     font-family: Roboto;
     src: url("../../styles/Roboto/Roboto-Medium.woff2");
 }
-
-@use './../../variables.scss' as vars;
 
 .title {
     font-size: 44px;

@@ -7,6 +7,7 @@ import Text from 'components/Text';
 import IngredientsEquipmentBlock from 'App/pages/ReceptPage/IngredientsEquipmentBlock';
 import decorativeImage from './../../../assets/images/Pattern.png';
 import type { Recipe } from 'App/pages/CatalogPage/CatalogPage';
+import qs from 'qs';
 
 const STRAPI_BASE_URL = 'https://front-school-strapi.ktsdev.ru';
 const STRAPI_URL = `${STRAPI_BASE_URL}/api`;
@@ -15,24 +16,41 @@ const ReceptPage = () => {
     const params = useParams();
     const [recipe, setRecipe] = useState<Recipe | null>(null);
     const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState<string | null>(null);
 
+
+    const getURL = (): string => {
+        const queryParams = {
+            populate: ['ingradients', 'equipments', 'directions.image', 'images', 'category']
+        };
+        const queryString = qs.stringify(queryParams, { encodeValuesOnly: true });
+        const fullUrl = `${STRAPI_URL}/recipes/${params.id}?${queryString}`;
+        return fullUrl;
+    }
 
     useEffect(() => {
         const fetch = async () => {
-            const response = await axios.get(
-                //использовать библиотеку qs
-
-                `${STRAPI_URL}/recipes/${params.id}?populate[0]=ingradients&populate[1]=equipments&populate[2]=directions.image&populate[3]=images&populate[4]=category`,
-                {
-                    headers: {
-                        Authorization: `Bearer ${import.meta.env.VITE_API_TOKEN}`,
+            try {
+                setIsLoading(true);
+                const url = getURL();
+                const response = await axios.get(
+                    url,
+                    {
+                        headers: {
+                            Authorization: `Bearer ${import.meta.env.VITE_API_TOKEN}`,
+                        },
                     },
-                },
-            );
-            setRecipe(response.data.data);
-            //console.log(response.data)
+                );
+                setRecipe(response.data.data);
+                //console.log(response.data)
+                setIsLoading(false)
+                setError(null);
+            } catch (err) {
+                console.error('Ошибка при выполнении запроса:', error);
+                setIsLoading(false);
+                setError('Не удалось загрузить данные. Попробуйте позже.');
 
-            setIsLoading(false)
+            }
         };
         setIsLoading(true)
         fetch();
@@ -42,6 +60,8 @@ const ReceptPage = () => {
         <div className={styles.container}>
             <div className={styles.decorativeImage} style={{ backgroundImage: `url(${decorativeImage})` }}></div>
             <div className={styles[`container--maxWidth`]}>
+                {error && <div className={styles.error}>{error}</div>}
+
                 {isLoading && <div className={styles.center}><Loader /></div>}
                 {recipe?.name
                     && <div className={styles.recipe}>

@@ -91,6 +91,7 @@ const CatalogPage = () => {
     const [pageCount, setPageCount] = useState<number>(1);
     const [actualPage, setActualPage] = useState<number>(1);
     const [searchParams, setSearchParams] = useSearchParams();
+    const [error, setError] = useState<string | null>(null);
 
 
 
@@ -101,24 +102,33 @@ const CatalogPage = () => {
         console.log(url)
         console.log(`${STRAPI_URL}/recipes?populate[0]=images&populate[1]=ingradients`)
         const fetch = async () => {
-            const response = await axios.get(
-                url,
-                {
-                    headers: {
-                        Authorization: `Bearer ${import.meta.env.VITE_API_TOKEN}`,
+            try {
+                setIsLoading(true);
+                const response = await axios.get(
+                    url,
+                    {
+                        headers: {
+                            Authorization: `Bearer ${import.meta.env.VITE_API_TOKEN}`,
+                        },
                     },
-                },
-            );
-            setRecipes(response.data.data);
-            setPageCount(response.data.meta.pagination.pageCount);
-            setActualPage(response.data.meta.pagination.page)
-            //console.log(response.data.data)
-            //console.log(response.data.meta.pagination.pageCount)
-            // console.log(response.data.meta.pagination.page)
+                );
+                setRecipes(response.data.data);
+                setPageCount(response.data.meta.pagination.pageCount);
+                setActualPage(response.data.meta.pagination.page)
+                //console.log(response.data.data)
+                //console.log(response.data.meta.pagination.pageCount)
+                // console.log(response.data.meta.pagination.page)
 
-            setIsLoading(false)
+                setIsLoading(false);
+                setError(null);
+
+            } catch (error) {
+                console.error('Ошибка при выполнении запроса:', error);
+                setIsLoading(false);
+                setError('Не удалось загрузить данные. Попробуйте позже.');
+            }
+
         };
-        setIsLoading(true)
         fetch();
     }, [searchParams]);
 
@@ -136,6 +146,8 @@ const CatalogPage = () => {
             <div className={styles.container}>
 
                 <div className={styles[`container--maxWidth`]}>
+                    {error && <div className={styles.error}>{error}</div>}
+
                     <SearchInfo />
                     <SearchRecipes />
 

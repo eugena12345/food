@@ -59,6 +59,11 @@
   }
 }
 
+.error {
+  color: red;
+  font-size: vars.$spaceL;
+}
+
 
 @media (max-width: 730px) {
   .container {

@@ -87,6 +87,12 @@
     text-align: justify;
 }
 
+.error {
+    color: red;
+    font-size: vars.$spaceL;
+}
+
+
 @media (max-width: 1440px) {
     .container {
         padding-left: 50px;

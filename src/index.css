@@ -26,12 +26,12 @@
 
 a {
   font-weight: 500;
-  color: var(--color-brand);
+  color: #B5460F;
   text-decoration: inherit;
 }
 
 a:hover {
-  color: #535bf2;
+  color: #6c2a09;
 }
 
 body {

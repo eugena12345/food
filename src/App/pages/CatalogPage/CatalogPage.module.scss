@@ -1,4 +1,4 @@
-@import './../../../variables.scss';
+@use './../../../variables.scss' as vars;
 
 .container {
   width: 100%;
@@ -17,7 +17,7 @@
     justify-content: center;
     align-items: center;
     width: 100%;
-    max-width: $maxWidth;
+    max-width: vars.$maxWidth;
     height: 100%;
   }
 
@@ -62,7 +62,7 @@
 
 @media (max-width: 730px) {
   .container {
-    padding-left: $spaceL;
-    padding-right: $spaceL;
+    padding-left: vars.$spaceL;
+    padding-right: vars.$spaceL;
   }
 }

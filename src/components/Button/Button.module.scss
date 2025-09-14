@@ -1,34 +1,33 @@
-//$spaceXS: 8px;
-@import './../../variables.scss';
+@use './../../variables.scss' as vars;
 
 .original {
-    padding: 17px $spaceL 17px $spaceL;
+    padding: 17px vars.$spaceL 17px vars.$spaceL;
     color: white;
-    background-color: $color-brand;
+    background-color: vars.$color-brand;
     border: none;
     display: flex;
-    gap: $spaceXXS;
+    gap: vars.$spaceXXS;
     align-items: center;
     justify-content: center;
     font-size: 18px;
     height: 54px;
-    border-radius: $spaceXS;
+    border-radius: vars.$spaceXS;
     overflow: hidden;
 
 
     &:hover {
-        background-color: $color-brand-hover;
+        background-color: vars.$color-brand-hover;
     }
 
     &:active {
-        background-color: $color-brand-active;
+        background-color: vars.$color-brand-active;
     }
 }
 
 .loading,
 .loading:hover {
     color: white;
-    background-color: $color-brand;
+    background-color: vars.$color-brand;
 }
 
 .loading .disabled {

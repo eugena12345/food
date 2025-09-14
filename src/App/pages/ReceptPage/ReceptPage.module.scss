@@ -1,4 +1,4 @@
-@import './../../../variables.scss';
+@use './../../../variables.scss' as vars;
 
 .container {
 
@@ -22,7 +22,7 @@
         justify-content: center;
         align-items: center;
         width: 100%;
-        max-width: $maxWidth;
+        max-width: vars.$maxWidth;
         height: 100%;
     }
 
@@ -81,7 +81,7 @@
 .summary {
     padding: 48px;
     background-color: #B5460F54;
-    border-radius: $spaceXL;
+    border-radius: vars.$spaceXL;
     margin-right: 89px;
     margin-bottom: 48px;
     text-align: justify;

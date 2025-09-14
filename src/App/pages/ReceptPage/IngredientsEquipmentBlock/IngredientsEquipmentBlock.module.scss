@@ -1,12 +1,11 @@
-//var(--color-brand);
-@import './../../../../variables.scss';
+@use './../../../../variables.scss' as vars;
 
 .container {
   display: flex;
   align-items: stretch;
   justify-content: space-between;
   gap: 40px;
-  padding: $spaceL;
+  padding: vars.$spaceL;
   height: 100%;
 }
 
@@ -15,20 +14,20 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: $spaceM;
+  gap: vars.$spaceM;
 
 }
 
 
 .title {
-  font-size: $spaceL;
+  font-size: vars.$spaceL;
   font-weight: bold;
   margin-bottom: 10px;
 }
 
 .columns {
   display: flex;
-  gap: $spaceL;
+  gap: vars.$spaceL;
   height: 100%;
 }
 
@@ -38,7 +37,7 @@
   margin: 0;
 
   li {
-    font-size: $spaceM;
+    font-size: vars.$spaceM;
     line-height: 1.5;
     padding: 8px 0;
     display: flex;
@@ -47,8 +46,8 @@
   }
 
   .dinnerLogo {
-    width: $spaceXL;
-    height: $spaceXL;
+    width: vars.$spaceXL;
+    height: vars.$spaceXL;
     flex-shrink: 0;
   }
 
@@ -88,20 +87,20 @@
 @media (max-width: 1440px) {
   .container {
     gap: 30px;
-    padding: $spaceM;
+    padding: vars.$spaceM;
   }
 
   .title {
-    font-size: $spaceM;
+    font-size: vars.$spaceM;
   }
 
   .columns {
-    gap: $spaceM;
+    gap: vars.$spaceM;
   }
 
   .dinnerLogo {
-    width: $spaceL;
-    height: $spaceL;
+    width: vars.$spaceL;
+    height: vars.$spaceL;
   }
 }
 
@@ -118,7 +117,7 @@
 
   .columns {
     flex-direction: column;
-    gap: $spaceS;
+    gap: vars.$spaceS;
   }
 
   .line {
@@ -132,21 +131,21 @@
 
 @media (max-width: 768px) {
   .container {
-    padding: $spaceS;
+    padding: vars.$spaceS;
   }
 
   .title {
-    font-size: $spaceS;
+    font-size: vars.$spaceS;
   }
 
   .column li {
-    font-size: $spaceXS;
+    font-size: vars.$spaceXS;
     gap: 5px;
   }
 
   .dinnerLogo {
-    width: $spaceM;
-    height: $spaceM;
+    width: vars.$spaceM;
+    height: vars.$spaceM;
   }
 }
 
@@ -156,16 +155,16 @@
   }
 
   .title {
-    font-size: $spaceS;
+    font-size: vars.$spaceS;
   }
 
   .column li {
-    font-size: $spaceXS;
+    font-size: vars.$spaceXS;
     gap: 3px;
   }
 
   .dinnerLogo {
-    width: $spaceS;
-    height: $spaceS;
+    width: vars.$spaceS;
+    height: vars.$spaceS;
   }
 }

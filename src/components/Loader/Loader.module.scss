@@ -1,7 +1,7 @@
-@import './../../variables.scss';
+@use './../../variables.scss' as vars;
 
 .spin {
-    color: $color-brand;
+    color: vars.$color-brand;
 }
 
 .white {

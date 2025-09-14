@@ -11,13 +11,13 @@ export type InputProps = Omit<
 };
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ value, onChange, afterSlot, ...rest }) => {
+  ({ value, onChange, afterSlot, ...rest }, ref) => {
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       onChange(e.target.value);
     };
     return (
-      <div className={styles.container }> 
-        <input type="text" placeholder='Text' value={value} onChange={handleChange} {...rest} />
+      <div className={styles.container}>
+        <input type="text" placeholder='Text' value={value} onChange={handleChange} ref={ref}  {...rest} />
         {afterSlot && afterSlot}
       </div>
     )

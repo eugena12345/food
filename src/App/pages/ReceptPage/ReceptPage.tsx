@@ -116,7 +116,7 @@ const ReceptPage = () => {
                             <Text tag='h2'>Directions</Text>
                             {recipe.directions?.map((step, idx) => {
                                 return (
-                                    <div className={styles.steps}>
+                                    <div key={step.id} className={styles.steps}>
                                         <Text tag='h3'>Step {idx + 1}</Text>
                                         <div>{step.description}</div>
                                     </div>

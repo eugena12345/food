@@ -45,7 +45,7 @@ const HeaderNav = () => {
             <nav className={styles.headerNav}>
                 <ul>
                     {menuItems.map((item) => {
-                        return (<li>
+                        return (<li key={item.label}>
                             <Link to={item.route}>
                                 {item.label}
                             </Link>

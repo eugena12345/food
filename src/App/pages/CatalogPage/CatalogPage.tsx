@@ -99,8 +99,6 @@ const CatalogPage = () => {
     useEffect(() => {
         const page = Number(searchParams.get('page')) || 1;
         const url = getURL(page);
-        console.log(url)
-        console.log(`${STRAPI_URL}/recipes?populate[0]=images&populate[1]=ingradients`)
         const fetch = async () => {
             try {
                 setIsLoading(true);
@@ -133,7 +131,6 @@ const CatalogPage = () => {
     }, [searchParams]);
 
     useEffect(() => {
-        console.log('ap', searchParams.get('page'))
         setActualPage(Number(searchParams.get('page')) || 1);
     }, [searchParams]);
 

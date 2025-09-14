@@ -1,11 +1,13 @@
+@import './../../../variables.scss';
+
 .generalHeaderContainer {
-     width: 100%;
+    width: 100%;
     position: relative;
     left: 50%;
     right: 50%;
     margin-left: -50vw;
     background-color: #ffffff;
-    padding: 16px 0;
+    padding: $spaceM 0;
     display: flex;
     justify-content: center;
 }
@@ -13,8 +15,7 @@
 .headerContainer {
     display: flex;
     width: 100%;
-    max-width: 1440px;
-;
+    max-width: $maxWidth;
     flex-direction: row;
     justify-content: space-between;
 }

@@ -1,3 +1,5 @@
+@import './../../../variables.scss';
+
 .container {
     display: flex;
     flex-direction: column;
@@ -10,11 +12,11 @@
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
-        margin-bottom: var(--spaceXL);
+        margin-bottom: $spaceXL;
 
         &--grow {
             flex-grow: 1;
-            margin-right: var(--spaceXL);
+            margin-right: $spaceXL;
         }
     }
 
@@ -27,7 +29,7 @@
         display: flex;
         flex-direction: row;
         align-items: center;
-        gap: var(--spaceXL);
+        gap: $spaceXL;
     }
 
     &__resultOrReset {
@@ -36,10 +38,10 @@
         flex-direction: row;
         flex-wrap: wrap;
         align-items: center;
-        gap: var(--spaceXL);
+        gap: $spaceXL;
         justify-content: space-between;
-        padding-left: 20px;
-        padding-right: 20px;
+        padding-left: $spaceL;
+        padding-right: $spaceL;
 
     }
 }

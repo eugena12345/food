@@ -1,3 +1,5 @@
+@import './../../../variables.scss';
+
 .pagination {
     display: flex;
     flex-direction: row;
@@ -12,11 +14,11 @@
         font-size: 18px;
 
         &--active {
-            background-color: var(--color-brand);
+            background-color: $color-brand;
         }
 
         &:hover {
-            background-color: var(--color-brand);
+            background-color: $color-brand;
             cursor: pointer;
         }
     }
@@ -28,7 +30,7 @@
         align-items: center;
 
         &:hover {
-            background-color: var(--color-brand);
+            background-color: $color-brand;
             cursor: pointer;
         }
 
@@ -46,14 +48,14 @@
 @media (max-width: 310px) {
     .pagination {
         &__pagenumber {
-            width: 20px;
-            height: 20px;
-            font-size: 16px;
+            width: $spaceL;
+            height: $spaceL;
+            font-size: $spaceM;
         }
 
         &__arrow {
-            width: 20px;
-            height: 20px;
+            width: $spaceL;
+            height: $spaceL;
 
         }
     }

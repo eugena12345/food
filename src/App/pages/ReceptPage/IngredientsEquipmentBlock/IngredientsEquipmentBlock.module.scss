@@ -1,33 +1,35 @@
 //var(--color-brand);
+@import './../../../../variables.scss';
+
 .container {
-    display: flex;
-    align-items: stretch; 
-    justify-content: space-between;
-    gap: 40px;
-    padding: 20px;
-    height: 100%;
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  gap: 40px;
+  padding: $spaceL;
+  height: 100%;
 }
 
 .leftBlock,
 .rightBlock {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: $spaceM;
+
 }
 
 
 .title {
-    font-size: 20px;
-    font-weight: bold;
-    margin-bottom: 10px;
+  font-size: $spaceL;
+  font-weight: bold;
+  margin-bottom: 10px;
 }
 
 .columns {
-    display: flex;
-    gap: 20px;
-    height: 100%;
+  display: flex;
+  gap: $spaceL;
+  height: 100%;
 }
 
 .column {
@@ -36,7 +38,7 @@
   margin: 0;
 
   li {
-    font-size: 16px;
+    font-size: $spaceM;
     line-height: 1.5;
     padding: 8px 0;
     display: flex;
@@ -45,40 +47,40 @@
   }
 
   .dinnerLogo {
-    width: 24px;
-    height: 24px;
-    flex-shrink: 0; 
+    width: $spaceXL;
+    height: $spaceXL;
+    flex-shrink: 0;
   }
 
-  .descr{
+  .descr {
     text-align: left;
   }
 }
 
 .divider {
-    position: relative;
-    width: 2px;
+  position: relative;
+  width: 2px;
 
 }
 
 .circle {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 7px;
-    height: 7px;
-    background-color: #B5460F;
-    border: 1px solid #B5460F;
-    border-radius: 50%;
-    z-index: 1;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 7px;
+  height: 7px;
+  background-color: #B5460F;
+  border: 1px solid #B5460F;
+  border-radius: 50%;
+  z-index: 1;
 }
 
 .line {
-    position: absolute;
-    top: 15px;
-    left: 50%;
-    width: 2px;
-    background-color: #B5460F;
-    transform: translateX(-50%);
-    height: 95%;
+  position: absolute;
+  top: 15px;
+  left: 50%;
+  width: 2px;
+  background-color: #B5460F;
+  transform: translateX(-50%);
+  height: 95%;
 }

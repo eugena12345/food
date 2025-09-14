@@ -1,13 +1,15 @@
+@import './../../../../variables.scss';
+
 .container {
     &__search {
         display: flex;
         flex-direction: row;
-        margin-bottom: var(--spaceXL);
+        margin-bottom: $spaceXL;
 
         &--grow {
             flex-grow: 1;
             flex-shrink: 1;
-            margin-right: var(--spaceXL);
+            margin-right: $spaceXL;
         }
     }
 }

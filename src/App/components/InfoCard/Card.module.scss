@@ -1,10 +1,11 @@
-$spaceXL: 32px;
-$spaceL: 24px;
-$spaceXS: 8px;
-$spaceS: 14px;
-$spaceXXS: 4px;
-$color-brand: var(--color-brand);
+// $spaceXL: 32px;
+// $spaceL: 24px;
+// $spaceXS: 8px;
+// $spaceS: 14px;
+// $spaceXXS: 4px;
+// $color-brand: var(--color-brand);
 // TODO взять отступы из переменных
+@import './../../../variables.scss';
 
 .card {
     display: flex;

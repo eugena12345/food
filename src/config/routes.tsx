@@ -4,6 +4,8 @@ import CatalogPage from 'App/pages/CatalogPage';
 import ReceptPage from "App/pages/ReceptPage";
 import ComingSoonPage from "App/pages/ComingSoonPage";
 import { routes } from "config/routes.config";
+import LoginPage from "App/pages/LoginPage";
+import RegistrationPage from "App/pages/RegistrationPage";
 
 export const routesConfig: RouteObject[] = [
   {
@@ -32,7 +34,11 @@ export const routesConfig: RouteObject[] = [
       },
       {
         path: routes.login.mask,
-        element: <ComingSoonPage />
+        element: <LoginPage />
+      },
+      {
+        path: routes.registration.mask,
+        element: <RegistrationPage />
       },
       {
         path: routes.products.mask,

@@ -32,4 +32,8 @@ export const routes = {
     mask: "/login",
     create: () => `/login`,
   },
+  registration: {
+    mask: "/registration",
+    create: () => `/registration`,
+  },
 }

@@ -70,13 +70,14 @@ nav {
 
   .mobileMenu {
     position: absolute;
-    top: 90px;
+    top: 50px;
     background-color: rgb(255, 255, 255);
     padding: 5px;
     border: 1px solid vars.$color-brand;
     width: 70vw;
     display: flex;
     justify-content: space-between;
+    z-index: 2;
 
   }
 

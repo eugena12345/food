@@ -65,7 +65,7 @@
 }
 
 
-@media (max-width: 730px) {
+@media (max-width: vars.$breakpointsS) {
   .container {
     padding-left: vars.$spaceL;
     padding-right: vars.$spaceL;

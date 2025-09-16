@@ -45,7 +45,7 @@
     }
 }
 
-@media (max-width: 310px) {
+@media (max-width: vars.$breakpointsXS) {
     .pagination {
         &__pagenumber {
             width: vars.$spaceL;

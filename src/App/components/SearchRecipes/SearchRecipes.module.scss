@@ -46,7 +46,7 @@
     }
 }
 
-@media (max-width: 800px) {
+@media (max-width: vars.$breakpointsS) {
     .container {
 
         .filterandsort {
@@ -58,7 +58,7 @@
     }
 }
 
-@media (max-width: 470px) {
+@media (max-width: vars.$breakpointsXS) {
     .container {
 
         &__resultOrReset {

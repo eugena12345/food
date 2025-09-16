@@ -84,7 +84,7 @@
   height: 95%;
 }
 
-@media (max-width: 1440px) {
+@media (max-width: vars.$breakpointsL) {
   .container {
     gap: 30px;
     padding: vars.$spaceM;
@@ -104,7 +104,7 @@
   }
 }
 
-@media (max-width: 1024px) {
+@media (max-width: vars.$breakpointsM) {
   .container {
     flex-direction: column;
     gap: 20px;
@@ -129,7 +129,7 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: vars.$breakpointsS) {
   .container {
     padding: vars.$spaceS;
   }
@@ -149,7 +149,7 @@
   }
 }
 
-@media (max-width: 375px) {
+@media (max-width: vars.$breakpointsXS) {
   .container {
     gap: 10px;
   }

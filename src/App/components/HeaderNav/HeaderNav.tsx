@@ -26,10 +26,10 @@ const HeaderNav = () => {
                 <button onClick={showMenu}>☰</button>
                 {isMenuOpen &&
                     <div className={styles.mobileMenu} onClick={closeMenu}>
-                        <ul>
+                        <ul className={styles.navList}>
                             {menuItems.map((item) => {
-                                return (<li key={item.label}>
-                                    <Link to={item.route} onClick={closeMenu}>
+                                return (<li className={styles.navItem} key={item.label}>
+                                    <Link to={item.route} className={styles.navLink} onClick={closeMenu}>
                                         {item.label}
                                     </Link>
                                 </li>)

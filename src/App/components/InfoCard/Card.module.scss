@@ -87,7 +87,7 @@
     }
 }
 
-@media (max-width: 730px) {
+@media (max-width: vars.$breakpointsS) {
     .card {
         width: 45%;
     }

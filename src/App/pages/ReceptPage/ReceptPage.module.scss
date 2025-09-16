@@ -25,9 +25,7 @@
         max-width: vars.$maxWidth;
         height: 100%;
     }
-
 }
-
 
 .decorativeImage {
     position: absolute;
@@ -93,7 +91,7 @@
 }
 
 
-@media (max-width: 1440px) {
+@media (max-width: vars.$breakpointsL) {
     .container {
         padding-left: 50px;
         padding-right: 50px;
@@ -105,7 +103,7 @@
     }
 }
 
-@media (max-width: 1024px) {
+@media (max-width: vars.$breakpointsM) {
     .container {
         padding-left: 30px;
         padding-right: 30px;
@@ -132,7 +130,7 @@
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: vars.$breakpointsS) {
     .container {
         padding-left: 20px;
         padding-right: 20px;
@@ -155,11 +153,9 @@
     }
 
     .info {
-        margin: 0;
-    }
+        margin: 10px;
 
-    .descrElement {
-        width: 100%;
+
     }
 
     .summary {
@@ -168,7 +164,7 @@
     }
 }
 
-@media (max-width: 375px) {
+@media (max-width: vars.$breakpointsXS) {
     .container {
         padding-left: 10px;
         padding-right: 10px;

@@ -29,7 +29,7 @@
     }
 }
 
-@media (max-width: 350px) {
+@media (max-width: vars.$breakpointsXS) {
     .container {
         &__filter {
             width: 200px;

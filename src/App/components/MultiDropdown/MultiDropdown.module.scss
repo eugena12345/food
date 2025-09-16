@@ -38,7 +38,7 @@
 
 }
 
-@media (max-width: 350px) {
+@media (max-width: vars.$breakpointsXS) {
   .container {
     width: 200px;
   }

@@ -22,9 +22,8 @@ const LoginPage = () => {
                 }
             );
 
-            //console.log(response.data)
             setIsLoading(false);
-            //setError(null);
+            //TODO setError(null);
             localStorage.setItem('username', identifier);
             localStorage.setItem('JWT', response.data.jwt);
             navigate(routes.favorite.create());
@@ -33,7 +32,7 @@ const LoginPage = () => {
         } catch (error) {
             console.error('Ошибка при выполнении запроса:', error);
             setIsLoading(false);
-            //setError('Не удалось загрузить данные. Попробуйте позже.');
+            //TODO setError('Не удалось загрузить данные. Попробуйте позже.');
         }
 
     };

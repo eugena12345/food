@@ -7,8 +7,6 @@ import Loader from "components/Loader";
 import titleImage from 'assets/images/titleImage.png';
 import overlayImage from 'assets/images/Recipes (1) 1.svg'
 import Pagination from "App/components/Pagination";
-//import Text from "components/Text";
-//import ProductsInfo from "App";
 import SearchInfo from "App/components/SearchInfo";
 import SearchRecipes from "App/components/SearchRecipes";
 import qs from 'qs';
@@ -113,10 +111,6 @@ const CatalogPage = () => {
                 setRecipes(response.data.data);
                 setPageCount(response.data.meta.pagination.pageCount);
                 setActualPage(response.data.meta.pagination.page)
-                //console.log(response.data.data)
-                //console.log(response.data.meta.pagination.pageCount)
-                // console.log(response.data.meta.pagination.page)
-
                 setIsLoading(false);
                 setError(null);
 

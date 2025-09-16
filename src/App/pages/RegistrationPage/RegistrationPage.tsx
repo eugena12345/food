@@ -21,15 +21,8 @@ const RegistrationPage = () => {
                     password,
                 }
             );
-            //setRecipes(response.data.data);
-            //setPageCount(response.data.meta.pagination.pageCount);
-            //setActualPage(response.data.meta.pagination.page)
-            console.log(response.data)
-            //console.log(response.data.meta.pagination.pageCount)
-            // console.log(response.data.meta.pagination.page)
-
             setIsLoading(false);
-            //setError(null);
+            // TODO setError(null);
             localStorage.setItem('username', response.data.user.username);
             localStorage.setItem('JWT', response.data.jwt);
             navigate(routes.favorite.create());
@@ -38,7 +31,7 @@ const RegistrationPage = () => {
         } catch (error) {
             console.error('Ошибка при выполнении запроса:', error);
             setIsLoading(false);
-            //setError('Не удалось загрузить данные. Попробуйте позже.');
+            // TODO setError('Не удалось загрузить данные. Попробуйте позже.');
         }
 
     };
@@ -54,10 +47,7 @@ const RegistrationPage = () => {
             password: "",
         },
         onSubmit: (values) => {
-            //console.log('values', values)
             registration(values);
-            //localStorage.setItem('userEmail', values.email);
-            //navigate(routes.favorite.create());
         },
     });
     return (

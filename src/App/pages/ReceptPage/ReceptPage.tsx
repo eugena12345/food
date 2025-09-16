@@ -42,7 +42,6 @@ const ReceptPage = () => {
                     },
                 );
                 setRecipe(response.data.data);
-                //console.log(response.data)
                 setIsLoading(false)
                 setError(null);
             } catch (err) {

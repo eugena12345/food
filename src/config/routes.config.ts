@@ -7,11 +7,6 @@ export const routes = {
     mask: "/recipes",
     create: () => "/recipes",
   },
-  // productsWithCategory: {
-  //   mask: "/products",
-  //   create: (id: number) => `/products/?filterByCategoryId=${id}`,
-  // },
-
   recipe: {
     mask: "/recipes/:id",
     create: (id: string) => `/recipes/${id}`,

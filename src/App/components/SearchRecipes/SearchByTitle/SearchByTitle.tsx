@@ -1,4 +1,4 @@
-import Input from "App//components/Input/Input";
+import Input from "App/components/Input/Input";
 import Button from "components/Button/Button";
 import styles from './SearchByTitle.module.scss';
 import { useState } from "react";

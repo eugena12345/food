@@ -31,16 +31,6 @@ const Text: React.FC<TextProps> = ({
         return resultClassNames.join(' ')
     }
 
-    // const style = {
-    //     // 'overflow': 'hidden',
-    //     // 'text-overflow': 'ellipsis',
-    //     // '-moz-box-orient': 'vertical',
-    //     // 'display': '-webkit-box',
-    //     // '-webkit-line-clamp': `${maxLines > 0 ? maxLines : 100}`,
-    //     // '-webkit-box-orient': 'vertical',
-    //     // 'line-clamp': `${maxLines > 0 ? maxLines : 100}`,
-    //     // 'box-orient': 'vertical',
-    // }
     const style: React.CSSProperties = {
         overflow: 'hidden',
         textOverflow: 'ellipsis',

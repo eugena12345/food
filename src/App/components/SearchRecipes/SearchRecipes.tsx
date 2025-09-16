@@ -10,9 +10,9 @@ const SearchRecipes = () => {
             <SearchByTitle />
             <div className={styles.filterandsort}>
                 <SearchByFilter />
-                
+
             </div>
-            {/* <div className={styles.container__resultOrReset}>
+            {/* TODO <div className={styles.container__resultOrReset}>
                 <div className={styles['container__result']}>
                         <>
                             <Text tag='h2' color='primary'>Total Recipes</Text>

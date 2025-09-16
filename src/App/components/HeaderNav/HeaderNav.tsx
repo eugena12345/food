@@ -42,11 +42,11 @@ const HeaderNav = () => {
                 }
 
             </div>
-            <nav className={styles.headerNav}>
-                <ul>
+            <nav className={styles.navMenu}>
+                <ul className={styles.navList}>
                     {menuItems.map((item) => {
-                        return (<li key={item.label}>
-                            <Link to={item.route}>
+                        return (<li className={styles.navItem} key={item.label}>
+                            <Link className={styles.navLink} to={item.route}>
                                 {item.label}
                             </Link>
                         </li>)

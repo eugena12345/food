@@ -1,9 +1,10 @@
 import { useFormik } from 'formik';
 import styles from './LoginPage.module.scss';
-import { useNavigate } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import { routes } from 'config/routes.config';
 import axios from 'axios';
 import { useState } from 'react';
+import Button from 'components/Button';
 
 const LoginPage = () => {
     const navigate = useNavigate();
@@ -49,7 +50,7 @@ const LoginPage = () => {
     return (
         <div className={styles.container}>
             <div className={styles['container--withMax']}>
-                <form className={styles.form} onSubmit={formik.handleSubmit}>
+                <form className={styles.authForm} onSubmit={formik.handleSubmit}>
                     <label htmlFor="identifier">Username</label>
                     <input className={styles.element}
                         id="identifier"
@@ -70,11 +71,13 @@ const LoginPage = () => {
                         value={formik.values.password}
                     />
 
-                    <button type="submit">Submit</button>
+                    {/* TODO добавить дизейбл кнопки при отправке запроса на сервер */}
+                    <Button type="submit">Submit</Button>
                 </form>
 
 
             </div>
+            <Link to={routes.registration.create()}>Registration here</Link>
 
         </div>
     )

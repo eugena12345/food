@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router';
 import { routes } from 'config/routes.config';
 import { useState } from 'react';
 import axios from 'axios';
+import Button from 'components/Button';
 
 const RegistrationPage = () => {
     const navigate = useNavigate();
@@ -53,7 +54,7 @@ const RegistrationPage = () => {
     return (
         <div className={styles.container}>
             <div className={styles['container--withMax']}>
-                <form className={styles.form} onSubmit={formik.handleSubmit}>
+                <form className={styles.authForm} onSubmit={formik.handleSubmit}>
                     <label htmlFor="username">Username</label>
                     <input className={styles.element}
                         id="username"
@@ -82,8 +83,8 @@ const RegistrationPage = () => {
                         onChange={formik.handleChange}
                         value={formik.values.password}
                     />
-
-                    <button type="submit">Submit</button>
+                    {/* TODO добавить дизейбл кнопки при отправке запроса на сервер */}
+                    <Button type="submit">Submit</Button>
                 </form>
 
 

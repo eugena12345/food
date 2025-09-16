@@ -5,8 +5,8 @@ import Text from "components/Text/Text";
 const SearchInfo = () => {
     return (
         <div className={styles.container}>
-            
-            <Text view='p-20' color='primary'>Find the perfect food and drink ideas for every occasion, 
+
+            <Text className={styles.withoutMargin} view='p-20' color='primary'>Find the perfect food and drink ideas for every occasion,
                 from weeknight dinners to holiday feasts.</Text>
         </div>
     )

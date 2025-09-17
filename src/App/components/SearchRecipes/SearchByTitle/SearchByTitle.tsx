@@ -7,9 +7,6 @@ import { useState } from "react";
 const SearchByTitle = () => {
     const [value, setValue] = useState('')
 
-    const handleInputChange = (searchQuery: string) => {
-        setValue(searchQuery);
-    };
 
 
 
@@ -18,7 +15,7 @@ const SearchByTitle = () => {
         <div className={styles['container__search']}>
             <Input
                 placeholder="Search product"
-                onChange={handleInputChange}
+                onChange={setValue}
                 value={value}
                 className={styles['container__search--grow']}
             />

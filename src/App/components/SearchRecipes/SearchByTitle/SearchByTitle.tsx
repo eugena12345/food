@@ -12,12 +12,12 @@ const SearchByTitle = () => {
 
 
     return (
-        <div className={styles['container__search']}>
+        <div className={styles['search__container']}>
             <Input
                 placeholder="Search product"
                 onChange={setValue}
                 value={value}
-                className={styles['container__search--grow']}
+                className={styles['search__container--input']}
             />
             <Button>Find now</Button>
         </div>

@@ -1,12 +1,12 @@
 @use './../../../../variables.scss' as vars;
 
-.container {
-    &__search {
+.search {
+    &__container {
         display: flex;
         flex-direction: row;
         margin-bottom: vars.$spaceXL;
 
-        &--grow {
+        &--input {
             flex-grow: 1;
             flex-shrink: 1;
             margin-right: vars.$spaceXL;
@@ -15,9 +15,9 @@
 }
 
 @media (max-width: vars.$breakpointsXS) {
-    .container {
-        &__search {
-            &--grow {
+    .search {
+        &__container {
+            &--input {
                 margin-right: 2px;
             }
         }

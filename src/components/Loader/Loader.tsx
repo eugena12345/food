@@ -1,15 +1,8 @@
 import React from 'react';
 import style from './Loader.module.scss';
-export type LoaderProps = {
-    size?: 's' | 'm' | 'l';
-    className?: string;
-};
+import type { LoaderProps } from './types';
+import { loaderSize } from './config';
 
-const loaderSize = {
-    s: '24px',
-    m: '48px',
-    l: '60px',
-};
 
 const Loader: React.FC<LoaderProps> = ({ size = 'l', className }) => {
     const classNameLoader = `${style.spin} ${className ? className : ''}`;

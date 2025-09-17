@@ -1,12 +1,8 @@
 import React, { memo } from 'react';
 import Loader from 'components/Loader';
 import styles from './Button.module.scss';
+import type { ButtonProps } from './types';
 
-export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
-  loading?: boolean;
-  children: React.ReactNode;
-  'data-testid'?: string;
-};
 
 const Button: React.FC<ButtonProps> = (props) => {
   const actualStyle = props.disabled ? styles.disabled : styles.original;

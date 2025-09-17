@@ -5,8 +5,8 @@ import userSvg from 'assets/images/User.svg'
 import heartSvg from 'assets/images/HeartIcon.svg'
 import { useNavigate } from 'react-router';
 import { routes } from 'config/routes.config';
+import type { NavigateFunction } from './types';
 
-type NavigateFunction = () => void;
 
 const Header = () => {
     const navigate = useNavigate()

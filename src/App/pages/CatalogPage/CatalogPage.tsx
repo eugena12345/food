@@ -11,62 +11,12 @@ import SearchInfo from "App/components/SearchInfo";
 import SearchRecipes from "App/components/SearchRecipes";
 import qs from 'qs';
 import { useSearchParams } from "react-router";
+import type { Recipe } from './types';
+import { getIngradientsString } from 'utils/helpers';
 
+//TODO переместить в ДЗ 4
 const STRAPI_BASE_URL = 'https://front-school-strapi.ktsdev.ru';
 const STRAPI_URL = `${STRAPI_BASE_URL}/api`;
-const getIngradientsString = (ingArr: Ingredient[]): string => {
-    return ingArr.map((ing) => ing.name).join(' + ')
-}
-
-
-export interface Image {
-    id: number;
-    documentId: string;
-    name: string;
-    alternativeText: string | null;
-    caption: string | null;
-    url: string
-}
-
-export interface Ingredient {
-    id: number;
-    name: string;
-    amount: number;
-    unit: string | null;
-}
-
-export type Equipment = {
-    id: number,
-    name: string
-}
-
-export type Direction = {
-    description: string,
-    id: number,
-    image: null | string
-}
-
-export interface Recipe {
-    calories: number;
-    cookingTime: number;
-    createdAt: string;
-    documentId: string;
-    id: number;
-    images: Image[];
-    ingradients: Ingredient[];
-    likes: number;
-    name: string;
-    preparationTime: number;
-    publishedAt: string;
-    rating: number;
-    servings: number;
-    summary: string;
-    totalTime: number;
-    updatedAt: string;
-    vegetarian: boolean;
-    equipments?: Equipment[];
-    directions?: Direction[];
-}
 
 const getURL = (actualPage: number): string => {
     const queryParams = {
@@ -81,8 +31,6 @@ const getURL = (actualPage: number): string => {
     return fullUrl;
 }
 
-
-
 const CatalogPage = () => {
     const [recipes, setRecipes] = useState<Recipe[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -90,9 +38,6 @@ const CatalogPage = () => {
     const [actualPage, setActualPage] = useState<number>(1);
     const [searchParams, setSearchParams] = useSearchParams();
     const [error, setError] = useState<string | null>(null);
-
-
-
 
     useEffect(() => {
         const page = Number(searchParams.get('page')) || 1;

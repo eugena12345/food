@@ -6,11 +6,9 @@ import axios from 'axios';
 import Text from 'components/Text';
 import IngredientsEquipmentBlock from 'App/pages/ReceptPage/IngredientsEquipmentBlock';
 import decorativeImage from './../../../assets/images/Pattern.png';
-import type { Recipe } from 'App/pages/CatalogPage/CatalogPage';
+import type { Recipe } from 'App/pages/CatalogPage';
 import qs from 'qs';
-
-const STRAPI_BASE_URL = 'https://front-school-strapi.ktsdev.ru';
-const STRAPI_URL = `${STRAPI_BASE_URL}/api`;
+import { getURL } from 'utils/helpers';
 
 const ReceptPage = () => {
     const params = useParams();
@@ -18,21 +16,11 @@ const ReceptPage = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
-
-    const getURL = (): string => {
-        const queryParams = {
-            populate: ['ingradients', 'equipments', 'directions.image', 'images', 'category']
-        };
-        const queryString = qs.stringify(queryParams, { encodeValuesOnly: true });
-        const fullUrl = `${STRAPI_URL}/recipes/${params.id}?${queryString}`;
-        return fullUrl;
-    }
-
     useEffect(() => {
         const fetch = async () => {
             try {
                 setIsLoading(true);
-                const url = getURL();
+                const url = getURL(params.id);
                 const response = await axios.get(
                     url,
                     {

@@ -1,20 +1,8 @@
 import { Link } from 'react-router';
 import styles from './HeaderNav.module.scss';
-import { routes } from 'config/routes.config';
 import { useState } from 'react';
 import { stack as Menu } from 'react-burger-menu';
-
-interface MenuItem {
-    label: string;
-    route: string;
-}
-const menuItems: MenuItem[] = [
-    { label: 'Recipes', route: routes.recipes.create() },
-    { label: 'Meals Categories', route: routes.categories.create() },
-    { label: 'Products', route: routes.products.create() },
-    { label: 'Menu Items', route: routes.main.create() }, //TODO сделать роуты
-    { label: 'Meal Planning', route: routes.main.create() }, //TODO сделать роуты
-];
+import { menuItems } from './config';
 
 const HeaderNav = () => {
     const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);

@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import styles from './CatalogPage.module.scss'
 import Loader from "~components/Loader";
 import titleImage from '~assets/images/titleImage.png';
-import overlayImage from '~assets/images/Recipes (1) 1.svg'
+import overlayImage from '~assets/images/Recipes.svg'
 import Pagination from "~App/components/Pagination";
 import SearchInfo from "~App/components/SearchInfo";
 import SearchRecipes from "~App/components/SearchRecipes";

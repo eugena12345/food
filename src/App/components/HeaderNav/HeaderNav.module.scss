@@ -1,6 +1,5 @@
 @use './../../../variables' as vars;
 
-// здесь использовать классы а не теги
 .navMenu {
   display: flex;
   align-items: center;
@@ -52,10 +51,51 @@
 
 .burger {
   display: none;
+  font-size: 24px;
+  cursor: pointer;
+  width: 25px;
+  height: 25px;
+
+
+  @media (max-width: 768px) {
+    display: block;
+  }
 }
 
+.close {
+  font-size: 24px;
+  cursor: pointer;
+}
 
-@media (max-width: 650px) {
+.navList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.navItem {
+  margin: 10px 0;
+}
+
+.navLink {
+  text-decoration: none;
+  color: black;
+  font-size: 18px;
+
+  &:hover {
+    color: vars.$color-brand;
+  }
+}
+
+.mobMenu {
+  background-color: #ffffff;
+}
+
+.burger {
+  display: none;
+}
+
+@media (max-width: vars.$breakpointsS) {
   .navMenu {
     display: none;
   }
@@ -83,8 +123,6 @@
   }
 
   .close {
-    background-color: red;
-    color: white;
     width: vars.$spaceL;
     height: vars.$spaceL;
     display: flex;

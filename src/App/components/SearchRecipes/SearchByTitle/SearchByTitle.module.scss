@@ -12,10 +12,8 @@
             margin-right: vars.$spaceXL;
         }
     }
-}
 
-@media (max-width: vars.$breakpointsXS) {
-    .search {
+    @media (max-width: vars.$breakpointsXS) {
         &__container {
             &--input {
                 margin-right: 2px;

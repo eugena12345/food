@@ -1,4 +1,4 @@
-import type { Ingredient } from 'App/pages/CatalogPage';
+import type { Ingredient } from '~App/pages/CatalogPage';
 import qs from 'qs';
 
 

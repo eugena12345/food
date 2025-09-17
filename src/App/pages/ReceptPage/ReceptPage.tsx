@@ -1,13 +1,13 @@
 import { useParams } from 'react-router';
-import styles from './ReceptPage.module.scss'
 import { useEffect, useState } from 'react';
-import Loader from 'components/Loader';
 import axios from 'axios';
-import Text from 'components/Text';
-import IngredientsEquipmentBlock from 'App/pages/ReceptPage/IngredientsEquipmentBlock';
-import decorativeImage from './../../../assets/images/Pattern.png';
-import type { Recipe } from 'App/pages/CatalogPage';
-import { getURL } from 'utils/helpers';
+import Loader from '~components/Loader';
+import Text from '~components/Text';
+import IngredientsEquipmentBlock from '~App/pages/ReceptPage/IngredientsEquipmentBlock';
+import decorativeImage from '~assets/images/Pattern.png';
+import type { Recipe } from '~App/pages/CatalogPage';
+import { getURL } from '~utils/helpers';
+import styles from './ReceptPage.module.scss'
 
 const ReceptPage = () => {
     const params = useParams();

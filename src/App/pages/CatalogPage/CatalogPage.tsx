@@ -1,18 +1,18 @@
-import InfoCard from "App/components/InfoCard";
+import InfoCard from "~App/components/InfoCard";
 import axios from "axios";
-import Button from "components/Button";
+import Button from "~components/Button";
 import { useEffect, useState } from "react";
 import styles from './CatalogPage.module.scss'
-import Loader from "components/Loader";
-import titleImage from 'assets/images/titleImage.png';
-import overlayImage from 'assets/images/Recipes (1) 1.svg'
-import Pagination from "App/components/Pagination";
-import SearchInfo from "App/components/SearchInfo";
-import SearchRecipes from "App/components/SearchRecipes";
+import Loader from "~components/Loader";
+import titleImage from '~assets/images/titleImage.png';
+import overlayImage from '~assets/images/Recipes (1) 1.svg'
+import Pagination from "~App/components/Pagination";
+import SearchInfo from "~App/components/SearchInfo";
+import SearchRecipes from "~App/components/SearchRecipes";
 import qs from 'qs';
 import { useSearchParams } from "react-router";
 import type { Recipe } from './types';
-import { getIngradientsString } from 'utils/helpers';
+import { getIngradientsString } from '~utils/helpers';
 
 //TODO переместить в ДЗ 4
 const STRAPI_BASE_URL = 'https://front-school-strapi.ktsdev.ru';

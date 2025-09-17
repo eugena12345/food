@@ -1,11 +1,11 @@
 import { Navigate, type RouteObject } from "react-router";
 import App from "../App";
-import CatalogPage from 'App/pages/CatalogPage';
-import ReceptPage from "App/pages/ReceptPage";
-import ComingSoonPage from "App/pages/ComingSoonPage";
-import { routes } from "config/routes.config";
-import LoginPage from "App/pages/LoginPage";
-import RegistrationPage from "App/pages/RegistrationPage";
+import CatalogPage from '~App/pages/CatalogPage';
+import ReceptPage from "~App/pages/ReceptPage";
+import ComingSoonPage from "~App/pages/ComingSoonPage";
+import { routes } from "~config/routes.config";
+import LoginPage from "~App/pages/LoginPage";
+import RegistrationPage from "~App/pages/RegistrationPage";
 
 export const routesConfig: RouteObject[] = [
   {

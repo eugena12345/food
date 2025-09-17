@@ -1,4 +1,4 @@
-import MultiDropdown, { type Option } from "App/components/MultiDropdown";
+import MultiDropdown, { type Option } from "~App/components/MultiDropdown";
 import styles from './SearchByFilter.module.scss';
 
 

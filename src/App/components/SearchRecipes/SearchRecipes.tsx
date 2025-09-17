@@ -1,6 +1,6 @@
-import SearchByFilter from 'App/components/SearchRecipes/SearchByFilter';
+import SearchByFilter from '~App/components/SearchRecipes/SearchByFilter';
 import styles from './SearchRecipes.module.scss';
-import SearchByTitle from 'App/components/SearchRecipes/SearchByTitle';
+import SearchByTitle from '~App/components/SearchRecipes/SearchByTitle';
 //import Text from 'components/Text';
 
 const SearchRecipes = () => {

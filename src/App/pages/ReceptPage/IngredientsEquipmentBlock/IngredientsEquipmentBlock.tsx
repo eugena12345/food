@@ -1,9 +1,9 @@
 import React from 'react';
 import styles from './IngredientsEquipmentBlock.module.scss';
-import dinner from 'assets/images/dinner.svg';
-import ladle from 'assets/images/ladle.png';
-import Text from 'components/Text';
-import type { Ingredient, Equipment } from 'App/pages/CatalogPage/CatalogPage';
+import dinner from '~assets/images/dinner.svg';
+import ladle from '~assets/images/ladle.png';
+import Text from '~components/Text';
+import type { Ingredient, Equipment } from '~App/pages/CatalogPage/CatalogPage';
 
 
 type Props = {

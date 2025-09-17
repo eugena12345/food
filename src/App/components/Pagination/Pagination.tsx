@@ -1,9 +1,9 @@
 import styles from './Pagination.module.scss';
-import arrowBackIcon from 'assets/images/arrow-right.svg'
-import arrowForwardIcon from 'assets/images/arrow-rightSingle.svg'
+import arrowBackIcon from '~assets/images/arrow-right.svg'
+import arrowForwardIcon from '~assets/images/arrow-rightSingle.svg'
 import { useSearchParams } from 'react-router';
 import type { PaginationProps } from './types';
-import { getNumberCountArr } from 'utils/helpers';
+import { getNumberCountArr } from '~utils/helpers';
 
 
 const Pagination = ({ pageCount, actualPage }: PaginationProps) => {

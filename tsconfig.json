@@ -11,27 +11,24 @@
   "compilerOptions": {
     "baseUrl": "src",
     "paths": {
-      "components": [
+      "~components": [
         "components/*"
       ],
-      "config": [
+      "~config": [
         "config/*"
       ],
-      "styles": [
+      "~styles": [
         "styles/*"
       ],
-      "utils": [
+      "~utils": [
         "utils/*"
       ],
-      "assets": [
+      "~assets": [
         "assets/*"
       ],
-      "App": [
+      "~App": [
         "App/*"
-      ],
-      "utils": [
-        "utils/*"
-      ],
+      ]
     }
   }
 }

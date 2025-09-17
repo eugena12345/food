@@ -1,6 +1,6 @@
 import { memo } from 'react';
 import styles from './SearchInfo.module.scss';
-import Text from "components/Text/Text";
+import Text from '~components/Text/Text';
 
 const SearchInfo = () => {
     return (

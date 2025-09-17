@@ -1,8 +1,8 @@
 import React, { memo } from 'react';
 import styles from './Card.module.scss';
-import Text from 'components/Text/Text';
+import Text from '~components/Text/Text';
 import { useNavigate } from 'react-router';
-import { routes } from "config/routes.config";
+import { routes } from "~config/routes.config";
 import type { CardProps } from './types'
 
 

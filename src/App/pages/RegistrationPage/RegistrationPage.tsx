@@ -1,10 +1,10 @@
 import { useFormik } from 'formik';
 import styles from './RegistrationPage.module.scss';
 import { useNavigate } from 'react-router';
-import { routes } from 'config/routes.config';
+import { routes } from '~config/routes.config';
 import { useState } from 'react';
 import axios from 'axios';
-import Button from 'components/Button';
+import Button from '~components/Button';
 
 const RegistrationPage = () => {
     const navigate = useNavigate();

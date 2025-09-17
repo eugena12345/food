@@ -1,10 +1,10 @@
 import HeaderNav from '../HeaderNav/HeaderNav';
 import styles from './Header.module.scss';
-import logo from 'assets/images/Group.svg';
-import userSvg from 'assets/images/User.svg'
-import heartSvg from 'assets/images/HeartIcon.svg'
+import logo from '~assets/images/Group.svg';
+import userSvg from '~assets/images/User.svg'
+import heartSvg from '~assets/images/HeartIcon.svg'
 import { useNavigate } from 'react-router';
-import { routes } from 'config/routes.config';
+import { routes } from '~config/routes.config';
 import type { NavigateFunction } from './types';
 
 

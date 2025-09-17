@@ -1,5 +1,5 @@
 import React, { memo } from 'react';
-import Loader from 'components/Loader';
+import Loader from '~components/Loader';
 import styles from './Button.module.scss';
 import type { ButtonProps } from './types';
 

@@ -1,10 +1,10 @@
 import { useFormik } from 'formik';
 import styles from './LoginPage.module.scss';
 import { Link, useNavigate } from 'react-router';
-import { routes } from 'config/routes.config';
+import { routes } from '~config/routes.config';
 import axios from 'axios';
 import { useState } from 'react';
-import Button from 'components/Button';
+import Button from '~components/Button';
 
 const LoginPage = () => {
     const navigate = useNavigate();

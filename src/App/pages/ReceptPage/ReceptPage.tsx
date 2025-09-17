@@ -7,7 +7,6 @@ import Text from 'components/Text';
 import IngredientsEquipmentBlock from 'App/pages/ReceptPage/IngredientsEquipmentBlock';
 import decorativeImage from './../../../assets/images/Pattern.png';
 import type { Recipe } from 'App/pages/CatalogPage';
-import qs from 'qs';
 import { getURL } from 'utils/helpers';
 
 const ReceptPage = () => {

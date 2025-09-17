@@ -1,4 +1,7 @@
 import type { Ingredient } from 'App/pages/CatalogPage';
+import qs from 'qs';
+
+
 export const getNumberCountArr = (pageCount: number): number[] => {
     const result = [];
     for (let i = 1; i <= pageCount; i += 1) {

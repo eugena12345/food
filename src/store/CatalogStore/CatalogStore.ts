@@ -1,5 +1,5 @@
 import { action, computed, makeObservable, observable, runInAction } from "mobx";
-import type { Recipe } from "~App/pages/CatalogPage";
+import type { Recipe } from "~store/models/recepies";
 import type { RecipiesListParams, PrivateFields } from "~store/CatalogStore";
 import { Meta, STRAPI_URL, metaInfoInitial } from "~store/CatalogStore";
 import ApiStore, { HTTPMethod } from "~store/ApiStore";
@@ -23,6 +23,7 @@ export default class CatalogStore {
     }
 
     get recepies() {
+        console.log(this._recepies)
         return this._recepies;
     }
 

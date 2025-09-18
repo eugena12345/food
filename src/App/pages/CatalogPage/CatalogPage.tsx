@@ -1,5 +1,4 @@
 import InfoCard from "~App/components/InfoCard";
-import axios from "axios";
 import Button from "~components/Button";
 import { useEffect, useState } from "react";
 import styles from './CatalogPage.module.scss'
@@ -9,64 +8,31 @@ import overlayImage from '~assets/images/Recipes.svg'
 import Pagination from "~App/components/Pagination";
 import SearchInfo from "~App/components/SearchInfo";
 import SearchRecipes from "~App/components/SearchRecipes";
-import qs from 'qs';
 import { useSearchParams } from "react-router";
-import type { Recipe } from './types';
 import { getIngradientsString } from '~utils/helpers';
+import { observer, useLocalStore } from "mobx-react-lite";
+import CatalogStore from "./../../../store/CatalogStore";
+import { Meta } from "~store/CatalogStore/";
 
-//TODO переместить в ДЗ 4
-const STRAPI_BASE_URL = 'https://front-school-strapi.ktsdev.ru';
-const STRAPI_URL = `${STRAPI_BASE_URL}/api`;
-
-const getURL = (actualPage: number): string => {
-    const queryParams = {
-        populate: ['images', 'ingradients'],
-        pagination: {
-            page: actualPage,
-            pageSize: 6,
-        }
-    };
-    const queryString = qs.stringify(queryParams, { encodeValuesOnly: true });
-    const fullUrl = `${STRAPI_URL}/recipes?${queryString}`;
-    return fullUrl;
-}
-
-const CatalogPage = () => {
-    const [recipes, setRecipes] = useState<Recipe[]>([]);
-    const [isLoading, setIsLoading] = useState<boolean>(false);
-    const [pageCount, setPageCount] = useState<number>(1);
+const CatalogPage = observer(() => {
     const [actualPage, setActualPage] = useState<number>(1);
     const [searchParams, setSearchParams] = useSearchParams();
-    const [error, setError] = useState<string | null>(null);
+
+    const recipesStore = useLocalStore(() => new CatalogStore());
+
+    useEffect(() => {
+        const queryParams = {
+            populate: ['images', 'ingradients'],
+            pagination: {
+                page: actualPage,
+                pageSize: 6,
+            }
+        };
+        recipesStore.getRecipiesList(queryParams);
+    }, []);
 
     useEffect(() => {
         const page = Number(searchParams.get('page')) || 1;
-        const url = getURL(page);
-        const fetch = async () => {
-            try {
-                setIsLoading(true);
-                const response = await axios.get(
-                    url,
-                    {
-                        headers: {
-                            Authorization: `Bearer ${import.meta.env.VITE_API_TOKEN}`,
-                        },
-                    },
-                );
-                setRecipes(response.data.data);
-                setPageCount(response.data.meta.pagination.pageCount);
-                setActualPage(response.data.meta.pagination.page)
-                setIsLoading(false);
-                setError(null);
-
-            } catch (error) {
-                console.error('Ошибка при выполнении запроса:', error);
-                setIsLoading(false);
-                setError('Не удалось загрузить данные. Попробуйте позже.');
-            }
-
-        };
-        fetch();
     }, [searchParams]);
 
     useEffect(() => {
@@ -82,15 +48,16 @@ const CatalogPage = () => {
             <div className={styles.container}>
 
                 <div className={styles[`container--maxWidth`]}>
-                    {error && <div className={styles.error}>{error}</div>}
+                    {recipesStore.meta === Meta.error && <div className={styles.error}>Возникла непредвиденная ошибка. Не удалось загрузить данные. Попробуйте позже.</div>}
+                    {/*TODO есть ли сообщение с сервера? {error} */}
 
                     <SearchInfo />
                     <SearchRecipes />
 
-                    {isLoading && <Loader />}
+                    {recipesStore.meta === Meta.loading && <Loader />}
 
                     <div className={styles[`container__products`]}>
-                        {recipes.map(rec => (
+                        {recipesStore.recepies.length > 0 && recipesStore.recepies.map(rec => (
 
                             <InfoCard
                                 key={rec.id}
@@ -106,8 +73,8 @@ const CatalogPage = () => {
                             />
                         ))}
                     </div>
-                    {pageCount > 1
-                        && <Pagination pageCount={pageCount} actualPage={actualPage} />}
+                    {recipesStore.metaInfo.pagination.pageCount > 1
+                        && <Pagination pageCount={recipesStore.metaInfo.pagination.pageCount} actualPage={actualPage} />}
                 </div>
             </div>
 
@@ -115,6 +82,6 @@ const CatalogPage = () => {
 
 
     )
-};
+});
 
 export default CatalogPage;

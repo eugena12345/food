@@ -1,55 +1,74 @@
-//import { Link } from 'react-router';
+import { Link } from 'react-router';
 import styles from './HeaderNav.module.scss';
-//import { routes } from 'config/routes.config';
 import { useState } from 'react';
-
-const menuItems = [
-    { label: 'Recipes', },//route: routes.recipes.create()
-    { label: 'Meals Categories', },
-    { label: 'Products', },
-    { label: 'Menu Items', },
-    { label: 'Meal Planning', },
-];
+import { stack as Menu } from 'react-burger-menu';
+import { menuItems } from './config';
 
 const HeaderNav = () => {
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 
-    const showMenu = () => setIsMenuOpen(true);
-    const closeMenu = () => setIsMenuOpen(false);
+    const handleStateChange = (state: { isOpen: boolean }) => {
+        setIsMenuOpen(state.isOpen);
+    };
+
+    const closeMenu = () => {
+        setIsMenuOpen(false);
+    };
     return (
-        <>
-            <div className={styles.burger} >
-                <button onClick={showMenu}>☰</button>
-                {isMenuOpen &&
-                    <div className={styles.mobileMenu} onClick={closeMenu}>
-                        {/* <ul>
-                            <li><Link to={routes.main.create()} onClick={closeMenu} >Products</Link></li>
-                            <li><Link to={routes.categories.create()} onClick={closeMenu}>Categories</Link></li>
-                            <li><Link to={routes.about.create()} onClick={closeMenu}>About us</Link></li>
-                        </ul> */}
-                        <button onClick={closeMenu} className={styles.close}>
-                            ×
-                        </button>
-                    </div>
-                }
+        <div>
+            <Menu
+                isOpen={isMenuOpen}
+                onStateChange={handleStateChange}
+                width={'45%'}
+                right={false}
+                customBurgerIcon={<button className={styles.burger}>☰</button>}
+                customCrossIcon={<button className={styles.close}>×</button>}
+                styles={{
+                    bmBurgerButton: {
+                        position: 'relative',
+                        with: '25px',
+                        heigth: '25px',
+                    },
+                    bmOverlay: {
+                        top: '-16px',
+                        //TODO посмотреть как сделать типа такого в топ `${vars.$spaceM}`
+                        background: 'rgb(241 213 185 / 89%)',
+                    },
+                    bmMenuWrap: {
+                        height: 'auto',
+                    },
+                    bmMenu: {
+                        height: 'auto',
+                    },
+                }}
+            >
+                <ul className={styles.navList}>
+                    {menuItems.map((item) => (
+                        <li className={styles.navItem} key={item.label}>
+                            <Link
+                                to={item.route}
+                                className={styles.navLink}
+                                onClick={closeMenu}
+                            >
+                                {item.label}
+                            </Link>
+                        </li>
+                    ))}
+                </ul>
+            </Menu>
 
-            </div>
-            <nav className={styles.headerNav}>
-                <ul>
+            <nav className={styles.navMenu}>
+                <ul className={styles.navList}>
                     {menuItems.map((item) => {
-                        return (<li>
-                            {/* <Link to={item.route}> */}
-                            {/* TODO убрать тег а */}
-                            <a>{item.label}</a>
-                            {/* </Link> */}
+                        return (<li className={styles.navItem} key={item.label}>
+                            <Link className={styles.navLink} to={item.route}>
+                                {item.label}
+                            </Link>
                         </li>)
                     })}
-                    {/* <li><Link to={routes.main.create()}>Products</Link></li>
-                    <li><Link to={routes.categories.create()}>Categories</Link></li>
-                    <li><Link to={routes.about.create()}>About us</Link></li> */}
                 </ul>
             </nav>
-        </>
+        </div>
     )
 }
 

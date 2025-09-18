@@ -1,0 +1,63 @@
+@use './../../../variables.scss' as vars;
+
+.pagination {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+
+    &__pagenumber {
+        width: 38px;
+        height: 42px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 18px;
+
+        &--active {
+            background-color: vars.$color-brand;
+        }
+
+        &:hover {
+            background-color: vars.$color-brand;
+            cursor: pointer;
+        }
+    }
+
+    &__arrow {
+        width: 35px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &:hover {
+            background-color: vars.$color-brand;
+            cursor: pointer;
+        }
+
+        &:disabled {
+            filter: grayscale(1) opacity(0.3);
+
+            &:hover {
+                background-color: transparent;
+                cursor: not-allowed;
+            }
+        }
+    }
+}
+
+@media (max-width: vars.$breakpointsXS) {
+    .pagination {
+        &__pagenumber {
+            width: vars.$spaceL;
+            height: vars.$spaceL;
+            font-size: vars.$spaceM;
+        }
+
+        &__arrow {
+            width: vars.$spaceL;
+            height: vars.$spaceL;
+
+        }
+    }
+
+}

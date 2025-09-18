@@ -5,15 +5,44 @@ import path from 'path';
 
 import tsconfig from './tsconfig.json';
 
+// const SRC_PATH = path.resolve(__dirname, 'src');
+
+// const parseTsConfigPaths = (paths: Record<string, string[]>): Record<string, string> => {
+//   const webpackConfigAliases: Record<string, string> = {};
+
+//   Object.entries(paths).forEach(([alias, paths]) => {
+//     const aliasPath = paths[0].replace(/[^a-zA-Z]/g, '');
+
+//     webpackConfigAliases[alias] = path.join(SRC_PATH, aliasPath);
+//   });
+
+//   return webpackConfigAliases;
+// };
+
+// // https://vite.dev/config/
+// export default defineConfig({
+//   plugins: [react()],
+//   resolve: {
+//     alias: parseTsConfigPaths(tsconfig.compilerOptions.paths),
+//   },
+// });
+
+
 const SRC_PATH = path.resolve(__dirname, 'src');
 
+// Парсинг алиасов из tsconfig.json
 const parseTsConfigPaths = (paths: Record<string, string[]>): Record<string, string> => {
   const webpackConfigAliases: Record<string, string> = {};
 
-  Object.entries(paths).forEach(([alias, paths]) => {
-    const aliasPath = paths[0].replace(/[^a-zA-Z]/g, '');
+  Object.entries(paths).forEach(([alias, [pathValue]]) => {
+    // Удаляем символ `*` из алиаса и пути
+    //const aliasKey = alias.replace('/*', '');
+    const aliasPath = pathValue.replace('/*', '');
 
-    webpackConfigAliases[alias] = path.join(SRC_PATH, aliasPath);
+    // Формируем путь с учётом символа ``~``
+    //webpackConfigAliases[aliasKey] = path.resolve(SRC_PATH, aliasPath);
+    webpackConfigAliases[alias] = path.resolve(SRC_PATH, aliasPath);
+
   });
 
   return webpackConfigAliases;

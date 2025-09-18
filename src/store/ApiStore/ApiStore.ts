@@ -42,7 +42,8 @@ export default class ApiStore implements IApiStore {
 
             return {
                 success: response.ok,
-                data,
+                data: data.data,
+                meta: data.meta,
                 status: response.status,
             };
         } catch (e) {

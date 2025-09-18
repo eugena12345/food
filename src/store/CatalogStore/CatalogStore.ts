@@ -52,8 +52,8 @@ export default class CatalogStore {
         runInAction(() => {
             if (response.success) {
                 this._meta = Meta.success;
-                this._recepies = response.data.data;
-                this._metaInfo = response.data.meta;
+                this._recepies = response.data;
+                this._metaInfo = response.meta;
                 return;
             }
 

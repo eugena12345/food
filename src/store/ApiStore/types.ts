@@ -35,6 +35,14 @@ export type ApiResponse<SuccessT, ErrorT> =
     | {
         success: true;
         data: SuccessT;
+        meta: {
+            pagination: {
+                page: number;
+                pageCount: number;
+                pageSize: number;
+                total: number;
+            };
+        }
         status: StatusHTTP;
     }
     | {

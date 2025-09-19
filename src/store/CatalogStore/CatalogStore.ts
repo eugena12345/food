@@ -3,10 +3,16 @@ import type { Recipe } from "~store/models/recepies";
 import type { RecipiesListParams, PrivateFields } from "~store/CatalogStore";
 import { Meta, STRAPI_URL, metaInfoInitial } from "~store/CatalogStore";
 import ApiStore, { HTTPMethod } from "~store/ApiStore";
+import type { CollectionModel } from '~store/models/shared/collection';
+import {
+    getInitialCollectionModel,
+    normalizeCollection,
+    linearizeCollection
+} from '~store/models/shared/collection';
 
 export default class CatalogStore {
     private readonly _apiStore = new ApiStore(STRAPI_URL);
-    private _recepies: Recipe[] = [];
+    private _recepies: CollectionModel<number, Recipe> = getInitialCollectionModel();
     private _meta: Meta = Meta.initial;
     private _metaInfo = metaInfoInitial;
 
@@ -23,8 +29,8 @@ export default class CatalogStore {
     }
 
     get recepies() {
-        console.log(this._recepies)
-        return this._recepies;
+        //console.log(this._recepies)
+        return linearizeCollection(this._recepies);
     }
 
     get meta() {
@@ -39,7 +45,7 @@ export default class CatalogStore {
         params: RecipiesListParams
     ): Promise<void> {
         this._meta = Meta.loading;
-        this._recepies = [];
+        this._recepies = getInitialCollectionModel();
 
         const response = await this._apiStore.request<Recipe[]>({
             method: HTTPMethod.GET,
@@ -52,7 +58,7 @@ export default class CatalogStore {
         runInAction(() => {
             if (response.success) {
                 this._meta = Meta.success;
-                this._recepies = response.data;
+                this._recepies = normalizeCollection(response.data, (el) => el.id);
                 this._metaInfo = response.meta;
                 return;
             }
@@ -63,7 +69,7 @@ export default class CatalogStore {
     }
 
     reset(): void {
-        this._recepies = [];
+        this._recepies = getInitialCollectionModel();
         this._meta = Meta.initial;
         this._metaInfo = metaInfoInitial;
     }

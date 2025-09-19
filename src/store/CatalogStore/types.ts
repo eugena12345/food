@@ -14,3 +14,31 @@ export enum Meta {
 };
 
 export type PrivateFields = '_recepies' | '_meta' | '_metaInfo';
+
+export type ParamsFromQuery = {
+    page?: number | string,
+    filterByCategoryId?: string,
+    filterByName?: string,
+    sort?: string,
+}
+
+export type ParamsForApi = {
+    populate: string[],
+    pagination: {
+        page?: number | string,
+        pageSize?: number,
+
+    }
+    filters?: {
+        category?: {
+            id: {
+                $in: string[]
+            }
+        },
+        name?: {
+            $containsi: string,
+        },
+
+    }
+    sort?: string,
+}

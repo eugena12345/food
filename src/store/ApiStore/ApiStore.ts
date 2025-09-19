@@ -29,6 +29,7 @@ export default class ApiStore implements IApiStore {
             };
             options.body = JSON.stringify(params.data);
         }
+        console.log('endpoint, options', endpoint, options)
 
         return [endpoint, options];
     }

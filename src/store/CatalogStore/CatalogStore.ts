@@ -1,6 +1,6 @@
-import { action, computed, makeObservable, observable, runInAction } from "mobx";
+import { action, computed, makeObservable, observable, reaction, runInAction, type IReactionDisposer } from "mobx";
 import type { Recipe } from "~store/models/recepies";
-import type { RecipiesListParams, PrivateFields } from "~store/CatalogStore";
+import type { ParamsFromQuery, PrivateFields } from "~store/CatalogStore";
 import { Meta, STRAPI_URL, metaInfoInitial } from "~store/CatalogStore";
 import ApiStore, { HTTPMethod } from "~store/ApiStore";
 import type { CollectionModel } from '~store/models/shared/collection';
@@ -9,6 +9,8 @@ import {
     normalizeCollection,
     linearizeCollection
 } from '~store/models/shared/collection';
+import rootStore from "~store/RootStore/instance";
+import { createParamsForApi } from "~utils/api";
 
 export default class CatalogStore {
     private readonly _apiStore = new ApiStore(STRAPI_URL);
@@ -29,7 +31,6 @@ export default class CatalogStore {
     }
 
     get recepies() {
-        //console.log(this._recepies)
         return linearizeCollection(this._recepies);
     }
 
@@ -42,14 +43,16 @@ export default class CatalogStore {
     }
 
     async getRecipiesList(
-        params: RecipiesListParams
+        params: ParamsFromQuery
     ): Promise<void> {
         this._meta = Meta.loading;
         this._recepies = getInitialCollectionModel();
 
+        const paramsForApi = createParamsForApi(params);
+
         const response = await this._apiStore.request<Recipe[]>({
             method: HTTPMethod.GET,
-            data: params,
+            data: paramsForApi,
             headers: {
                 Authorization: `Bearer ${import.meta.env.VITE_API_TOKEN}`,
             },
@@ -62,8 +65,6 @@ export default class CatalogStore {
                 this._metaInfo = response.meta;
                 return;
             }
-
-
             this._meta = Meta.error;
         })
     }
@@ -76,6 +77,31 @@ export default class CatalogStore {
 
     destroy(): void {
         this.reset();
+        this._qpReactionPage();
+        this._qpReactionName();
+        this._qpReactionMealCategory();
     }
+
+    private readonly _qpReactionPage: IReactionDisposer = reaction(
+        () => rootStore.query.getParam('page'),
+        () => {
+            this.getRecipiesList(rootStore.query.getQueryParams())
+        }
+    );
+    private readonly _qpReactionName: IReactionDisposer = reaction(
+        () => rootStore.query.getParam('filterByName'),
+        () => {
+            //  console.log('!!!!!!!!!!!!!', rootStore.query.getParam('filterByName'))
+            this.getRecipiesList(rootStore.query.getQueryParams())
+        }
+    );
+    private readonly _qpReactionMealCategory: IReactionDisposer = reaction(
+        () => rootStore.query.getParam('filterByCategoryId'),
+        () => {
+            this.getRecipiesList(rootStore.query.getQueryParams())
+        }
+    );
+
+
 };
 

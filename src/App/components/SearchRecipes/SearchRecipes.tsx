@@ -1,9 +1,18 @@
 import SearchByFilter from '~App/components/SearchRecipes/SearchByFilter';
 import styles from './SearchRecipes.module.scss';
 import SearchByTitle from '~App/components/SearchRecipes/SearchByTitle';
+import { useSearchParams } from 'react-router';
+import Button from '~components/Button';
 //import Text from 'components/Text';
 
 const SearchRecipes = () => {
+    const [searchParams, setSearchParams] = useSearchParams();
+    const resetFilters = () => {
+        searchParams.set('filterByCategoryId', '');
+        searchParams.set('filterByName', '');
+        searchParams.set('page', '1');
+        setSearchParams(searchParams);
+    }
     return (
 
         <div className={styles.container}>
@@ -21,6 +30,7 @@ const SearchRecipes = () => {
                     
                 </div>
             </div> */}
+            <Button onClick={resetFilters}>Reset filters</Button>
         </div>
     );
 

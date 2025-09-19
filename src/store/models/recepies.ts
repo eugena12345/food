@@ -25,6 +25,16 @@ export type Direction = {
     image: null | string
 }
 
+export type MealCategory = {
+
+    id: number,
+    documentId: string,
+    title: string,
+    createdAt: string,
+    updatedAt: string,
+    publishedAt: string,
+}
+
 export interface Recipe {
     calories: number;
     cookingTime: number;
@@ -45,4 +55,5 @@ export interface Recipe {
     vegetarian: boolean;
     equipments?: Equipment[];
     directions?: Direction[];
+    category?: MealCategory;
 }

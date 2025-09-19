@@ -10,33 +10,24 @@ import SearchInfo from "~App/components/SearchInfo";
 import SearchRecipes from "~App/components/SearchRecipes";
 import { useSearchParams } from "react-router";
 import { getIngradientsString } from '~utils/helpers';
-import { observer, useLocalStore } from "mobx-react-lite";
+import { observer, useLocalObservable, useLocalStore } from "mobx-react-lite";
 import CatalogStore from "./../../../store/CatalogStore";
 import { Meta } from "~store/CatalogStore/";
 
 const CatalogPage = observer(() => {
-    const [actualPage, setActualPage] = useState<number>(1);
     const [searchParams, setSearchParams] = useSearchParams();
 
-    const recipesStore = useLocalStore(() => new CatalogStore());
+    const recipesStore = useLocalObservable(() => new CatalogStore());
 
     useEffect(() => {
         const queryParams = {
             populate: ['images', 'ingradients'],
             pagination: {
-                page: actualPage,
+                page: Number(searchParams.get('page')) || 1,
                 pageSize: 6,
             }
         };
         recipesStore.getRecipiesList(queryParams);
-    }, []);
-
-    useEffect(() => {
-        const page = Number(searchParams.get('page')) || 1;
-    }, [searchParams]);
-
-    useEffect(() => {
-        setActualPage(Number(searchParams.get('page')) || 1);
     }, [searchParams]);
 
     return (
@@ -74,7 +65,7 @@ const CatalogPage = observer(() => {
                         ))}
                     </div>
                     {recipesStore.metaInfo.pagination.pageCount > 1
-                        && <Pagination pageCount={recipesStore.metaInfo.pagination.pageCount} actualPage={actualPage} />}
+                        && <Pagination pageCount={recipesStore.metaInfo.pagination.pageCount} actualPage={recipesStore.metaInfo.pagination.page} />}
                 </div>
             </div>
 

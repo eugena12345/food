@@ -4,17 +4,24 @@ import styles from "./MealCategoriesPage.module.scss";
 import MealCategoryStore from "~store/MealCategoryStore/MealCategoryStore";
 import Text from "~components/Text";
 import Loader from "~components/Loader";
+import { useNavigate } from "react-router";
+import { routes } from "~config/routes.config";
 
 const MealCategoriesPage = observer(() => {
     const mealCategoryStore = useLocalObservable(() => new MealCategoryStore());
+    const navigate = useNavigate();
 
-    // Загрузка данных при монтировании
+    // Загрузка данных при монтировании ???
     useEffect(() => {
         mealCategoryStore.getMealCategoryList();
         return () => {
-            mealCategoryStore.reset(); // Очистка данных при размонтировании
+            mealCategoryStore.reset(); // Очистка данных при размонтировании ???
         };
     }, []);
+
+    const goToFiltredCategory = (categoryId: string) => {
+        navigate(routes.mainWithCategory.create(categoryId))
+    }
 
     return (
         <div className={styles.container}>
@@ -27,7 +34,7 @@ const MealCategoriesPage = observer(() => {
                 ) : (
                     <div className={styles.grid}>
                         {mealCategoryStore.mealCategory.map((category) => (
-                            <div key={category.id} className={styles.card}>
+                            <div key={category.id} className={styles.card} onClick={() => goToFiltredCategory(category.id)}>
                                 <img
                                     src={category.image.url}
                                     alt={category.title}

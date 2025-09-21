@@ -1,8 +1,8 @@
-import { action, computed, makeObservable, observable, reaction, runInAction, type IReactionDisposer } from "mobx";
+import { action, computed, makeObservable, observable, runInAction } from "mobx";
 // import type { Recipe } from "~store/models/recepies";
-import type { ParamsFromQuery } from "~store/CatalogStore";
+//import type { ParamsFromQuery } from "~store/CatalogStore";
 import type { PrivateFields } from "~store/MealCategoryStore/types";
-import { Meta, STRAPI_URL, metaInfoInitial } from "~store/CatalogStore";
+import { STRAPI_URL } from "~store/CatalogStore";
 import ApiStore, { HTTPMethod } from "~store/ApiStore";
 import type { MealCategory } from "~store/models/recepies";
 import type { CollectionModel } from '~store/models/shared/collection';

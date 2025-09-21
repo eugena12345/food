@@ -1,5 +1,5 @@
 import type { Ingredient } from '~App/pages/CatalogPage';
-import qs from 'qs';
+//import qs from 'qs';
 
 
 export const getNumberCountArr = (pageCount: number): number[] => {
@@ -16,15 +16,15 @@ export const getIngradientsString = (ingArr: Ingredient[]): string => {
 
 
 //TODO переместить в ДЗ 4
-const STRAPI_BASE_URL = 'https://front-school-strapi.ktsdev.ru';
-const STRAPI_URL = `${STRAPI_BASE_URL}/api`;
-export const getURL = (recipeId: string | undefined): string => {
-    if (!recipeId) return '';
-    const queryParams = {
-        populate: ['ingradients', 'equipments', 'directions.image', 'images', 'category']
-    };
-    const queryString = qs.stringify(queryParams, { encodeValuesOnly: true });
-    const fullUrl = `${STRAPI_URL}/recipes/${recipeId}?${queryString}`;
-    return fullUrl;
-}
+// const STRAPI_BASE_URL = 'https://front-school-strapi.ktsdev.ru';
+// const STRAPI_URL = `${STRAPI_BASE_URL}/api`;
+// export const getURL = (recipeId: string | undefined): string => {
+//     if (!recipeId) return '';
+//     const queryParams = {
+//         populate: ['ingradients', 'equipments', 'directions.image', 'images', 'category']
+//     };
+//     const queryString = qs.stringify(queryParams, { encodeValuesOnly: true });
+//     const fullUrl = `${STRAPI_URL}/recipes/${recipeId}?${queryString}`;
+//     return fullUrl;
+// }
 

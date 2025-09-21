@@ -1,6 +1,6 @@
 import InfoCard from "~App/components/InfoCard";
 import Button from "~components/Button";
-import { useEffect } from "react"; //, useState
+import { useEffect } from "react";
 import styles from './CatalogPage.module.scss'
 import Loader from "~components/Loader";
 import titleImage from '~assets/images/titleImage.png';
@@ -8,26 +8,16 @@ import overlayImage from '~assets/images/Recipes.svg'
 import Pagination from "~App/components/Pagination";
 import SearchInfo from "~App/components/SearchInfo";
 import SearchRecipes from "~App/components/SearchRecipes";
-//import { useSearchParams } from "react-router";
 import { getIngradientsString } from '~utils/helpers';
-import { observer, useLocalObservable, useLocalStore } from "mobx-react-lite";
+import { observer, useLocalObservable } from "mobx-react-lite";
 import CatalogStore from "./../../../store/CatalogStore";
 import { Meta } from "~store/CatalogStore/";
 import rootStore from "~store/RootStore/instance";
 
 const CatalogPage = observer(() => {
-    //const [searchParams, setSearchParams] = useSearchParams();
-
     const recipesStore = useLocalObservable(() => new CatalogStore());
 
     useEffect(() => {
-        // const queryParams = {
-        //     populate: ['images', 'ingradients'],
-        //     pagination: {
-        //         page: Number(searchParams.get('page')) || 1,
-        //         pageSize: 6,
-        //     }
-        // };
         recipesStore.getRecipiesList(rootStore.query.getQueryParams());
     }, []);
 
@@ -41,18 +31,15 @@ const CatalogPage = observer(() => {
 
                 <div className={styles[`container--maxWidth`]}>
                     {recipesStore.meta === Meta.error && <div className={styles.error}>Возникла непредвиденная ошибка. Не удалось загрузить данные. Попробуйте позже.</div>}
-                    {/*TODO есть ли сообщение с сервера? {error} */}
 
                     <SearchInfo />
-                    <SearchRecipes />
+                    <SearchRecipes totatItems={recipesStore.recepies.length} />
 
                     {recipesStore.meta === Meta.loading && <Loader />}
 
                     <div className={styles[`container__products`]}>
                         {recipesStore.recepies.length > 0 && recipesStore.recepies.map(rec => {
-                            //console.log(' recept 1; ', rec);
                             return (
-
                                 <InfoCard
                                     key={rec.id}
                                     image={rec.images[0].url}
@@ -73,10 +60,7 @@ const CatalogPage = observer(() => {
                         && <Pagination pageCount={recipesStore.metaInfo.pagination.pageCount} actualPage={recipesStore.metaInfo.pagination.page} />}
                 </div>
             </div>
-
         </div>
-
-
     )
 });
 

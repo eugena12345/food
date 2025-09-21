@@ -2,9 +2,7 @@ import Input from "~App/components/Input/Input";
 import Button from "~components/Button/Button";
 import styles from './SearchByTitle.module.scss';
 import { useEffect, useState } from "react";
-import rootStore from "~store/RootStore/instance";
 import { useSearchParams } from "react-router";
-
 
 const SearchByTitle = () => {
     const [value, setValue] = useState('');
@@ -12,20 +10,16 @@ const SearchByTitle = () => {
 
     useEffect(() => {
         const oldValue = searchParams.get('filterByName');
-        // console.log(oldValue)
         if (oldValue || oldValue === '') {
             setValue(oldValue);
         }
     }, [searchParams]);
 
     const getRecepies = () => {
-        //rootStore.query.setSearch('filterByName', )
         searchParams.set('filterByName', `${value}`);
+        searchParams.set('page', '1');
         setSearchParams(searchParams);
-        console.log('filterByName', `${value}`)
     }
-
-
 
     return (
         <div className={styles['search__container']}>

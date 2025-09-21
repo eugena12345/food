@@ -3,9 +3,10 @@ import styles from './SearchRecipes.module.scss';
 import SearchByTitle from '~App/components/SearchRecipes/SearchByTitle';
 import { useSearchParams } from 'react-router';
 import Button from '~components/Button';
-//import Text from 'components/Text';
+import Text from '~components/Text';
+import type { SearchRecipesProps } from './types';
 
-const SearchRecipes = () => {
+const SearchRecipes: React.FC<SearchRecipesProps> = ({ totatItems }) => {
     const [searchParams, setSearchParams] = useSearchParams();
     const resetFilters = () => {
         searchParams.set('filterByCategoryId', '');
@@ -14,25 +15,21 @@ const SearchRecipes = () => {
         setSearchParams(searchParams);
     }
     return (
-
         <div className={styles.container}>
             <SearchByTitle />
             <div className={styles.filterandsort}>
                 <SearchByFilter />
-
             </div>
-            {/* TODO <div className={styles.container__resultOrReset}>
+            <div className={styles.container__resultOrReset}>
                 <div className={styles['container__result']}>
-                        <>
-                            <Text tag='h2' color='primary'>Total Recipes</Text>
-                            <Text view='p-20' color='accent' weight='bold'>__ Recipes</Text>
-                        </>
-                    
+                    {
+                        totatItems === 0
+                        && <Text tag="h3">Nothing found matching your criteria. Try changing your filters.</Text>
+                    }
+                    <Button onClick={resetFilters}>Reset filters</Button>
                 </div>
-            </div> */}
-            <Button onClick={resetFilters}>Reset filters</Button>
+            </div>
         </div>
     );
-
 }
 export default SearchRecipes;

@@ -15,7 +15,7 @@ const MealCategoriesPage = observer(() => {
     useEffect(() => {
         mealCategoryStore.getMealCategoryList();
         return () => {
-            mealCategoryStore.reset(); // Очистка данных при размонтировании ???
+            mealCategoryStore.reset(); // Очистка данных при размонтировании нужно ли добавлять везде ???
         };
     }, []);
 

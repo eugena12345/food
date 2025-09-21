@@ -5,7 +5,6 @@ import { observer, useLocalObservable } from "mobx-react-lite";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router";
 
-
 const SearchByFilter = observer(() => {
     const [value, setValue] = useState<Option[]>([]);
     const [searchParams, setSearchParams] = useSearchParams()
@@ -15,16 +14,12 @@ const SearchByFilter = observer(() => {
         const getCategory = async () => {
             await mealCategoryStore.getMealCategoryList();
             const category = mealCategoryStore.mealCategory;
-            //  if (mealCategoryStore.mealCategory.length > 0) {
             const choosedCategoryId = searchParams.get('filterByCategoryId')?.split(',');
             const oldValues = category.filter((categ) => choosedCategoryId?.includes(categ.id.toString()));
             setValue(oldValues.map((category) => ({ key: category.id.toString(), value: category.title })))
-            //  }
         };
 
-        getCategory()
-
-
+        getCategory();
     }, [mealCategoryStore, searchParams]);
 
     const getOptions = (): Option[] => {
@@ -35,14 +30,11 @@ const SearchByFilter = observer(() => {
     }
     const optionsForMulti = getOptions();
 
-
     const getTitle = (elements: Option[]) =>
         elements.map((el: Option) => el.value).join(', ');
 
-
     const onChange = (value: Option[]) => {
         setValue(value);
-
         const createRecepiesMealCategoryColl = () => {
             const result: string[] = [];
             value.map((item) => result.push(item.key.toString()))
@@ -51,9 +43,7 @@ const SearchByFilter = observer(() => {
         searchParams.set('filterByCategoryId', createRecepiesMealCategoryColl().join(','));
         searchParams.set('page', '1');
         setSearchParams(searchParams);
-
     };
-
 
     return (
         <MultiDropdown

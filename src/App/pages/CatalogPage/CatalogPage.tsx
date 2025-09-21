@@ -13,9 +13,24 @@ import { observer, useLocalObservable } from "mobx-react-lite";
 import CatalogStore from "./../../../store/CatalogStore";
 import { Meta } from "~store/CatalogStore/";
 import rootStore from "~store/RootStore/instance";
+import axios from "axios";
 
 const CatalogPage = observer(() => {
     const recipesStore = useLocalObservable(() => new CatalogStore());
+
+    const addFavorite = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, id: number): Promise<void> => {
+        e.stopPropagation();
+        const token = localStorage.getItem('JWT');
+        await axios.post(
+            'https://front-school-strapi.ktsdev.ru/api/favorites/add',
+            { recipe: id },
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            }
+        );
+    }
 
     useEffect(() => {
         recipesStore.getRecipiesList(rootStore.query.getQueryParams());
@@ -49,7 +64,7 @@ const CatalogPage = observer(() => {
                                     itemDocumentId={rec.documentId}
                                     contentSlot={`${Math.round(rec.calories)} kcal`}
                                     actionSlot={
-                                        <Button>Save</Button>
+                                        <Button onClick={(e) => addFavorite(e, rec.id)}>Save</Button>
                                     }
                                 />
                             )

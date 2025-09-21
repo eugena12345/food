@@ -6,6 +6,7 @@ import ComingSoonPage from "~App/pages/ComingSoonPage";
 import { routes } from "~config/routes.config";
 import LoginPage from "~App/pages/LoginPage";
 import RegistrationPage from "~App/pages/RegistrationPage";
+import MealCategoriesPage from "~App/pages/MealCategoriesPage";
 
 export const routesConfig: RouteObject[] = [
   {
@@ -26,7 +27,7 @@ export const routesConfig: RouteObject[] = [
       },
       {
         path: routes.categories.mask,
-        element: <ComingSoonPage />
+        element: <MealCategoriesPage />
       },
       {
         path: routes.favorite.mask,

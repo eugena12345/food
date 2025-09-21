@@ -33,6 +33,9 @@ export type MealCategory = {
     createdAt: string,
     updatedAt: string,
     publishedAt: string,
+    image: {
+        url: string,
+    }
 }
 
 export interface Recipe {

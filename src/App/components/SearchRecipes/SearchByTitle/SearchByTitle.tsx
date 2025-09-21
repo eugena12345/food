@@ -12,7 +12,7 @@ const SearchByTitle = () => {
 
     useEffect(() => {
         const oldValue = searchParams.get('filterByName');
-        console.log(oldValue)
+        // console.log(oldValue)
         if (oldValue || oldValue === '') {
             setValue(oldValue);
         }

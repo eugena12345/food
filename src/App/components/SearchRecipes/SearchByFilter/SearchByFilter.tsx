@@ -14,21 +14,19 @@ const SearchByFilter = observer(() => {
     useEffect(() => {
         const getCategory = async () => {
             await mealCategoryStore.getMealCategoryList();
-            if (mealCategoryStore.mealCategory.length > 0) {
-                const choosedCategoryId = searchParams.get('filterByCategoryId')?.split(',');
-                console.log('choosedCategory', choosedCategoryId);
-                const oldValues = mealCategoryStore.mealCategory.filter((categ) => choosedCategoryId?.includes(categ.id.toString()));
-                console.log('oldValues MULTI', oldValues)
-                setValue(oldValues.map((category) => ({ key: category.id.toString(), value: category.title })))
-            }
+            const category = mealCategoryStore.mealCategory;
+            //  if (mealCategoryStore.mealCategory.length > 0) {
+            const choosedCategoryId = searchParams.get('filterByCategoryId')?.split(',');
+            const oldValues = category.filter((categ) => choosedCategoryId?.includes(categ.id.toString()));
+            setValue(oldValues.map((category) => ({ key: category.id.toString(), value: category.title })))
+            //  }
         };
 
         getCategory()
 
 
-    }, []);
+    }, [mealCategoryStore, searchParams]);
 
-    //console.log('mealCategory from component', mealCategoryStore.mealCategory)
     const getOptions = (): Option[] => {
         if (mealCategoryStore.mealCategory.length > 0) {
             return mealCategoryStore.mealCategory.map((category) => ({ key: category.id.toString(), value: category.title }))

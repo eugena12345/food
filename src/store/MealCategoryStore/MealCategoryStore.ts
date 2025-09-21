@@ -62,7 +62,7 @@ export default class MealCategoryStore {
             },
             endpoint: '/meal-categories',
         });
-        console.log(response)
+        //console.log(response)
         runInAction(() => {
             if (response.success) {
                 //this._meta = Meta.success;

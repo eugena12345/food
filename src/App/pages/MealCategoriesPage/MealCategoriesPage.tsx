@@ -19,7 +19,7 @@ const MealCategoriesPage = observer(() => {
         };
     }, []);
 
-    const goToFiltredCategory = (categoryId: string) => {
+    const goToFiltredCategory = (categoryId: number) => {
         navigate(routes.mainWithCategory.create(categoryId))
     }
 

@@ -39,7 +39,7 @@ export const routesConfig: RouteObject[] = [
       },
       {
         path: routes.registration.mask,
-        element: <RegistrationPage />
+        element: <LoginPage />
       },
       {
         path: routes.products.mask,

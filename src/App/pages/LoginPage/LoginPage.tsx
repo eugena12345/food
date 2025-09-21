@@ -1,86 +1,118 @@
-import { useFormik } from 'formik';
-import styles from './LoginPage.module.scss';
-import { Link, useNavigate } from 'react-router';
-import { routes } from '~config/routes.config';
-import axios from 'axios';
-import { useState } from 'react';
-import Button from '~components/Button';
+import React from "react";
+import { observer } from "mobx-react-lite";
+import { useNavigate } from "react-router";
+import styles from "./LoginPage.module.scss";
+import { authStore } from "~store/AuthStore";
+import { routes } from "~config/routes.config";
+import Button from "~components/Button";
+import Text from '~components/Text';
 
-const LoginPage = () => {
+type AuthMode = "login" | "register";
+
+const LoginPage = observer(() => {
     const navigate = useNavigate();
+    const [mode, setMode] = React.useState<AuthMode>("login");
 
-    const [isLoading, setIsLoading] = useState(false);
-
-
-    const login = async ({ identifier, password }) => {
-        try {
-            setIsLoading(true);
-            const response = await axios.post(
-                'https://front-school-strapi.ktsdev.ru/api/auth/local',
-                {
-                    identifier,
-                    password,
-                }
-            );
-
-            setIsLoading(false);
-            //TODO setError(null);
-            localStorage.setItem('username', identifier);
-            localStorage.setItem('JWT', response.data.jwt);
-            navigate(routes.favorite.create());
-
-
-        } catch (error) {
-            console.error('Ошибка при выполнении запроса:', error);
-            setIsLoading(false);
-            //TODO setError('Не удалось загрузить данные. Попробуйте позже.');
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        if (mode === "login") {
+            await authStore.authorize();
+            if (!authStore.error) {
+                navigate(routes.favorite.create());
+            }
+        } else {
+            await authStore.register();
+            if (!authStore.error) {
+                navigate(routes.favorite.create());
+            }
         }
-
     };
 
-    const formik = useFormik({
-        initialValues: {
-            identifier: "",
-            password: "",
-        },
-        onSubmit: (values) => {
-            login(values);
-        },
-    });
     return (
         <div className={styles.container}>
-            <div className={styles['container--withMax']}>
-                <form className={styles.authForm} onSubmit={formik.handleSubmit}>
-                    <label htmlFor="identifier">Username</label>
-                    <input className={styles.element}
+            <div className={styles["container--withMax"]}>
+                <form className={styles.authForm} onSubmit={handleSubmit}>
+                    <Text color="accent" tag="h2">{mode === "login" ? "Login" : "Register"}</Text>
+
+                    {authStore.error && <p className={styles.error}>{authStore.error}</p>}
+
+                    <label className={styles.label} htmlFor="identifier">Username</label>
+                    <input
+                        className={styles.element}
                         id="identifier"
                         name="identifier"
-                        type="identifier"
-                        placeholder='type username'
-                        onChange={formik.handleChange}
-                        value={formik.values.identifier}
+                        type="text"
+                        placeholder="type name"
+                        value={authStore.identifier}
+                        onChange={(e) => authStore.setIdentifier(e.target.value)}
                     />
-                    <label htmlFor="password">Password</label>
-                    <input className={styles.element}
+
+                    {mode === "register" && (
+                        <>
+                            <label className={styles.label} htmlFor="email">Email</label>
+                            <input
+                                className={styles.element}
+                                id="email"
+                                name="email"
+                                type="email"
+                                placeholder="email"
+                                value={authStore.email}
+                                onChange={(e) => authStore.setEmail(e.target.value)}
+                            />
+                        </>
+                    )}
+
+                    <label className={styles.label} htmlFor="password">Password</label>
+                    <input
+                        className={styles.element}
                         id="password"
                         name="password"
                         type="password"
-                        placeholder='type password'
-
-                        onChange={formik.handleChange}
-                        value={formik.values.password}
+                        placeholder="type password"
+                        value={authStore.password}
+                        onChange={(e) => authStore.setPassword(e.target.value)}
                     />
 
-                    {/* TODO добавить дизейбл кнопки при отправке запроса на сервер */}
-                    <Button type="submit">Submit</Button>
+                    {mode === "register" && (
+                        <>
+                            <label className={styles.label} htmlFor="repeatPassword">Confirm Password</label>
+                            <input
+                                className={styles.element}
+                                id="repeatPassword"
+                                name="repeatPassword"
+                                type="password"
+                                placeholder="repeat password"
+                                value={authStore.repeatPassword}
+                                onChange={(e) => authStore.setRepeatPassword(e.target.value)}
+                            />
+                        </>
+                    )}
+
+                    <Button type="submit" disabled={authStore.isLoading}>
+                        {authStore.isLoading ? "Processing..." : mode === "login" ? "Login" : "Register"}
+                    </Button>
+
+                    <div className={styles.switchMode}>
+                        {mode === "login" ? (
+                            <p className={styles.message}>
+                                Don't have an account?{" "}
+                                <button className={styles.linkButton} type="button" onClick={() => setMode("register")}>
+                                    Register
+                                </button>
+                            </p>
+                        ) : (
+                            <p className={styles.message}>
+                                Already have an account?{" "}
+                                <button className={styles.linkButton} type="button" onClick={() => setMode("login")}>
+                                    Login
+                                </button>
+                            </p>
+                        )}
+                    </div>
                 </form>
-
-
             </div>
-            <Link to={routes.registration.create()}>Registration here</Link>
-
         </div>
-    )
-}
+    );
+});
 
 export default LoginPage;

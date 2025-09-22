@@ -13,6 +13,7 @@ export default class AuthStore {
     private _repeatPassword: string = '';
     private _error: string | null = null;
     private _isLoading: boolean = false;
+    private _isAuthenticated: boolean = false;
 
 
     constructor() {
@@ -23,6 +24,7 @@ export default class AuthStore {
             _repeatPassword: observable,
             _error: observable,
             _isLoading: observable,
+            _isAuthenticated: observable,
 
             identifier: computed,
             email: computed,
@@ -33,6 +35,7 @@ export default class AuthStore {
 
             authorize: action,
             register: action,
+            logout: action,
             reset: action,
         })
     }
@@ -57,7 +60,7 @@ export default class AuthStore {
     }
 
     get isAuthenticated(): boolean {
-        return !!localStorage.getItem('JWT');
+        return this._isAuthenticated;;
     }
 
     setIdentifier(value: string) {
@@ -107,6 +110,7 @@ export default class AuthStore {
                 if (response.status === 200) {
                     localStorage.setItem('username', this._identifier);
                     localStorage.setItem('JWT', response.data.jwt);
+                    this._isAuthenticated = true;
                     return;
                 }
             })
@@ -146,6 +150,7 @@ export default class AuthStore {
                 if (response.status === 200) {
                     localStorage.setItem('username', this._identifier);
                     localStorage.setItem('JWT', response.data.jwt);
+                    this._isAuthenticated = true;
                     return;
                 }
             })
@@ -159,6 +164,7 @@ export default class AuthStore {
     logout(): void {
         localStorage.removeItem('JWT');
         localStorage.removeItem('username');
+        this._isAuthenticated = false;
         this.reset();
     }
 

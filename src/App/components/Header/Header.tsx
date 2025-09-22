@@ -39,11 +39,11 @@ const Header = observer(() => {
                 </div>
                 <HeaderNav />
                 <div className={styles.logoContent}>
-                    {isAuthenticated && <><img src={heartSvg} alt='heartSvg' className={styles.userInfo} onClick={goToFavorite} />
-                        <div>{localStorage.getItem('username')}</div>
-                        <img src={logout} alt='logout' className={styles.logout} onClick={() => authStore.logout()} />
-                    </>
-
+                    {isAuthenticated
+                        && <><img src={heartSvg} alt='heartSvg' className={styles.userInfo} onClick={goToFavorite} />
+                            <div>{localStorage.getItem('username')}</div>
+                            <img src={logout} alt='logout' className={styles.logout} onClick={() => authStore.logout()} />
+                        </>
                     }
                     {!isAuthenticated
                         && <img src={userSvg} alt='userSvg' className={styles.userInfo} onClick={goToLogin} />

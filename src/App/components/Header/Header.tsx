@@ -3,12 +3,13 @@ import styles from './Header.module.scss';
 import logo from '~assets/images/Group.svg';
 import userSvg from '~assets/images/User.svg';
 import heartSvg from '~assets/images/HeartIcon.svg';
-import logout from '~assets/images/logout.png';
+import logoutImg from '~assets/images/logout.png';
 import { useNavigate } from 'react-router';
 import { routes } from '~config/routes.config';
 import type { NavigateFunction } from './types';
 import { authStore } from '~store/AuthStore';
 import { observer } from 'mobx-react-lite';
+import { useCallback } from 'react';
 
 
 
@@ -17,18 +18,19 @@ const Header = observer(() => {
     const isAuthenticated = authStore.isAuthenticated;
 
 
-    const goToLogin: NavigateFunction = () => {
+    const goToLogin: NavigateFunction = useCallback(() => {
         navigate(routes.login.create())
-    }
+    }, [routes]);
 
-    const goToFavorite: NavigateFunction = () => {
+    const goToFavorite: NavigateFunction = useCallback(() => {
         navigate(routes.favorite.create())
-    }
+    }, [routes]);
 
-    const goToCatalog: NavigateFunction = () => {
+    const goToCatalog: NavigateFunction = useCallback(() => {
         navigate(routes.main.create())
+    }, [routes]);
 
-    }
+    const logout = useCallback(() => authStore.logout(), [authStore]);
 
     return (
         <div className={styles.generalHeaderContainer}>
@@ -42,7 +44,7 @@ const Header = observer(() => {
                     {isAuthenticated
                         && <><img src={heartSvg} alt='heartSvg' className={styles.userInfo} onClick={goToFavorite} />
                             <div>{localStorage.getItem('username')}</div>
-                            <img src={logout} alt='logout' className={styles.logout} onClick={() => authStore.logout()} />
+                            <img src={logoutImg} alt='logout' className={styles.logout} onClick={logout} />
                         </>
                     }
                     {!isAuthenticated

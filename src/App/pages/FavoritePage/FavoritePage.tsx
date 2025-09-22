@@ -7,7 +7,6 @@ import Loader from "~components/Loader";
 //TODO? если есть import { getIngradientsString } from '~utils/helpers';
 import { observer, useLocalObservable } from "mobx-react-lite";
 import { Meta } from "~store/CatalogStore/";
-import axios from "axios";
 import FavoriteStore from "~store/FavoriteStore/FavoriteStore";
 import { authStore } from "~store/AuthStore";
 import { useNavigate } from "react-router";
@@ -20,29 +19,6 @@ const FavoritePage = observer(() => {
     const isAuthenticated = authStore.isAuthenticated;
     if (!isAuthenticated) {
         navigate(routes.login.create());
-    }
-
-    const deleteFavorite = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, id: string): Promise<void> => {
-        e.stopPropagation();
-        const token = localStorage.getItem('JWT');
-        try {
-            const response = await axios.post(
-                'https://front-school-strapi.ktsdev.ru/api/favorites/remove',
-                { recipe: id },
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                }
-            );
-            if (response.status === 200) {
-                console.log(response)
-                favoriteStore.getFavoriteRecipiesList();
-            }
-        } catch (error) {
-            console.error('Error details:', error.response?.data);
-            console.error('Status code:', error.response?.status);
-        }
     }
 
     useEffect(() => {
@@ -60,7 +36,6 @@ const FavoritePage = observer(() => {
 
                     <div className={styles[`container__products`]}>
                         {favoriteStore.favoriteRecepies.length > 0 && favoriteStore.favoriteRecepies.map(rec => {
-                            console.log('rec', rec)
                             return (
                                 <InfoCard
                                     key={rec.recipe.id}
@@ -71,7 +46,7 @@ const FavoritePage = observer(() => {
                                     itemDocumentId={rec.recipe.documentId}
                                     contentSlot={`${Math.round(rec.recipe.calories)} kcal`}
                                     actionSlot={
-                                        <Button onClick={(e) => deleteFavorite(e, rec.recipe.id)}>Delete</Button>
+                                        <Button onClick={(e) => favoriteStore.deleteFavoriteRecipe(e, rec.recipe.id)}>Delete</Button>
                                     }
                                 />
                             )

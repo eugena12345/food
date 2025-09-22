@@ -1,4 +1,4 @@
-import type { Ingredient } from '~App/pages/CatalogPage';
+import type { Ingredient } from '~store/models/recepies';
 
 export const getNumberCountArr = (pageCount: number): number[] => {
     const result = [];
@@ -11,5 +11,3 @@ export const getNumberCountArr = (pageCount: number): number[] => {
 export const getIngradientsString = (ingArr: Ingredient[]): string => {
     return ingArr.map((ing) => ing.name).join(' + ')
 }
-
-

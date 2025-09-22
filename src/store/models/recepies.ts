@@ -45,7 +45,7 @@ export interface Recipe {
     documentId: string;
     id: number;
     images: Image[];
-    ingradients: Ingredient[];
+    ingradients?: Ingredient[];
     likes: number;
     name: string;
     preparationTime: number;
@@ -59,4 +59,15 @@ export interface Recipe {
     equipments?: Equipment[];
     directions?: Direction[];
     category?: MealCategory;
+}
+
+export interface FavRecipe {
+    createdAt: string;
+    documentId: string;
+    id: number;
+    locale?: null;
+    originalRecipeId: number;
+    publishedAt?: string;
+    recipe: Recipe;
+    updatedAt: string;
 }

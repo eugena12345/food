@@ -1,5 +1,5 @@
 import { action, computed, makeObservable, observable, runInAction } from "mobx";
-import type { Recipe } from "~store/models/recepies";
+import type { FavRecipe } from "~store/models/recepies";
 import type { PrivateFields } from "~store/FavoriteStore";
 import { Meta, STRAPI_URL } from "~store/CatalogStore";
 //TODO import ApiStore, { HTTPMethod } from "~store/ApiStore";
@@ -13,7 +13,7 @@ import axios from "axios";
 
 export default class FavoriteStore {
     //TODO? private readonly _apiStore = new ApiStore(STRAPI_URL);
-    private _favoriteRecepies: CollectionModel<number, Recipe> = getInitialCollectionModel();
+    private _favoriteRecepies: CollectionModel<number, FavRecipe> = getInitialCollectionModel();
     private _meta: Meta = Meta.initial;
 
     constructor() {
@@ -23,6 +23,8 @@ export default class FavoriteStore {
             favoriteRecepies: computed,
             meta: computed,
             getFavoriteRecipiesList: action,
+            addFavoriteRecipe: action,
+            deleteFavoriteRecipe: action,
             reset: action,
         })
     }
@@ -59,7 +61,46 @@ export default class FavoriteStore {
                 this._meta = Meta.error;
             }
         })
+    }
 
+    async addFavoriteRecipe(
+        e: React.MouseEvent<HTMLButtonElement, MouseEvent>, id: number
+    ): Promise<void> {
+        e.stopPropagation();
+        const token = localStorage.getItem('JWT');
+        await axios.post(
+            `${STRAPI_URL}/favorites/add`,
+            { recipe: id },
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            }
+        );
+    }
+
+    async deleteFavoriteRecipe(
+        e: React.MouseEvent<HTMLButtonElement, MouseEvent>, id: number
+    ): Promise<void> {
+        e.stopPropagation();
+        const token = localStorage.getItem('JWT');
+        try {
+            const response = await axios.post(
+                `${STRAPI_URL}/favorites/remove`,
+                { recipe: id },
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            );
+            if (response.status === 200) {
+                this.getFavoriteRecipiesList();
+            }
+        } catch (error) {
+            console.error('Error details:', error.response?.data);
+            console.error('Status code:', error.response?.status);
+        }
     }
 
     reset(): void {

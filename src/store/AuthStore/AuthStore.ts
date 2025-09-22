@@ -13,7 +13,7 @@ export default class AuthStore {
     private _repeatPassword: string = '';
     private _error: string | null = null;
     private _isLoading: boolean = false;
-    private _isAuthenticated: boolean = false;
+    private _isAuthenticated: boolean = !!localStorage.getItem('JWT');
 
 
     constructor() {

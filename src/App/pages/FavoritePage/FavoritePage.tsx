@@ -51,6 +51,7 @@ const FavoritePage = observer(() => {
 
                     <div className={styles[`container__products`]}>
                         {favoriteStore.favoriteRecepies.length > 0 && favoriteStore.favoriteRecepies.map(rec => {
+                            console.log('rec', rec)
                             return (
                                 <InfoCard
                                     key={rec.recipe.id}
@@ -58,7 +59,7 @@ const FavoritePage = observer(() => {
                                     captionSlot={`${rec.recipe.cookingTime} minutes`}
                                     title={rec.recipe.name}
                                     subtitle=''// НЕТ ИНГРЕДИЕНТОВ в ответе!!!  {getIngradientsString(rec.ingradients)}
-                                    itemDocumentId={rec.documentId}
+                                    itemDocumentId={rec.recipe.documentId}
                                     contentSlot={`${Math.round(rec.recipe.calories)} kcal`}
                                     actionSlot={
                                         <Button onClick={(e) => deleteFavorite(e, rec.recipe.id)}>Delete</Button>

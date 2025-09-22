@@ -9,9 +9,17 @@ import { observer, useLocalObservable } from "mobx-react-lite";
 import { Meta } from "~store/CatalogStore/";
 import axios from "axios";
 import FavoriteStore from "~store/FavoriteStore/FavoriteStore";
+import { authStore } from "~store/AuthStore";
+import { useNavigate } from "react-router";
+import { routes } from "~config/routes.config";
 
 const FavoritePage = observer(() => {
+    const navigate = useNavigate();
     const favoriteStore = useLocalObservable(() => new FavoriteStore());
+    const isAuthenticated = authStore.isAuthenticated;
+    if (!isAuthenticated) {
+        navigate(routes.login.create());
+    }
 
     const deleteFavorite = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, id: string): Promise<void> => {
         e.stopPropagation();

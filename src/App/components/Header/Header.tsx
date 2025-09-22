@@ -1,15 +1,22 @@
 import HeaderNav from '../HeaderNav/HeaderNav';
 import styles from './Header.module.scss';
 import logo from '~assets/images/Group.svg';
-import userSvg from '~assets/images/User.svg'
-import heartSvg from '~assets/images/HeartIcon.svg'
+import userSvg from '~assets/images/User.svg';
+import heartSvg from '~assets/images/HeartIcon.svg';
+import logout from '~assets/images/logout.png';
 import { useNavigate } from 'react-router';
 import { routes } from '~config/routes.config';
 import type { NavigateFunction } from './types';
+import { authStore } from '~store/AuthStore';
+import { observer } from 'mobx-react-lite';
 
 
-const Header = () => {
-    const navigate = useNavigate()
+
+const Header = observer(() => {
+    const navigate = useNavigate();
+    const isAuthenticated = authStore.isAuthenticated;
+
+
     const goToLogin: NavigateFunction = () => {
         navigate(routes.login.create())
     }
@@ -32,12 +39,19 @@ const Header = () => {
                 </div>
                 <HeaderNav />
                 <div className={styles.logoContent}>
-                    <img src={heartSvg} alt='heartSvg' className={styles.userInfo} onClick={goToFavorite} />
-                    <img src={userSvg} alt='userSvg' className={styles.userInfo} onClick={goToLogin} />
+                    {isAuthenticated && <><img src={heartSvg} alt='heartSvg' className={styles.userInfo} onClick={goToFavorite} />
+                        <div>{localStorage.getItem('username')}</div>
+                        <img src={logout} alt='logout' className={styles.logout} onClick={() => authStore.logout()} />
+                    </>
+
+                    }
+                    {!isAuthenticated
+                        && <img src={userSvg} alt='userSvg' className={styles.userInfo} onClick={goToLogin} />
+                    }
                 </div>
             </div>
         </div>
     )
-};
+});
 
 export default Header;

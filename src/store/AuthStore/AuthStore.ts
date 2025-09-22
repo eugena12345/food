@@ -1,6 +1,6 @@
 import { action, computed, makeObservable, observable, runInAction } from "mobx";
 import type { PrivateFields } from "~store/AuthStore";
-//TODO import { STRAPI_URL } from "~store/CatalogStore";
+import { STRAPI_URL } from "~store/CatalogStore";
 //TODO import ApiStore, { HTTPMethod } from "~store/ApiStore";
 //TODO import { createRecipeParamsForApi } from "~utils/api";
 import axios from "axios";
@@ -56,6 +56,10 @@ export default class AuthStore {
         return this._isLoading;
     }
 
+    get isAuthenticated(): boolean {
+        return !!localStorage.getItem('JWT');
+    }
+
     setIdentifier(value: string) {
         this._identifier = value;
     }
@@ -72,7 +76,6 @@ export default class AuthStore {
         this._repeatPassword = value;
     }
 
-
     setError(message: string) {
         this._error = message;
     }
@@ -80,7 +83,6 @@ export default class AuthStore {
     setLoading(loading: boolean) {
         this._isLoading = loading;
     }
-
 
     async authorize(
     ): Promise<void> {
@@ -95,7 +97,7 @@ export default class AuthStore {
             const identifier = this._identifier;
             const password = this._password;
             const response = await axios.post(
-                'https://front-school-strapi.ktsdev.ru/api/auth/local',
+                `${STRAPI_URL}/auth/local`,
                 {
                     identifier,
                     password,
@@ -132,7 +134,7 @@ export default class AuthStore {
             const email = this._email;
             const password = this._password;
             const response = await axios.post(
-                'https://front-school-strapi.ktsdev.ru/api/auth/local/register',
+                `${STRAPI_URL}/auth/local/register`,
                 {
                     username,
                     email,
@@ -152,6 +154,12 @@ export default class AuthStore {
         } finally {
             this.setLoading(false);
         }
+    }
+
+    logout(): void {
+        localStorage.removeItem('JWT');
+        localStorage.removeItem('username');
+        this.reset();
     }
 
     reset(): void {

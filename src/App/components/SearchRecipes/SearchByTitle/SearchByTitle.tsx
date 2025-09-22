@@ -1,7 +1,7 @@
 import Input from "~App/components/Input";
 import Button from "~components/Button";
 import styles from './SearchByTitle.module.scss';
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useSearchParams } from "react-router";
 
 const SearchByTitle = () => {

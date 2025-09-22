@@ -2,7 +2,7 @@ import MultiDropdown, { type Option } from "~App/components/MultiDropdown";
 import styles from './SearchByFilter.module.scss';
 import MealCategoryStore from "~store/MealCategoryStore/MealCategoryStore";
 import { observer, useLocalObservable } from "mobx-react-lite";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useSearchParams } from "react-router";
 
 const SearchByFilter = observer(() => {
@@ -30,10 +30,10 @@ const SearchByFilter = observer(() => {
     }
     const optionsForMulti = getOptions();
 
-    const getTitle = (elements: Option[]) =>
-        elements.map((el: Option) => el.value).join(', ');
+    const getTitle = useCallback((elements: Option[]) =>
+        elements.map((el: Option) => el.value).join(', '), []);
 
-    const onChange = (value: Option[]) => {
+    const onChange = useCallback((value: Option[]) => {
         setValue(value);
         const createRecepiesMealCategoryColl = () => {
             const result: string[] = [];
@@ -43,7 +43,7 @@ const SearchByFilter = observer(() => {
         searchParams.set('filterByCategoryId', createRecepiesMealCategoryColl().join(','));
         searchParams.set('page', '1');
         setSearchParams(searchParams);
-    };
+    }, []);
 
     return (
         <MultiDropdown

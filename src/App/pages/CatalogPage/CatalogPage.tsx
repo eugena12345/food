@@ -1,6 +1,6 @@
 import InfoCard from "~App/components/InfoCard";
 import Button from "~components/Button";
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import styles from './CatalogPage.module.scss'
 import Loader from "~components/Loader";
 import titleImage from '~assets/images/titleImage.png';
@@ -18,6 +18,11 @@ import FavoriteStore from "~store/FavoriteStore";
 const CatalogPage = observer(() => {
     const recipesStore = useLocalObservable(() => new CatalogStore());
     const favoriteStore = useLocalObservable(() => new FavoriteStore());
+
+    const addFavRecipe = useCallback(
+        (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, recipeId: number) => {
+            favoriteStore.addFavoriteRecipe(e, recipeId);
+        }, [])
 
     useEffect(() => {
         recipesStore.getRecipiesList(rootStore.query.getQueryParams());
@@ -52,7 +57,7 @@ const CatalogPage = observer(() => {
                                     contentSlot={`${Math.round(rec.calories)} kcal`}
                                     actionSlot={
                                         <Button
-                                            onClick={(e) => favoriteStore.addFavoriteRecipe(e, rec.id)}>
+                                            onClick={(e) => addFavRecipe(e, rec.id)}>
                                             Save
                                         </Button>
                                     }

@@ -5,7 +5,6 @@ import { stack as Menu } from 'react-burger-menu';
 import { menuItems } from './config';
 
 const HeaderNav = () => {
-    console.log('HeaderNav sdjfskjdfh')
     const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 
     const handleStateChange = (state: { isOpen: boolean }) => {

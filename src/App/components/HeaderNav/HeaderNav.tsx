@@ -1,10 +1,11 @@
 import { Link } from 'react-router';
 import styles from './HeaderNav.module.scss';
-import { useCallback, useState } from 'react';
+import { memo, useCallback, useState } from 'react';
 import { stack as Menu } from 'react-burger-menu';
 import { menuItems } from './config';
 
 const HeaderNav = () => {
+    console.log('HeaderNav sdjfskjdfh')
     const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 
     const handleStateChange = (state: { isOpen: boolean }) => {
@@ -72,4 +73,4 @@ const HeaderNav = () => {
     )
 }
 
-export default HeaderNav;
+export default memo(HeaderNav);

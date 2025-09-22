@@ -43,14 +43,6 @@ export const createParamsForApi = (params: ParamsFromQuery): ParamsForApi => {
     return paramsForApi;
 };
 
-// export const createParamsForCategoriesApi = () => {
-//     const paramsForApi = {
-//         populate: ['image']
-//     };
-//     return paramsForApi;
-// }
-
-//Написать типизацию
 export const createCategoryParamsForApi = () => {
     const paramsForApi = {
         populate: ['image'],

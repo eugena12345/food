@@ -1,19 +1,15 @@
 import { useParams } from 'react-router';
 import { useEffect, useState } from 'react';
-//import axios from 'axios';
 import Loader from '~components/Loader';
 import Text from '~components/Text';
 import IngredientsEquipmentBlock from '~App/pages/ReceptPage/IngredientsEquipmentBlock';
 import decorativeImage from '~assets/images/Pattern.png';
-// import type { Recipe } from '~App/pages/CatalogPage';
-// import { getURL } from '~utils/helpers';
 import styles from './ReceptPage.module.scss'
 import { observer, useLocalObservable } from 'mobx-react-lite';
 import RecipeStore from '~store/RecipeStore';
 
 const ReceptPage = observer(() => {
     const params = useParams();
-    //const [recipe, setRecipe] = useState<Recipe | null>(null);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const recipeStore = useLocalObservable(() => new RecipeStore());
@@ -23,23 +19,12 @@ const ReceptPage = observer(() => {
             try {
                 setIsLoading(true);
                 await recipeStore.getRecipe(params?.id || '');
-                // const url = getURL(params.id);
-                // const response = await axios.get(
-                //     url,
-                //     {
-                //         headers: {
-                //             Authorization: `Bearer ${import.meta.env.VITE_API_TOKEN}`,
-                //         },
-                //     },
-                // );
-                // setRecipe(response.data.data);
                 setIsLoading(false)
                 setError(null);
             } catch (err) {
                 console.error('Ошибка при выполнении запроса:', error);
                 setIsLoading(false);
                 setError('Не удалось загрузить данные. Попробуйте позже.');
-
             }
         };
         setIsLoading(true)

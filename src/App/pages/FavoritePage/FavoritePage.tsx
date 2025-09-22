@@ -1,6 +1,6 @@
 import InfoCard from "~App/components/InfoCard";
 import Button from "~components/Button";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import styles from './FavoritePage.module.scss'
 import Loader from "~components/Loader";
 //TODO? import Pagination from "~App/components/Pagination";
@@ -12,6 +12,7 @@ import FavoriteStore from "~store/FavoriteStore/FavoriteStore";
 import { authStore } from "~store/AuthStore";
 import { useNavigate } from "react-router";
 import { routes } from "~config/routes.config";
+import Text from "~components/Text";
 
 const FavoritePage = observer(() => {
     const navigate = useNavigate();
@@ -51,7 +52,7 @@ const FavoritePage = observer(() => {
     return (
         <div>
             <div className={styles.container}>
-
+                <Text tag="h1" color="accent">Favorite recipes</Text>
                 <div className={styles[`container--maxWidth`]}>
                     {favoriteStore.meta === Meta.error && <div className={styles.error}>Возникла непредвиденная ошибка. Не удалось загрузить данные. Попробуйте позже.</div>}
 

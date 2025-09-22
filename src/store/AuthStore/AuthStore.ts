@@ -32,6 +32,7 @@ export default class AuthStore {
             repeatPassword: computed,
             error: computed,
             isLoading: computed,
+            isAuthenticated: computed,
 
             authorize: action,
             register: action,

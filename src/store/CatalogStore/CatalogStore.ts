@@ -91,7 +91,6 @@ export default class CatalogStore {
     private readonly _qpReactionName: IReactionDisposer = reaction(
         () => rootStore.query.getParam('filterByName'),
         () => {
-            //  console.log('!!!!!!!!!!!!!', rootStore.query.getParam('filterByName'))
             this.getRecipiesList(rootStore.query.getQueryParams())
         }
     );

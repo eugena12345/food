@@ -1,20 +1,14 @@
 import * as React from 'react';
 import type { IconProps } from './../Icon';
+import classNames from 'classnames';
 
 const CheckIcon: React.FC<IconProps> = (props) => {
-    const getClassNames = () => {
-        const resultClassnames: string[] = [];
-        if (props.className) {
-            resultClassnames.push(props.className);
-        }
-        if (props.color) {
-            resultClassnames.push(props.color);
-        }
-        return resultClassnames.join(' ');
-    }
+
+    const actualClassName = classNames(props.className, props.color);
+
     return (
-        <div className={getClassNames()}>
-            <svg className={getClassNames()}
+        <div className={actualClassName}>
+            <svg className={actualClassName}
                 width={props.width || 24}
                 height={props.height || 24}
                 viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

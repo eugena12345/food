@@ -10,10 +10,10 @@ import SearchInfo from "~App/components/SearchInfo";
 import SearchRecipes from "~App/components/SearchRecipes";
 import { getIngradientsString } from '~utils/helpers';
 import { observer, useLocalObservable } from "mobx-react-lite";
-import CatalogStore from "./../../../store/CatalogStore";
+import CatalogStore from "~store/CatalogStore";
 import { Meta } from "~store/CatalogStore/";
 import rootStore from "~store/RootStore/instance";
-import FavoriteStore from "~store/FavoriteStore/FavoriteStore";
+import FavoriteStore from "~store/FavoriteStore";
 
 const CatalogPage = observer(() => {
     const recipesStore = useLocalObservable(() => new CatalogStore());

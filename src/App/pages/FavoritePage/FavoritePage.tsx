@@ -7,7 +7,7 @@ import Loader from "~components/Loader";
 //TODO? если есть import { getIngradientsString } from '~utils/helpers';
 import { observer, useLocalObservable } from "mobx-react-lite";
 import { Meta } from "~store/CatalogStore/";
-import FavoriteStore from "~store/FavoriteStore/FavoriteStore";
+import FavoriteStore from "~store/FavoriteStore";
 import { authStore } from "~store/AuthStore";
 import { useNavigate } from "react-router";
 import { routes } from "~config/routes.config";

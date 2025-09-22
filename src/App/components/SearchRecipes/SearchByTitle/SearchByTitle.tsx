@@ -1,5 +1,5 @@
-import Input from "~App/components/Input/Input";
-import Button from "~components/Button/Button";
+import Input from "~App/components/Input";
+import Button from "~components/Button";
 import styles from './SearchByTitle.module.scss';
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router";

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { observer, useLocalObservable } from "mobx-react-lite";
 import styles from "./MealCategoriesPage.module.scss";
-import MealCategoryStore from "~store/MealCategoryStore/MealCategoryStore";
+import MealCategoryStore from "~store/MealCategoryStore";
 import Text from "~components/Text";
 import Loader from "~components/Loader";
 import { useNavigate } from "react-router";

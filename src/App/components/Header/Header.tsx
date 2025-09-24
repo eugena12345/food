@@ -12,8 +12,7 @@ import { observer } from 'mobx-react-lite';
 
 const Header = () => {
     const navigate = useNavigate();
-    const isAuthenticated = authStore.isAuthenticated;
-
+    const { isAuthenticated } = authStore;
 
     const goToLogin: NavigateFunction = () => {
         navigate(routes.login.create())

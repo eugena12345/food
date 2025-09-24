@@ -9,24 +9,25 @@ import { routes } from '~config/routes.config';
 import type { NavigateFunction } from './types';
 import { authStore } from '~store/AuthStore';
 import { observer } from 'mobx-react-lite';
+import { useCallback } from 'react';
 
 const Header = () => {
     const navigate = useNavigate();
     const { isAuthenticated } = authStore;
 
-    const goToLogin: NavigateFunction = () => {
+    const goToLogin: NavigateFunction = useCallback(() => {
         navigate(routes.login.create())
-    };
+    }, []);
 
-    const goToFavorite: NavigateFunction = () => {
+    const goToFavorite: NavigateFunction = useCallback(() => {
         navigate(routes.favorite.create())
-    };
+    }, []);
 
-    const goToCatalog: NavigateFunction = () => {
+    const goToCatalog: NavigateFunction = useCallback(() => {
         navigate(routes.main.create())
-    };
+    }, []);
 
-    const logout = () => authStore.logout();
+    const logout = useCallback(() => authStore.logout(), []);
 
     return (
         <div className={styles.generalHeaderContainer}>

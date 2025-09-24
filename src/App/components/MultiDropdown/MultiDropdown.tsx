@@ -21,7 +21,7 @@ const MultiDropdown: React.FC<MultiDropdownProps> = ({
     event.stopPropagation();
     setIsOptionsOpen(true);
   }, [disabled]);
-  const closeOptions = () => setIsOptionsOpen(false);
+  const closeOptions = useCallback(() => setIsOptionsOpen(false), []);
 
   const dropdownRef = useRef<HTMLDivElement | null>(null);
 

@@ -9,7 +9,7 @@ import Text from '~components/Text';
 
 type AuthMode = "login" | "register";
 
-const LoginPage = observer(() => {
+const LoginPage = () => {
     const navigate = useNavigate();
     const [mode, setMode] = React.useState<AuthMode>("login");
 
@@ -113,6 +113,6 @@ const LoginPage = observer(() => {
             </div>
         </div>
     );
-});
+};
 
-export default LoginPage;
+export default observer(LoginPage);

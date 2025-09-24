@@ -5,7 +5,7 @@ import { observer, useLocalObservable } from "mobx-react-lite";
 import { useCallback, useEffect, useState } from "react";
 import { useSearchParams } from "react-router";
 
-const SearchByFilter = observer(() => {
+const SearchByFilter = () => {
     const [value, setValue] = useState<Option[]>([]);
     const [searchParams, setSearchParams] = useSearchParams()
     const mealCategoryStore = useLocalObservable(() => new MealCategoryStore());
@@ -54,6 +54,6 @@ const SearchByFilter = observer(() => {
             className={styles['container__filter']}
         />
     )
-});
+};
 
-export default SearchByFilter;
+export default observer(SearchByFilter);

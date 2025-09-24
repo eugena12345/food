@@ -8,7 +8,7 @@ import styles from './ReceptPage.module.scss'
 import { observer, useLocalObservable } from 'mobx-react-lite';
 import RecipeStore from '~store/RecipeStore';
 
-const ReceptPage = observer(() => {
+const ReceptPage = () => {
     const params = useParams();
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
@@ -103,6 +103,6 @@ const ReceptPage = observer(() => {
             </div>
         </div>
     )
-});
+};
 
-export default ReceptPage;
+export default observer(ReceptPage);

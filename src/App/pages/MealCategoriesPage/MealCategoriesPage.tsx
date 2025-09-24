@@ -7,7 +7,7 @@ import Loader from "~components/Loader";
 import { useNavigate } from "react-router";
 import { routes } from "~config/routes.config";
 
-const MealCategoriesPage = observer(() => {
+const MealCategoriesPage = () => {
     const mealCategoryStore = useLocalObservable(() => new MealCategoryStore());
     const navigate = useNavigate();
 
@@ -49,6 +49,6 @@ const MealCategoriesPage = observer(() => {
             </div>
         </div>
     );
-});
+};
 
-export default MealCategoriesPage;
+export default observer(MealCategoriesPage);

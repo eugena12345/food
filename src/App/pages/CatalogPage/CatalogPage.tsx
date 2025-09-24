@@ -15,7 +15,7 @@ import { Meta } from "~store/CatalogStore/";
 import rootStore from "~store/RootStore/instance";
 import FavoriteStore from "~store/FavoriteStore";
 
-const CatalogPage = observer(() => {
+const CatalogPage = () => {
     const recipesStore = useLocalObservable(() => new CatalogStore());
     const favoriteStore = useLocalObservable(() => new FavoriteStore());
 
@@ -72,6 +72,6 @@ const CatalogPage = observer(() => {
             </div>
         </div>
     )
-});
+};
 
-export default CatalogPage;
+export default observer(CatalogPage);

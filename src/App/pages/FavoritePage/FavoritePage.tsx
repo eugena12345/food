@@ -13,7 +13,7 @@ import { useNavigate } from "react-router";
 import { routes } from "~config/routes.config";
 import Text from "~components/Text";
 
-const FavoritePage = observer(() => {
+const FavoritePage = () => {
     const navigate = useNavigate();
     const favoriteStore = useLocalObservable(() => new FavoriteStore());
     const isAuthenticated = authStore.isAuthenticated;
@@ -59,6 +59,6 @@ const FavoritePage = observer(() => {
             </div>
         </div>
     )
-});
+};
 
-export default FavoritePage;
+export default observer(FavoritePage);

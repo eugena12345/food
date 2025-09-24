@@ -10,7 +10,7 @@ import type { NavigateFunction } from './types';
 import { authStore } from '~store/AuthStore';
 import { observer } from 'mobx-react-lite';
 
-const Header = observer(() => {
+const Header = () => {
     const navigate = useNavigate();
     const isAuthenticated = authStore.isAuthenticated;
 
@@ -51,6 +51,6 @@ const Header = observer(() => {
             </div>
         </div>
     )
-});
+};
 
-export default Header;
+export default observer(Header);

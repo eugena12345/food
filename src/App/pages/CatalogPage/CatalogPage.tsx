@@ -9,15 +9,16 @@ import Pagination from "~App/components/Pagination";
 import SearchInfo from "~App/components/SearchInfo";
 import SearchRecipes from "~App/components/SearchRecipes";
 import { getIngradientsString } from '~utils/helpers';
-import { observer, useLocalObservable } from "mobx-react-lite";
+import { observer } from "mobx-react-lite";
 import CatalogStore from "~store/CatalogStore";
 import { Meta } from "~store/CatalogStore/";
 import rootStore from "~store/RootStore/instance";
 import FavoriteStore from "~store/FavoriteStore";
+import { useLocalStore } from "~utils/useLocalStore";
 
 const CatalogPage = () => {
-    const recipesStore = useLocalObservable(() => new CatalogStore());
-    const favoriteStore = useLocalObservable(() => new FavoriteStore());
+    const recipesStore = useLocalStore(() => new CatalogStore());
+    const favoriteStore = useLocalStore(() => new FavoriteStore());
 
     const addFavRecipe = useCallback(
         (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, recipeId: number) => {

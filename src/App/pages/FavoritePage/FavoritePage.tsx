@@ -5,17 +5,18 @@ import styles from './FavoritePage.module.scss'
 import Loader from "~components/Loader";
 //TODO? import Pagination from "~App/components/Pagination";
 //TODO? если есть import { getIngradientsString } from '~utils/helpers';
-import { observer, useLocalObservable } from "mobx-react-lite";
+import { observer } from "mobx-react-lite";
 import { Meta } from "~store/CatalogStore/";
 import FavoriteStore from "~store/FavoriteStore";
 import { authStore } from "~store/AuthStore";
 import { useNavigate } from "react-router";
 import { routes } from "~config/routes.config";
 import Text from "~components/Text";
+import { useLocalStore } from "~utils/useLocalStore";
 
 const FavoritePage = () => {
     const navigate = useNavigate();
-    const favoriteStore = useLocalObservable(() => new FavoriteStore());
+    const favoriteStore = useLocalStore(() => new FavoriteStore());
     const isAuthenticated = authStore.isAuthenticated;
     if (!isAuthenticated) {
         navigate(routes.login.create());

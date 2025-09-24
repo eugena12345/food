@@ -5,14 +5,15 @@ import Text from '~components/Text';
 import IngredientsEquipmentBlock from '~App/pages/ReceptPage/IngredientsEquipmentBlock';
 import decorativeImage from '~assets/images/Pattern.png';
 import styles from './ReceptPage.module.scss'
-import { observer, useLocalObservable } from 'mobx-react-lite';
+import { observer } from 'mobx-react-lite';
 import RecipeStore from '~store/RecipeStore';
+import { useLocalStore } from '~utils/useLocalStore';
 
 const ReceptPage = () => {
     const params = useParams();
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
-    const recipeStore = useLocalObservable(() => new RecipeStore());
+    const recipeStore = useLocalStore(() => new RecipeStore());
 
     useEffect(() => {
         const fetch = async () => {

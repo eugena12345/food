@@ -1,14 +1,15 @@
 import React, { useEffect } from "react";
-import { observer, useLocalObservable } from "mobx-react-lite";
+import { observer } from "mobx-react-lite";
 import styles from "./MealCategoriesPage.module.scss";
 import MealCategoryStore from "~store/MealCategoryStore";
 import Text from "~components/Text";
 import Loader from "~components/Loader";
 import { useNavigate } from "react-router";
 import { routes } from "~config/routes.config";
+import { useLocalStore } from "~utils/useLocalStore";
 
 const MealCategoriesPage = () => {
-    const mealCategoryStore = useLocalObservable(() => new MealCategoryStore());
+    const mealCategoryStore = useLocalStore(() => new MealCategoryStore());
     const navigate = useNavigate();
 
     // Загрузка данных при монтировании ???

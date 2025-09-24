@@ -1,14 +1,15 @@
 import MultiDropdown, { type Option } from "~App/components/MultiDropdown";
 import styles from './SearchByFilter.module.scss';
 import MealCategoryStore from "~store/MealCategoryStore/MealCategoryStore";
-import { observer, useLocalObservable } from "mobx-react-lite";
+import { observer } from "mobx-react-lite";
 import { useCallback, useEffect, useState } from "react";
 import { useSearchParams } from "react-router";
+import { useLocalStore } from "~utils/useLocalStore";
 
 const SearchByFilter = () => {
     const [value, setValue] = useState<Option[]>([]);
     const [searchParams, setSearchParams] = useSearchParams()
-    const mealCategoryStore = useLocalObservable(() => new MealCategoryStore());
+    const mealCategoryStore = useLocalStore(() => new MealCategoryStore());
 
     useEffect(() => {
         const getCategory = async () => {

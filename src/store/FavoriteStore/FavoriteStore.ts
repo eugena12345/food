@@ -64,9 +64,8 @@ export default class FavoriteStore {
     }
 
     async addFavoriteRecipe(
-        e: React.MouseEvent<HTMLButtonElement, MouseEvent>, id: number
+        id: number
     ): Promise<void> {
-        e.stopPropagation();
         const token = localStorage.getItem('JWT');
         await axios.post(
             `${STRAPI_URL}/favorites/add`,

@@ -23,7 +23,8 @@ const CatalogPage = () => {
 
     const addFavRecipe = useCallback(
         (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, recipeId: number) => {
-            favoriteStore.addFavoriteRecipe(e, recipeId);
+            e.stopPropagation()
+            favoriteStore.addFavoriteRecipe(recipeId);
         }, [favoriteStore])
 
     useEffect(() => {

@@ -18,7 +18,7 @@ import { useLocalStore } from "~utils/useLocalStore";
 import Text from "~components/Text";
 
 const CatalogPage = () => {
-    const recipesStore = useLocalStore(() => new CatalogStore());
+    const catalogStore = useLocalStore(() => new CatalogStore());
     const favoriteStore = useLocalStore(() => new FavoriteStore());
 
     const addFavRecipe = useCallback(
@@ -27,7 +27,7 @@ const CatalogPage = () => {
         }, [])
 
     useEffect(() => {
-        recipesStore.getRecipiesList(rootStore.query.getQueryParams());
+        catalogStore.getRecipiesList(rootStore.query.getQueryParams());
     }, []);
 
     return (
@@ -39,19 +39,19 @@ const CatalogPage = () => {
             <div className={styles.container}>
 
                 <div className={styles[`container--maxWidth`]}>
-                    {recipesStore.meta === Meta.error && <div className={styles.error}>Возникла непредвиденная ошибка. Не удалось загрузить данные. Попробуйте позже.</div>}
+                    {catalogStore.meta === Meta.error && <div className={styles.error}>Возникла непредвиденная ошибка. Не удалось загрузить данные. Попробуйте позже.</div>}
 
                     <SearchInfo />
-                    <CatalogFilters totatItems={recipesStore.recepies.length} />
+                    <CatalogFilters totatItems={catalogStore.recepies.length} />
 
-                    {recipesStore.meta === Meta.loading && <Loader />}
+                    {catalogStore.meta === Meta.loading && <Loader />}
                     {
-                        recipesStore.meta === Meta.success && recipesStore.recepies.length === 0
+                        catalogStore.meta === Meta.success && catalogStore.recepies.length === 0
                         && <Text tag="h3">Nothing found matching your criteria. Try changing your filters.</Text>
                     }
 
                     <div className={styles[`container__products`]}>
-                        {recipesStore.recepies.length > 0 && recipesStore.recepies.map(rec => {
+                        {catalogStore.recepies.length > 0 && catalogStore.recepies.map(rec => {
                             return (
                                 <InfoCard
                                     key={rec.id}
@@ -72,8 +72,8 @@ const CatalogPage = () => {
                         }
                         )}
                     </div>
-                    {recipesStore.metaInfo.pagination.pageCount > 1
-                        && <Pagination pageCount={recipesStore.metaInfo.pagination.pageCount} actualPage={recipesStore.metaInfo.pagination.page} />}
+                    {catalogStore.metaInfo.pagination.pageCount > 1
+                        && <Pagination pageCount={catalogStore.metaInfo.pagination.pageCount} actualPage={catalogStore.metaInfo.pagination.page} />}
                 </div>
             </div>
         </div>

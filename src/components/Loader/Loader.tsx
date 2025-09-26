@@ -2,10 +2,10 @@ import React from 'react';
 import style from './Loader.module.scss';
 import type { LoaderProps } from './types';
 import { loaderSize } from './config';
-
+import classNames from 'classnames';
 
 const Loader: React.FC<LoaderProps> = ({ size = 'l', className }) => {
-    const classNameLoader = `${style.spin} ${className ? className : ''}`;
+    const classNameLoader = classNames(style.spin, className);
     return (
         <div className={classNameLoader} style={{ width: loaderSize[size], height: loaderSize[size] }}>
             <svg width={loaderSize[size]} height={loaderSize[size]} viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">

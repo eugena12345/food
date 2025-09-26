@@ -1,6 +1,6 @@
 import { Link } from 'react-router';
 import styles from './HeaderNav.module.scss';
-import { useState } from 'react';
+import { memo, useCallback, useState } from 'react';
 import { stack as Menu } from 'react-burger-menu';
 import { menuItems } from './config';
 
@@ -11,9 +11,9 @@ const HeaderNav = () => {
         setIsMenuOpen(state.isOpen);
     };
 
-    const closeMenu = () => {
+    const closeMenu = useCallback(() => {
         setIsMenuOpen(false);
-    };
+    }, []);
     return (
         <div>
             <Menu
@@ -72,4 +72,4 @@ const HeaderNav = () => {
     )
 }
 
-export default HeaderNav;
+export default memo(HeaderNav);

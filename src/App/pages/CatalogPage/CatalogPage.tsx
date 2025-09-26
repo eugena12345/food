@@ -1,77 +1,35 @@
 import InfoCard from "~App/components/InfoCard";
-import axios from "axios";
 import Button from "~components/Button";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect } from "react";
 import styles from './CatalogPage.module.scss'
 import Loader from "~components/Loader";
 import titleImage from '~assets/images/titleImage.png';
 import overlayImage from '~assets/images/Recipes.svg'
 import Pagination from "~App/components/Pagination";
 import SearchInfo from "~App/components/SearchInfo";
-import SearchRecipes from "~App/components/SearchRecipes";
-import qs from 'qs';
-import { useSearchParams } from "react-router";
-import type { Recipe } from './types';
+import CatalogFilters from "~App/components/CatalogFilters";
 import { getIngradientsString } from '~utils/helpers';
-
-//TODO переместить в ДЗ 4
-const STRAPI_BASE_URL = 'https://front-school-strapi.ktsdev.ru';
-const STRAPI_URL = `${STRAPI_BASE_URL}/api`;
-
-const getURL = (actualPage: number): string => {
-    const queryParams = {
-        populate: ['images', 'ingradients'],
-        pagination: {
-            page: actualPage,
-            pageSize: 6,
-        }
-    };
-    const queryString = qs.stringify(queryParams, { encodeValuesOnly: true });
-    const fullUrl = `${STRAPI_URL}/recipes?${queryString}`;
-    return fullUrl;
-}
+import { observer } from "mobx-react-lite";
+import CatalogStore from "~store/CatalogStore";
+import { Meta } from "~store/CatalogStore/";
+import rootStore from "~store/RootStore/instance";
+import FavoriteStore from "~store/FavoriteStore";
+import { useLocalStore } from "~utils/useLocalStore";
+import Text from "~components/Text";
 
 const CatalogPage = () => {
-    const [recipes, setRecipes] = useState<Recipe[]>([]);
-    const [isLoading, setIsLoading] = useState<boolean>(false);
-    const [pageCount, setPageCount] = useState<number>(1);
-    const [actualPage, setActualPage] = useState<number>(1);
-    const [searchParams, setSearchParams] = useSearchParams();
-    const [error, setError] = useState<string | null>(null);
+    const catalogStore = useLocalStore(() => new CatalogStore());
+    const favoriteStore = useLocalStore(() => new FavoriteStore());
+
+    const addFavRecipe = useCallback(
+        (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, recipeId: number) => {
+            e.stopPropagation()
+            favoriteStore.addFavoriteRecipe(recipeId);
+        }, [favoriteStore])
 
     useEffect(() => {
-        const page = Number(searchParams.get('page')) || 1;
-        const url = getURL(page);
-        const fetch = async () => {
-            try {
-                setIsLoading(true);
-                const response = await axios.get(
-                    url,
-                    {
-                        headers: {
-                            Authorization: `Bearer ${import.meta.env.VITE_API_TOKEN}`,
-                        },
-                    },
-                );
-                setRecipes(response.data.data);
-                setPageCount(response.data.meta.pagination.pageCount);
-                setActualPage(response.data.meta.pagination.page)
-                setIsLoading(false);
-                setError(null);
-
-            } catch (error) {
-                console.error('Ошибка при выполнении запроса:', error);
-                setIsLoading(false);
-                setError('Не удалось загрузить данные. Попробуйте позже.');
-            }
-
-        };
-        fetch();
-    }, [searchParams]);
-
-    useEffect(() => {
-        setActualPage(Number(searchParams.get('page')) || 1);
-    }, [searchParams]);
+        catalogStore.getRecipiesList(rootStore.query.getQueryParams());
+    }, []);
 
     return (
         <div>
@@ -82,39 +40,45 @@ const CatalogPage = () => {
             <div className={styles.container}>
 
                 <div className={styles[`container--maxWidth`]}>
-                    {error && <div className={styles.error}>{error}</div>}
+                    {catalogStore.meta === Meta.error && <div className={styles.error}>Возникла непредвиденная ошибка. Не удалось загрузить данные. Попробуйте позже.</div>}
 
                     <SearchInfo />
-                    <SearchRecipes />
+                    <CatalogFilters totatItems={catalogStore.recepies.length} />
 
-                    {isLoading && <Loader />}
+                    {catalogStore.meta === Meta.loading && <Loader />}
+                    {
+                        catalogStore.meta === Meta.success && catalogStore.recepies.length === 0
+                        && <Text tag="h3">Nothing found matching your criteria. Try changing your filters.</Text>
+                    }
 
                     <div className={styles[`container__products`]}>
-                        {recipes.map(rec => (
-
-                            <InfoCard
-                                key={rec.id}
-                                image={rec.images[0].url}
-                                captionSlot={`${rec.cookingTime} minutes`}
-                                title={rec.name}
-                                subtitle={getIngradientsString(rec.ingradients)}
-                                itemDocumentId={rec.documentId}
-                                contentSlot={`${Math.round(rec.calories)} kcal`}
-                                actionSlot={
-                                    <Button>Save</Button>
-                                }
-                            />
-                        ))}
+                        {catalogStore.recepies.length > 0 && catalogStore.recepies.map(rec => {
+                            return (
+                                <InfoCard
+                                    key={rec.id}
+                                    image={rec.images[0].url}
+                                    captionSlot={`${rec.cookingTime} minutes`}
+                                    title={rec.name}
+                                    subtitle={getIngradientsString(rec.ingradients || [])}
+                                    itemDocumentId={rec.documentId}
+                                    contentSlot={`${Math.round(rec.calories)} kcal`}
+                                    actionSlot={
+                                        <Button
+                                            onClick={(e) => addFavRecipe(e, rec.id)}>
+                                            Save
+                                        </Button>
+                                    }
+                                />
+                            )
+                        }
+                        )}
                     </div>
-                    {pageCount > 1
-                        && <Pagination pageCount={pageCount} actualPage={actualPage} />}
+                    {catalogStore.metaInfo.pagination.pageCount > 1
+                        && <Pagination pageCount={catalogStore.metaInfo.pagination.pageCount} actualPage={catalogStore.metaInfo.pagination.page} />}
                 </div>
             </div>
-
         </div>
-
-
     )
 };
 
-export default CatalogPage;
+export default observer(CatalogPage);

@@ -1,41 +1,31 @@
 import { useParams } from 'react-router';
 import { useEffect, useState } from 'react';
-import axios from 'axios';
 import Loader from '~components/Loader';
 import Text from '~components/Text';
 import IngredientsEquipmentBlock from '~App/pages/ReceptPage/IngredientsEquipmentBlock';
 import decorativeImage from '~assets/images/Pattern.png';
-import type { Recipe } from '~App/pages/CatalogPage';
-import { getURL } from '~utils/helpers';
 import styles from './ReceptPage.module.scss'
+import { observer } from 'mobx-react-lite';
+import RecipeStore from '~store/RecipeStore';
+import { useLocalStore } from '~utils/useLocalStore';
 
 const ReceptPage = () => {
     const params = useParams();
-    const [recipe, setRecipe] = useState<Recipe | null>(null);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
+    const recipeStore = useLocalStore(() => new RecipeStore());
 
     useEffect(() => {
         const fetch = async () => {
             try {
                 setIsLoading(true);
-                const url = getURL(params.id);
-                const response = await axios.get(
-                    url,
-                    {
-                        headers: {
-                            Authorization: `Bearer ${import.meta.env.VITE_API_TOKEN}`,
-                        },
-                    },
-                );
-                setRecipe(response.data.data);
+                await recipeStore.getRecipe(params?.id || '');
                 setIsLoading(false)
                 setError(null);
             } catch (err) {
                 console.error('Ошибка при выполнении запроса:', error);
                 setIsLoading(false);
                 setError('Не удалось загрузить данные. Попробуйте позже.');
-
             }
         };
         setIsLoading(true)
@@ -49,58 +39,58 @@ const ReceptPage = () => {
                 {error && <div className={styles.error}>{error}</div>}
 
                 {isLoading && <div className={styles.center}><Loader /></div>}
-                {recipe?.name
+                {recipeStore.recipe?.name
                     && <div className={styles.recipe}>
                         <div className={styles.title}>
                             {/*TODO картиника вернуться назад */}
-                            <Text view='title'>{recipe.name}</Text>
+                            <Text view='title'>{recipeStore.recipe.name}</Text>
                         </div>
 
 
                         <div className={styles.preInfo}>
-                            <img src={recipe.images[0].url} alt='картинка' className={styles['card__image']} />
+                            <img src={recipeStore.recipe.images[0].url} alt='картинка' className={styles['card__image']} />
                             <div className={styles.info}>
                                 <div className={styles.descrElement}>
                                     <Text>Preparation</Text>
-                                    <Text weight='bold' color='accent'>{recipe.preparationTime} minutes</Text>
+                                    <Text weight='bold' color='accent'>{recipeStore.recipe.preparationTime} minutes</Text>
                                 </div>
                                 <div className={styles.descrElement}>
                                     <Text>Cooking</Text>
-                                    <Text weight='bold' color='accent'>{recipe.cookingTime} minutes</Text>
+                                    <Text weight='bold' color='accent'>{recipeStore.recipe.cookingTime} minutes</Text>
                                 </div>
                                 <div className={styles.descrElement}>
                                     <Text>Total</Text>
-                                    <Text weight='bold' color='accent'>{recipe.preparationTime + recipe.cookingTime} minutes</Text>
+                                    <Text weight='bold' color='accent'>{recipeStore.recipe.preparationTime + recipeStore.recipe.cookingTime} minutes</Text>
                                 </div>
                                 <div className={styles.descrElement}>
                                     <Text>Likes</Text>
-                                    <Text weight='bold' color='accent'>{recipe.likes}</Text>
+                                    <Text weight='bold' color='accent'>{recipeStore.recipe.likes}</Text>
                                 </div>
                                 <div className={styles.descrElement}>
                                     <Text>Servings</Text>
-                                    <Text weight='bold' color='accent'>{recipe.servings} servings</Text>
+                                    <Text weight='bold' color='accent'>{recipeStore.recipe.servings} servings</Text>
                                 </div>
                                 <div className={styles.descrElement}>
                                     <Text>Ratings</Text>
-                                    <Text weight='bold' color='accent'>{recipe.rating}/5</Text>
+                                    <Text weight='bold' color='accent'>{recipeStore.recipe.rating}/5</Text>
                                 </div>
                             </div>
                         </div>
 
                         <div className={styles.summary}>
-                            <div dangerouslySetInnerHTML={{ __html: recipe.summary }} ></div>
+                            <div dangerouslySetInnerHTML={{ __html: recipeStore.recipe.summary }} ></div>
                         </div>
 
                         <div className={styles.need}>
                             <IngredientsEquipmentBlock
-                                ingredients={recipe.ingradients}
-                                equipment={recipe.equipments}
+                                ingredients={recipeStore.recipe.ingradients}
+                                equipment={recipeStore.recipe.equipments}
                             />
                         </div>
 
                         <div className={styles.description}>
                             <Text tag='h2'>Directions</Text>
-                            {recipe.directions?.map((step, idx) => {
+                            {recipeStore.recipe.directions?.map((step, idx) => {
                                 return (
                                     <div key={step.id} className={styles.steps}>
                                         <Text tag='h3'>Step {idx + 1}</Text>
@@ -116,4 +106,4 @@ const ReceptPage = () => {
     )
 };
 
-export default ReceptPage;
+export default observer(ReceptPage);

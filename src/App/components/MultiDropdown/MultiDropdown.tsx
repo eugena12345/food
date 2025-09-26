@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useRef, useState } from 'react';
+import React, { memo, useCallback, useEffect, useRef, useState } from 'react';
 import Input from '../Input/Input';
 import ArrowDownIcon from '~components/icons/ArrowDownIcon';
 import styles from './MultiDropdown.module.scss';
@@ -14,14 +14,14 @@ const MultiDropdown: React.FC<MultiDropdownProps> = ({
     option.value.toLowerCase().includes(inputValue.toLowerCase())
   );
 
-  const openOptions = (event: React.MouseEvent<HTMLInputElement>) => {
+  const openOptions = useCallback((event: React.MouseEvent<HTMLInputElement>) => {
     if (disabled === true) {
       return;
     }
     event.stopPropagation();
     setIsOptionsOpen(true);
-  };
-  const closeOptions = () => setIsOptionsOpen(false);
+  }, [disabled]);
+  const closeOptions = useCallback(() => setIsOptionsOpen(false), []);
 
   const dropdownRef = useRef<HTMLDivElement | null>(null);
 
@@ -56,7 +56,7 @@ const MultiDropdown: React.FC<MultiDropdownProps> = ({
     args.value = getTitle(value);
   }
 
-  const handleClick = (item: Option): void => {
+  const handleClick = useCallback((item: Option): void => {
     const itemKey = item.key.toString();
 
     if (value.some((selectedItem) => {
@@ -68,11 +68,11 @@ const MultiDropdown: React.FC<MultiDropdownProps> = ({
       const newValue = [...value, item];
       onChange(newValue);
     }
-  }
+  }, [value, onChange]);
 
-  const handleUpdateInputValue = (stringValue: string): void => {
-    setInputValue(stringValue);
-  }
+  const handleUpdateInputValue = useCallback((stringValue: string): void => {
+    setInputValue(stringValue)
+  }, []);
   return (
     <div className={styles.container}>
       <Input className={className} onChange={handleUpdateInputValue} afterSlot={<ArrowDownIcon />} disabled={disabled} onClick={openOptions} {...args}

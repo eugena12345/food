@@ -23,6 +23,8 @@
     .filterandsort {
         display: flex;
         flex-direction: row;
+        margin-bottom: vars.$spaceM;
+
     }
 
     &__result {

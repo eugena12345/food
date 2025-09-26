@@ -1,27 +1,33 @@
 import HeaderNav from '../HeaderNav/HeaderNav';
 import styles from './Header.module.scss';
 import logo from '~assets/images/Group.svg';
-import userSvg from '~assets/images/User.svg'
-import heartSvg from '~assets/images/HeartIcon.svg'
+import userSvg from '~assets/images/User.svg';
+import heartSvg from '~assets/images/HeartIcon.svg';
+import logoutImg from '~assets/images/logout.png';
 import { useNavigate } from 'react-router';
 import { routes } from '~config/routes.config';
 import type { NavigateFunction } from './types';
-
+import { authStore } from '~store/AuthStore';
+import { observer } from 'mobx-react-lite';
+import { useCallback } from 'react';
 
 const Header = () => {
-    const navigate = useNavigate()
-    const goToLogin: NavigateFunction = () => {
+    const navigate = useNavigate();
+    const { isAuthenticated } = authStore;
+
+    const goToLogin: NavigateFunction = useCallback(() => {
         navigate(routes.login.create())
-    }
+    }, [navigate]);
 
-    const goToFavorite: NavigateFunction = () => {
+    const goToFavorite: NavigateFunction = useCallback(() => {
         navigate(routes.favorite.create())
-    }
+    }, [navigate]);
 
-    const goToCatalog: NavigateFunction = () => {
+    const goToCatalog: NavigateFunction = useCallback(() => {
         navigate(routes.main.create())
+    }, [navigate]);
 
-    }
+    const logout = useCallback(() => authStore.logout(), []);
 
     return (
         <div className={styles.generalHeaderContainer}>
@@ -32,12 +38,19 @@ const Header = () => {
                 </div>
                 <HeaderNav />
                 <div className={styles.logoContent}>
-                    <img src={heartSvg} alt='heartSvg' className={styles.userInfo} onClick={goToFavorite} />
-                    <img src={userSvg} alt='userSvg' className={styles.userInfo} onClick={goToLogin} />
+                    {isAuthenticated
+                        && <><img src={heartSvg} alt='heartSvg' className={styles.userInfo} onClick={goToFavorite} />
+                            <div>{localStorage.getItem('username')}</div>
+                            <img src={logoutImg} alt='logout' className={styles.logout} onClick={logout} />
+                        </>
+                    }
+                    {!isAuthenticated
+                        && <img src={userSvg} alt='userSvg' className={styles.userInfo} onClick={goToLogin} />
+                    }
                 </div>
             </div>
         </div>
     )
 };
 
-export default Header;
+export default observer(Header);

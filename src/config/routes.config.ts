@@ -3,6 +3,10 @@ export const routes = {
     mask: "/",
     create: () => "/",
   },
+  mainWithCategory: {
+    mask: "/recipes/",
+    create: (categoryId: number) => `/recipes?categories=${categoryId}`,
+  },
   recipes: {
     mask: "/recipes",
     create: () => "/recipes",

@@ -1,13 +1,15 @@
 import React, { memo } from 'react';
 import styles from './Card.module.scss';
-import Text from '~components/Text/Text';
+import Text from '~components/Text';
 import { useNavigate } from 'react-router';
 import { routes } from "~config/routes.config";
-import type { CardProps } from './types'
+import type { CardProps } from './types';
+import classNames from 'classnames';
 
 
 const InfoCard: React.FC<CardProps> = ({ className, image, captionSlot, title, subtitle, contentSlot, onClick, actionSlot, itemDocumentId }) => {
-    const actualClassName = `${styles.card} ${className ? className : ''}`;
+    const actualClassName = classNames(styles.card, className);
+
     const navigate = useNavigate();
 
     return (

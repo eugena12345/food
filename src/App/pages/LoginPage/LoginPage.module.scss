@@ -1,36 +1,81 @@
-@use './../../../variables.scss' as vars;
+ @use './../../../variables.scss' as vars;
+ @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
 
-.container {
-    display: flex;
-    width: 100%;
-    height: 100vh;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+ .container {
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     min-height: 100vh;
+     background-color: #FFC0763B;
+     font-family: "Poppins", sans-serif;
+ }
 
-    &--withMax {
-        display: flex;
-        width: 100%;
-        max-width: 700px;
-        justify-content: center;
-        align-items: center;
-        flex-direction: row;
-        padding: 0 20px;
+ .container--withMax {
+     max-width: 400px;
+     width: 100%;
+     padding: 20px;
+     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+     background-color: white;
+     border-radius: 8px;
+ }
 
-        .authForm {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            align-items: center;
-        }
+ .authForm {
+     display: flex;
+     flex-direction: column;
+     gap: 16px;
+ }
 
-        .element {
-            display: flex;
-            width: 100%;
-            height: 30px;
-            margin: 20px;
-        }
-    }
+ .label {
+     font-size: 14px;
+ }
 
-}
+ .element {
+     padding: 10px;
+     font-size: 16px;
+     border: 1px solid #ccc;
+     border-radius: 4px;
+     transition: border-color 0.3s ease;
+
+     &:focus {
+         border-color: vars.$color-brand;
+         outline: none;
+     }
+ }
+
+ .error {
+     color: vars.$error-color;
+     font-size: 14px;
+     text-align: center;
+ }
+
+ .switchMode {
+     text-align: center;
+     margin-top: 16px;
+
+     .message {
+         font-size: 14px;
+
+         .linkButton {
+             color: vars.$color-brand;
+             background: none;
+             border: none;
+             cursor: pointer;
+             font-weight: 600;
+
+             &:hover {
+                 text-decoration: underline;
+             }
+         }
+     }
+ }
+
+ @media (max-width: 600px) {
+     .container--withMax {
+         padding: 16px;
+     }
+
+     .element,
+     button[type="submit"] {
+         font-size: 14px;
+     }
+ }

@@ -7,12 +7,8 @@ import Text from '~components/Text';
 import type { SearchRecipesProps } from './types';
 
 const SearchRecipes: React.FC<SearchRecipesProps> = ({ totatItems }) => {
-    const [searchParams, setSearchParams] = useSearchParams();
     const resetFilters = () => {
-        searchParams.set('filterByCategoryId', '');
-        searchParams.set('filterByName', '');
-        searchParams.set('page', '1');
-        setSearchParams(searchParams);
+        console.log('reset filter. code it')
     }
     return (
         <div className={styles.container}>

@@ -89,13 +89,13 @@ export default class CatalogStore {
         }
     );
     private readonly _qpReactionName: IReactionDisposer = reaction(
-        () => rootStore.query.getParam('filterByName'),
+        () => rootStore.query.getParam('search'),
         () => {
             this.getRecipiesList(rootStore.query.getQueryParams())
         }
     );
     private readonly _qpReactionMealCategory: IReactionDisposer = reaction(
-        () => rootStore.query.getParam('filterByCategoryId'),
+        () => rootStore.query.getParam('categories'),
         () => {
             this.getRecipiesList(rootStore.query.getQueryParams())
         }

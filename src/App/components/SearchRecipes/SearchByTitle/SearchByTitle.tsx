@@ -1,37 +1,35 @@
 import Input from "~App/components/Input";
 import Button from "~components/Button";
 import styles from './SearchByTitle.module.scss';
-import { useCallback, useEffect, useState } from "react";
-import { useSearchParams } from "react-router";
+import { useCallback } from "react";
+import { observer } from "mobx-react-lite";
+import { useLocalStore } from "~utils/useLocalStore";
+import CatalogFiltersStore from "~store/CatalogStore/CatalogFiltersStore/CatalogFiltersStore";
 
 const SearchByTitle = () => {
-    const [value, setValue] = useState('');
-    const [searchParams, setSearchParams] = useSearchParams();
+    const catalogFiltersStore = useLocalStore(() => new CatalogFiltersStore());
+    const { tempSearch, setTempSearch, setSearch } = catalogFiltersStore;
 
-    useEffect(() => {
-        const oldValue = searchParams.get('filterByName');
-        if (oldValue || oldValue === '') {
-            setValue(oldValue);
-        }
-    }, [searchParams]);
+    const handleInputChange = useCallback((value: string) => {
+        setTempSearch(value);
+    }, []);
 
-    const getRecepies = () => {
-        searchParams.set('filterByName', `${value}`);
-        searchParams.set('page', '1');
-        setSearchParams(searchParams);
-    }
+    const handleButtonClock = useCallback(() => {
+        setSearch();
+    }, []);
+
 
     return (
         <div className={styles['search__container']}>
             <Input
                 placeholder="Search product"
-                onChange={setValue}
-                value={value}
+                onChange={handleInputChange}
+                value={tempSearch}
                 className={styles['search__container--input']}
             />
-            <Button onClick={getRecepies}>Find now</Button>
+            <Button onClick={handleButtonClock}>Find now</Button>
         </div>
     )
 };
 
-export default SearchByTitle;
+export default observer(SearchByTitle);

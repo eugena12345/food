@@ -5,7 +5,7 @@ export const routes = {
   },
   mainWithCategory: {
     mask: "/recipes/",
-    create: (categoryId: number) => `/recipes?filterByCategoryId=${categoryId}`,
+    create: (categoryId: number) => `/recipes?categories=${categoryId}`,
   },
   recipes: {
     mask: "/recipes",

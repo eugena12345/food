@@ -2,54 +2,40 @@ import MultiDropdown, { type Option } from "~App/components/MultiDropdown";
 import styles from './SearchByFilter.module.scss';
 import MealCategoryStore from "~store/MealCategoryStore/MealCategoryStore";
 import { observer } from "mobx-react-lite";
-import { useCallback, useEffect, useState } from "react";
-import { useSearchParams } from "react-router";
+import { useCallback, useEffect } from "react";
 import { useLocalStore } from "~utils/useLocalStore";
 
 const SearchByFilter = () => {
-    const [value, setValue] = useState<Option[]>([]);
-    const [searchParams, setSearchParams] = useSearchParams()
     const mealCategoryStore = useLocalStore(() => new MealCategoryStore());
 
     useEffect(() => {
         const getCategory = async () => {
             await mealCategoryStore.getMealCategoryList();
-            const category = mealCategoryStore.mealCategory;
-            const choosedCategoryId = searchParams.get('filterByCategoryId')?.split(',');
-            const oldValues = category.filter((categ) => choosedCategoryId?.includes(categ.id.toString()));
-            setValue(oldValues.map((category) => ({ key: category.id.toString(), value: category.title })))
         };
 
         getCategory();
-    }, [mealCategoryStore, searchParams]);
+    }, [mealCategoryStore]);
 
-    const getOptions = (): Option[] => {
+    const getOptions = useCallback((): Option[] => {
         if (mealCategoryStore.mealCategory.length > 0) {
             return mealCategoryStore.mealCategory.map((category) => ({ key: category.id.toString(), value: category.title }))
         }
         return []
-    }
+    }, []);
+
     const optionsForMulti = getOptions();
 
     const getTitle = useCallback((elements: Option[]) =>
         elements.map((el: Option) => el.value).join(', '), []);
 
     const onChange = useCallback((value: Option[]) => {
-        setValue(value);
-        const createRecepiesMealCategoryColl = () => {
-            const result: string[] = [];
-            value.map((item) => result.push(item.key.toString()))
-            return result;
-        }
-        searchParams.set('filterByCategoryId', createRecepiesMealCategoryColl().join(','));
-        searchParams.set('page', '1');
-        setSearchParams(searchParams);
+        mealCategoryStore.setSelectedCategories(value);
     }, []);
 
     return (
         <MultiDropdown
             options={optionsForMulti}
-            value={value}
+            value={mealCategoryStore.choosedCategory}
             onChange={onChange}
             getTitle={getTitle}
             className={styles['container__filter']}

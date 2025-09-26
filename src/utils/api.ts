@@ -10,28 +10,27 @@ export const createParamsForApi = (params: ParamsFromQuery): ParamsForApi => {
         }
     };
     if (params.page) paramsForApi.pagination.page = params.page;
-    if (params.filterByCategoryId && params.filterByCategoryId !== '') {
+    if (params.categories && params.categories.length > 0) { ///!!!
         if (paramsForApi.filters) {
             paramsForApi.filters.category = {
-                id: { $in: [params.filterByCategoryId] }
+                id: { $in: params.categories }
             }
         } else {
-            const filterByCategoryIdColl = params.filterByCategoryId.split(',');
             paramsForApi.filters = {
                 category: {
-                    id: { $in: filterByCategoryIdColl }
+                    id: { $in: params.categories }
                 }
             }
         }
     }
 
-    if (params.filterByName && params.filterByName !== '') {
+    if (params.search && params.search !== '') {
         if (paramsForApi.filters) {
-            paramsForApi.filters.name = { $containsi: params.filterByName }
+            paramsForApi.filters.name = { $containsi: params.search }
         } else {
             paramsForApi.filters = {
                 name: {
-                    $containsi: params.filterByName
+                    $containsi: params.search
                 }
             }
         }

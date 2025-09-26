@@ -7,7 +7,7 @@ import titleImage from '~assets/images/titleImage.png';
 import overlayImage from '~assets/images/Recipes.svg'
 import Pagination from "~App/components/Pagination";
 import SearchInfo from "~App/components/SearchInfo";
-import SearchRecipes from "~App/components/SearchRecipes";
+import CatalogFilters from "~App/components/CatalogFilters";
 import { getIngradientsString } from '~utils/helpers';
 import { observer } from "mobx-react-lite";
 import CatalogStore from "~store/CatalogStore";
@@ -41,7 +41,7 @@ const CatalogPage = () => {
                     {recipesStore.meta === Meta.error && <div className={styles.error}>Возникла непредвиденная ошибка. Не удалось загрузить данные. Попробуйте позже.</div>}
 
                     <SearchInfo />
-                    <SearchRecipes totatItems={recipesStore.recepies.length} />
+                    <CatalogFilters totatItems={recipesStore.recepies.length} />
 
                     {recipesStore.meta === Meta.loading && <Loader />}
 

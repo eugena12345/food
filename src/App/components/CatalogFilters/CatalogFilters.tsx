@@ -1,20 +1,19 @@
-import SearchByFilter from '~App/components/SearchRecipes/SearchByFilter';
-import styles from './SearchRecipes.module.scss';
-import SearchByTitle from '~App/components/SearchRecipes/SearchByTitle';
-import { useSearchParams } from 'react-router';
+import styles from './CatalogFilters.module.scss';
 import Button from '~components/Button';
 import Text from '~components/Text';
 import type { SearchRecipesProps } from './types';
+import SearchFilter from '~App/components/CatalogFilters/SearchFilter';
+import CategoriesFilter from '~App/components/CatalogFilters/CategoriesFilter';
 
-const SearchRecipes: React.FC<SearchRecipesProps> = ({ totatItems }) => {
+const CatalogFilters: React.FC<SearchRecipesProps> = ({ totatItems }) => {
     const resetFilters = () => {
         console.log('reset filter. code it')
     }
     return (
         <div className={styles.container}>
-            <SearchByTitle />
+            <SearchFilter />
             <div className={styles.filterandsort}>
-                <SearchByFilter />
+                <CategoriesFilter />
             </div>
             <div className={styles.container__resultOrReset}>
                 <div className={styles['container__result']}>
@@ -28,4 +27,4 @@ const SearchRecipes: React.FC<SearchRecipesProps> = ({ totatItems }) => {
         </div>
     );
 }
-export default SearchRecipes;
+export default CatalogFilters;

@@ -1,11 +1,11 @@
 import MultiDropdown, { type Option } from "~App/components/MultiDropdown";
-import styles from './SearchByFilter.module.scss';
+import styles from './CategoriesFilter.module.scss';
 import MealCategoryStore from "~store/MealCategoryStore/MealCategoryStore";
 import { observer } from "mobx-react-lite";
 import { useCallback, useEffect } from "react";
 import { useLocalStore } from "~utils/useLocalStore";
 
-const SearchByFilter = () => {
+const CategoriesFilter = () => {
     const mealCategoryStore = useLocalStore(() => new MealCategoryStore());
 
     useEffect(() => {
@@ -43,4 +43,4 @@ const SearchByFilter = () => {
     )
 };
 
-export default observer(SearchByFilter);
+export default observer(CategoriesFilter);

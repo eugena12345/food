@@ -12,11 +12,11 @@ const SearchFilter = () => {
 
     const handleInputChange = useCallback((value: string) => {
         setTempSearch(value);
-    }, []);
+    }, [setTempSearch]);
 
     const handleButtonClock = useCallback(() => {
         setSearch();
-    }, []);
+    }, [setSearch]);
 
 
     return (

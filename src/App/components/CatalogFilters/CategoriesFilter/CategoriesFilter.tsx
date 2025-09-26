@@ -21,7 +21,7 @@ const CategoriesFilter = () => {
             return mealCategoryStore.mealCategory.map((category) => ({ key: category.id.toString(), value: category.title }))
         }
         return []
-    }, []);
+    }, [mealCategoryStore]);
 
     const optionsForMulti = getOptions();
 
@@ -30,7 +30,7 @@ const CategoriesFilter = () => {
 
     const onChange = useCallback((value: Option[]) => {
         mealCategoryStore.setSelectedCategories(value);
-    }, []);
+    }, [mealCategoryStore]);
 
     return (
         <MultiDropdown

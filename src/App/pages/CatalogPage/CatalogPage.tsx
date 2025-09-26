@@ -24,7 +24,7 @@ const CatalogPage = () => {
     const addFavRecipe = useCallback(
         (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, recipeId: number) => {
             favoriteStore.addFavoriteRecipe(e, recipeId);
-        }, [])
+        }, [favoriteStore])
 
     useEffect(() => {
         catalogStore.getRecipiesList(rootStore.query.getQueryParams());

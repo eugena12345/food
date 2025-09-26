@@ -17,15 +17,15 @@ const Header = () => {
 
     const goToLogin: NavigateFunction = useCallback(() => {
         navigate(routes.login.create())
-    }, []);
+    }, [navigate]);
 
     const goToFavorite: NavigateFunction = useCallback(() => {
         navigate(routes.favorite.create())
-    }, []);
+    }, [navigate]);
 
     const goToCatalog: NavigateFunction = useCallback(() => {
         navigate(routes.main.create())
-    }, []);
+    }, [navigate]);
 
     const logout = useCallback(() => authStore.logout(), []);
 

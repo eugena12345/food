@@ -47,6 +47,7 @@ export default class CatalogStore {
     ): Promise<void> {
         this._meta = Meta.loading;
         this._recepies = getInitialCollectionModel();
+        this._metaInfo = metaInfoInitial;
 
         const paramsForApi = createParamsForApi(params);
 

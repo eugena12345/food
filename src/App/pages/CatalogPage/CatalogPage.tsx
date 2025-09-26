@@ -15,6 +15,7 @@ import { Meta } from "~store/CatalogStore/";
 import rootStore from "~store/RootStore/instance";
 import FavoriteStore from "~store/FavoriteStore";
 import { useLocalStore } from "~utils/useLocalStore";
+import Text from "~components/Text";
 
 const CatalogPage = () => {
     const recipesStore = useLocalStore(() => new CatalogStore());
@@ -44,6 +45,10 @@ const CatalogPage = () => {
                     <CatalogFilters totatItems={recipesStore.recepies.length} />
 
                     {recipesStore.meta === Meta.loading && <Loader />}
+                    {
+                        recipesStore.meta === Meta.success && recipesStore.recepies.length === 0
+                        && <Text tag="h3">Nothing found matching your criteria. Try changing your filters.</Text>
+                    }
 
                     <div className={styles[`container__products`]}>
                         {recipesStore.recepies.length > 0 && recipesStore.recepies.map(rec => {

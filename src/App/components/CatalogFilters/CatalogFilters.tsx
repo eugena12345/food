@@ -17,10 +17,6 @@ const CatalogFilters: React.FC<SearchRecipesProps> = ({ totatItems }) => {
             </div>
             <div className={styles.container__resultOrReset}>
                 <div className={styles['container__result']}>
-                    {
-                        totatItems === 0
-                        && <Text tag="h3">Nothing found matching your criteria. Try changing your filters.</Text>
-                    }
                     <Button onClick={resetFilters}>Reset filters</Button>
                 </div>
             </div>

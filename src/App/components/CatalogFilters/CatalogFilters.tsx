@@ -1,14 +1,13 @@
 import styles from './CatalogFilters.module.scss';
-import Button from '~components/Button';
-import Text from '~components/Text';
-import type { SearchRecipesProps } from './types';
+//TODO import Button from '~components/Button';
+//TODO import Text from '~components/Text';
 import SearchFilter from '~App/components/CatalogFilters/SearchFilter';
 import CategoriesFilter from '~App/components/CatalogFilters/CategoriesFilter';
 
-const CatalogFilters: React.FC<SearchRecipesProps> = ({ totatItems }) => {
-    const resetFilters = () => {
-        console.log('reset filter. code it')
-    }
+const CatalogFilters = () => {
+    //TODO const resetFilters = () => {
+    //     console.log('reset filter. code it')
+    // }
     return (
         <div className={styles.container}>
             <SearchFilter />
@@ -17,7 +16,7 @@ const CatalogFilters: React.FC<SearchRecipesProps> = ({ totatItems }) => {
             </div>
             <div className={styles.container__resultOrReset}>
                 <div className={styles['container__result']}>
-                    <Button onClick={resetFilters}>Reset filters</Button>
+                    {/*TODO <Button onClick={resetFilters}>Reset filters</Button> */}
                 </div>
             </div>
         </div>
